@@ -32,7 +32,7 @@ func GetService() *Service {
 func (s *Service) Login(ctx context.Context, req *sess.LoginReq, rsp *sess.LoginRsp) (err error) {
 	// TODO: token验证
 	*rsp = sess.LoginRsp{
-		Code:    0,
+		Code:    200,
 		Message: "成功",
 	}
 	var devices []*DeviceInfo
