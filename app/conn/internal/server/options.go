@@ -1,20 +1,16 @@
 package server
 
-import (
-	"context"
-)
+import "github.com/google/uuid"
 
 type Options struct {
-	Id       string
-	TcpAddr  string
-	WsAddr   string
-	Context  context.Context
-	NatsAddr string
+	Id      string
+	TcpAddr string
+	WsAddr  string
 }
 
 func NewOptions(opts ...Option) Options {
 	options := Options{
-		//RpcLogic: "zim.logic",
+		Id: uuid.New().String(),
 	}
 
 	for _, o := range opts {
@@ -26,12 +22,6 @@ func NewOptions(opts ...Option) Options {
 
 type Option func(*Options)
 
-func Context(ctx context.Context) Option {
-	return func(o *Options) {
-		o.Context = ctx
-	}
-}
-
 func TcpAddr(addr string) Option {
 	return func(o *Options) {
 		o.TcpAddr = addr
@@ -41,11 +31,5 @@ func TcpAddr(addr string) Option {
 func WsAddr(addr string) Option {
 	return func(o *Options) {
 		o.WsAddr = addr
-	}
-}
-
-func NatsAddr(addr string) Option {
-	return func(o *Options) {
-		o.NatsAddr = addr
 	}
 }

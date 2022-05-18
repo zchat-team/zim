@@ -24,19 +24,10 @@ import (
 )
 
 type Chat struct {
-	nc *nats.Conn
-	js nats.JetStreamContext
 }
 
 func GetChatService() *Chat {
-	var err error
-	c := &Chat{}
-	c.nc, err = nats.Connect(nats.DefaultURL)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	c.js, _ = c.nc.JetStream(nats.PublishAsyncMaxPending(256))
-	return c
+	return &Chat{}
 }
 
 func (l *Chat) SendMsg(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
@@ -220,14 +211,15 @@ func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 		Data:    b,
 		Sub:     nil,
 	}
-	l.js.PublishMsg(m)
+	js := runtime.GetJS()
+	js.PublishMsg(m)
 	p.Owner = req.Target
 	b, err = proto.Marshal(&p)
 	if err != nil {
 		return
 	}
 	m.Data = b
-	l.js.PublishMsg(m)
+	js.PublishMsg(m)
 
 	// TODO: 移除code,message两个字段
 	*rsp = chat.SendRsp{
@@ -265,6 +257,7 @@ func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 		return
 	}
 
+	js := runtime.GetJS()
 	for _, v := range members {
 		p.Owner = v.Member
 		b, err := proto.Marshal(&p)
@@ -277,7 +270,7 @@ func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 			Data:    b,
 			Sub:     nil,
 		}
-		l.js.PublishMsg(m)
+		js.PublishMsg(m)
 	}
 
 	if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeGroup, &p); err != nil {

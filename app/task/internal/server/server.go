@@ -192,8 +192,6 @@ func (s *Server) storeMysql(m *common.Msg) {
 		ClientUuid: m.ClientUuid,
 	}
 
-	//if db.Take(&)
-
 	if err := db.Take(&model.Msg{Id: m.Id}).Error; err != nil {
 		if !errors.Is(err, gorm.ErrRecordNotFound) {
 			log.Error(err)

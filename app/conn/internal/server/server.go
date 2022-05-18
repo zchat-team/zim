@@ -4,12 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/zmicro-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zim/proto/common"
 	"github.com/zmicro-team/zim/proto/conn"
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/google/uuid"
 	"github.com/iobrother/ztimer"
 	"github.com/nats-io/nats.go"
 	"github.com/panjf2000/gnet/pool/goroutine"
@@ -51,8 +51,6 @@ func NewServer(opts ...Option) *Server {
 	s.clientManager = NewClientManager()
 	s.workerPool = goroutine.Default()
 
-	s.opts.Id = uuid.New().String()
-
 	if s.opts.TcpAddr != "" {
 		s.tcpServer = NewTcpServer(s, s.opts.TcpAddr)
 	}
@@ -63,11 +61,7 @@ func NewServer(opts ...Option) *Server {
 
 	s.timer = ztimer.NewTimer(100*time.Millisecond, 20)
 
-	var err error
-	if s.nc, err = nats.Connect(s.opts.NatsAddr); err != nil {
-		log.Fatal(err)
-	}
-
+	runtime.Setup()
 	s.registerCmdFunc()
 
 	return s
@@ -173,7 +167,6 @@ func (s *Server) consumePush() error {
 		for _, deviceId := range pushMsg.Devices {
 			if c := s.GetClientManager().Get(deviceId); c != nil {
 				if c.Conn != nil {
-					log.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 					p := protocol.Packet{
 						HeaderLen: 20,
 						Version:   uint32(c.Version),

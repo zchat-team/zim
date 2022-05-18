@@ -24,19 +24,10 @@ import (
 )
 
 type Conv struct {
-	nc *nats.Conn
-	js nats.JetStreamContext
 }
 
-func GetConvService() *Chat {
-	var err error
-	c := &Chat{}
-	c.nc, err = nats.Connect(nats.DefaultURL)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	c.js, _ = c.nc.JetStream(nats.PublishAsyncMaxPending(256))
-	return c
+func GetConvService() *Conv {
+	return &Conv{}
 }
 
 // 获取最近的100个会话
@@ -324,7 +315,8 @@ func (l *Conv) SetConversationRead(ctx context.Context, req *chat.SetConversatio
 			Data:    b,
 			Sub:     nil,
 		}
-		l.js.PublishMsg(m)
+		js := runtime.GetJS()
+		js.PublishMsg(m)
 	}()
 
 	return
