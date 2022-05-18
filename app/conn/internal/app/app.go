@@ -56,13 +56,9 @@ func New(opts ...Option) *App {
 		conf: conf,
 	}
 
-	if err = config.Scan("nats", &conf.Nats); err != nil {
-		log.Fatal(err)
-	}
 	app.server = server.NewServer(
 		server.TcpAddr(conf.App.TcpAddr),
 		server.WsAddr(conf.App.WsAddr),
-		server.NatsAddr(conf.Nats.Addr),
 	)
 	return app
 }

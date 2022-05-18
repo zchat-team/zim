@@ -57,6 +57,14 @@ func GetRedisClient() *redis.Client {
 	return defaultRuntime.GetRedisClient()
 }
 
+func GetNC() *nats.Conn {
+	return defaultRuntime.GetNC()
+}
+
+func GetJS() nats.JetStreamContext {
+	return defaultRuntime.GetJS()
+}
+
 func Setup() {
 	if config.Get("mysql") != nil {
 		c := zdb.Config{}

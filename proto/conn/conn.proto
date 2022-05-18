@@ -1,0 +1,285 @@
+syntax = "proto3";
+
+option go_package = "github.com/zmicro-team/zim/proto/conn";
+
+package github.com.zmicro.team.zim.proto.conn;
+
+enum CmdId {
+  Cmd_Raw = 0;
+
+  Cmd_Noop = 6;
+  Cmd_Signalling = 243;
+
+  Cmd_Error = 999;
+
+  // conn
+  Cmd_Login = 1001;
+  Cmd_Logout = 1002;
+  Cmd_Kick = 1003;
+
+  // msg
+  Cmd_Msg = 1101;               // S->C 服务器推送
+  Cmd_Sync = 1102;              // 同步消息，从redis缓存中获取
+  Cmd_Send = 1103;
+  Cmd_MsgAck = 1104;
+  Cmd_Recall = 1105;
+  Cmd_Delete = 1106;
+
+  // conv
+  Cmd_SetConversationTop = 1201;
+  Cmd_SetConversationMute = 1202;
+  Cmd_GetConversationTop = 1203;
+  Cmd_GetConversationMute = 1204;
+  Cmd_GetConversation = 1205;
+  Cmd_GetConversationMsg = 1206;      // 获取会话历史消息，从mysql数据库中获取
+  Cmd_GetRecentConversation = 1207;
+  Cmd_DeleteConversation = 1208;
+  Cmd_SyncConversation = 1209;        // 同步会话，从redis缓存中获取
+  Cmd_SyncConversationMsg = 1210;     // 同步会话消息，从redis缓存中获取
+  Cmd_SetConversationRead = 1211;     // 设置会话已读
+
+  // user
+  Cmd_BlackAdd = 1301;
+  Cmd_BlackDel = 1302;
+  Cmd_BlackList = 1303;
+
+  // group
+  Cmd_GroupCreate = 1401;
+  // TODO: 更多
+
+  // chat
+  Cmd_RoomCreate = 1501;
+  // TODO: 更多
+}
+
+enum ErrorCode {
+  Success = 0;
+  InvalidToken = 1;
+}
+
+message Error {
+  int32 code = 1;
+  string message = 2;
+}
+
+message LoginReq {
+  string uin = 1;
+  string tag = 2;
+  string token = 3;
+  string device_id = 4;
+  string device_name = 5;
+  string platform = 6;
+  bool reconnect = 7;
+}
+
+message LoginRsp {
+  int32 code = 1;
+  string message = 2;
+}
+
+message LogoutReq {
+
+}
+
+message LogoutRsp {
+
+}
+
+message Noop {
+
+}
+
+message Kick {
+  string reason = 1;
+}
+
+message Msg {
+  int64 id = 1;
+  int32 conv_type = 2;
+  int32 type = 3;
+  string content = 4;
+  string sender = 5;
+  string target = 6;
+  string extra = 7;
+  int64 send_time = 8;
+  repeated string at_user_list = 9;
+  int64 read_time = 10;
+  string client_uuid = 11;
+  bool is_transparent = 12;
+}
+
+// 同步消息，该接口从redis中同步消息
+message SyncMsgReq {
+  int64 offset = 1; // offset为本地最近一条消息的发送时间
+  int64 limit = 2;
+}
+
+message SyncMsgRsp {
+  repeated Msg list = 1;
+}
+
+message SendReq {
+  int32 conv_type = 1;
+  int32 msg_type = 2;
+  string sender = 3;
+  string target = 4;
+  string content = 5;
+  string extra = 6;
+  repeated string at_user_list = 7;
+  bool is_transparent = 8;
+  string client_uuid = 9;
+}
+
+message SendRsp {
+  int32 code = 1;
+  string message = 2;
+  int64 id = 3;
+  int64 send_time = 4;
+  string client_uuid = 5;
+}
+
+message MsgAckReq {
+  int64 id = 1;
+}
+
+message MsgAckRsp {
+}
+
+message RecallReq {
+  int64 id = 1;
+}
+
+message RecallRsp {
+}
+
+message DeleteReq {
+  string conv_id = 1;
+  repeated int64 ids = 2;
+}
+
+message DeleteRsp {
+}
+
+message GetMergerMsgReq {
+}
+
+message MergerMsgItem {
+  string nickname = 1;
+  string avatar = 2;
+  int32 type = 3;
+  string content = 4;
+  int64 send_time = 5;
+}
+
+message GetMergerMsgRsp {
+  repeated MergerMsgItem list = 1;
+}
+
+message Conversation {
+  int32 type = 1;
+  string target = 2;
+  bool is_top = 3;
+  bool is_mute = 4;
+  string remark = 5;
+  int64 peer_last_read = 6;
+  int64 peer_last_recv = 7;
+  int64 updated_at = 8;
+  int64 unread_count = 9;
+  Msg last_msg = 10;
+}
+
+// 该接口从MySQL中同步最近的会话列表
+message GetRecentConversationReq {
+
+}
+
+message GetRecentConversationRsp {
+  repeated Conversation list = 1;
+}
+
+// 该接口从MySQL中同步消息，可以获取历史消息
+message GetConversationMsgReq {
+  string conv_id = 1;
+  int64 offset = 2; // 前翻取本地最小ID，后翻取本地最大ID
+  int64 limit = 3;
+  int32 direction = 4; // 1: 前翻 2: 后翻
+}
+
+message GetConversationMsgRsp {
+  repeated Msg list = 1;
+}
+
+message DeleteConversationReq {
+  repeated string conv_ids = 1;
+}
+
+message DeleteConversationRsp {
+
+}
+
+message GetConversationReq {
+  string conv_id = 1;
+}
+
+message GetConversationRsp {
+  int32 type = 1;
+  string target = 2;
+  int32 unread_count = 3;
+  bool is_top = 4;
+  bool is_mute = 5;
+  string remark = 6;
+}
+
+message SetConversationTopReq {
+  string conv_id = 1;
+  bool is_top = 2;
+}
+
+message SetConversationTopRsp {
+
+}
+
+message SetConversationMuteReq {
+  string conv_id = 1;
+  bool is_mute = 2;
+}
+
+message SetConversationMuteRsp {
+
+}
+
+message SyncConversationReq {
+  int64 offset = 1; // 最近一个会话更新时间(updated_at)
+  int64 limit = 2;
+}
+
+message SyncConversationRsp {
+  repeated Conversation list = 1;
+}
+
+message SyncConversationMsgReq {
+  int64 offset = 1;   // 会话最后一条消息时间
+  int64 limit = 2;
+  string conv_id = 3;
+}
+
+message SyncConversationMsgRsp {
+  repeated Msg list = 1;
+}
+
+message GroupCreateReq {
+  repeated string member_list = 1;
+  string group_id = 2;
+  string group_name = 3;
+}
+
+message GroupCreateRsp {
+}
+
+message SetConversationReadReq {
+  string conv_id = 1;
+}
+
+message SetConversationReadRsp {
+
+}

@@ -1,14 +1,21 @@
 package server
 
+import (
+	"context"
+)
+
 type Options struct {
 	Id       string
 	TcpAddr  string
 	WsAddr   string
+	Context  context.Context
 	NatsAddr string
 }
 
 func NewOptions(opts ...Option) Options {
-	options := Options{}
+	options := Options{
+		//RpcLogic: "zim.logic",
+	}
 
 	for _, o := range opts {
 		o(&options)
@@ -18,6 +25,12 @@ func NewOptions(opts ...Option) Options {
 }
 
 type Option func(*Options)
+
+func Context(ctx context.Context) Option {
+	return func(o *Options) {
+		o.Context = ctx
+	}
+}
 
 func TcpAddr(addr string) Option {
 	return func(o *Options) {

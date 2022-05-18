@@ -7,6 +7,7 @@ require (
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.3.0
+	github.com/iobrother/ztimer v0.0.0-20220419030337-03883ba1194e
 	github.com/nats-io/nats.go v1.15.0
 	github.com/panjf2000/gnet v1.5.0
 	github.com/smallnest/rpcx v1.7.4

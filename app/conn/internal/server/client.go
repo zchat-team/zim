@@ -3,18 +3,20 @@ package server
 import (
 	"bytes"
 
+	"github.com/iobrother/ztimer"
 	"github.com/panjf2000/gnet"
 	"github.com/zmicro-team/zim/app/conn/protocol"
 )
 
 type Client struct {
-	Status   int
-	DeviceId string
-	Conn     gnet.Conn
-	Version  int
-	Uin      string
-	Platform string
-	Server   string
+	Status    int
+	TimerTask *ztimer.TimerTask
+	DeviceId  string
+	Conn      gnet.Conn
+	Version   int
+	Uin       string
+	Platform  string
+	Server    string
 }
 
 func (c *Client) Write(data []byte) error {
