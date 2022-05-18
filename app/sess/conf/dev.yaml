@@ -1,5 +1,5 @@
 app:
-  name: "zim.chat"
+  name: "zim.sess"
 logger:
   level: "debug"
   filename: "logs/app.log"
@@ -12,13 +12,7 @@ registry:
   updateInterval: 30
   etcdAddr:
     - "127.0.0.1:2379"
-mysql:
-  dataSource: "root:123456@tcp(127.0.0.1:3306)/zim?parseTime=true&loc=Local"
-  maxIdle: 10
-  maxOpen: 100
 redis:
   addr: "127.0.0.1:6379"
   password: "123456"
   db: 1
-nats:
-  addr: "nats://127.0.0.1:4222"
