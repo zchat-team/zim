@@ -31,17 +31,17 @@ for PROTO in $PROTOS; do
     $PROTO
 done
 
-echo 'Generating api swagger'
-protoc \
-    -I . \
-    -I./third_party \
-    --openapiv2_out docs \
-    --openapiv2_opt logtostderr=true \
-    --openapiv2_opt allow_merge=true \
-    --openapiv2_opt merge_file_name=swagger \
-    --openapiv2_opt enums_as_ints=true \
-    --openapiv2_opt json_names_for_fields=false \
-     $PROTOS
+#echo 'Generating api swagger'
+#protoc \
+#    -I . \
+#    -I./third_party \
+#    --openapiv2_out docs \
+#    --openapiv2_opt logtostderr=true \
+#    --openapiv2_opt allow_merge=true \
+#    --openapiv2_opt merge_file_name=swagger \
+#    --openapiv2_opt enums_as_ints=true \
+#    --openapiv2_opt json_names_for_fields=false \
+#     $PROTOS
 
 echo 'Generating errno'
 ERRORS=$(find ./errno -type f -name '*.proto')

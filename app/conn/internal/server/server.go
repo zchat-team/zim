@@ -4,7 +4,6 @@ import (
 	"github.com/google/uuid"
 	"github.com/panjf2000/gnet/pool/goroutine"
 	"github.com/zmicro-team/zim/app/conn/protocol"
-	"github.com/zmicro-team/zim/proto/conn"
 	"github.com/zmicro-team/zmicro/core/log"
 )
 
@@ -23,7 +22,6 @@ type Server struct {
 	// TODO: 分桶
 	clientManager *ClientManager
 	workerPool    *goroutine.Pool
-	mapCmdFunc    map[conn.CmdId]CmdFunc
 }
 
 type Registry struct {
