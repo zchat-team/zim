@@ -7,7 +7,7 @@ import (
 )
 
 // |-----------|---------------|---------|---------|---------|---------------|
-// | HeaderLen | ClientVersion |   Cmd   |   Seq   | BodyLen |     Body      |
+// | HeaderLen |    Version    |   Cmd   |   Seq   | BodyLen |     Body      |
 // |-----------|---------------|---------|---------|---------|---------------|
 // |  4 bytes  |    4 bytes    | 4 bytes | 4 bytes | 4 bytes | BodyLen bytes |
 // |-----------|---------------|---------|---------|---------|---------------|
@@ -19,12 +19,12 @@ const (
 )
 
 type Packet struct {
-	HeaderLen     uint32
-	ClientVersion uint32
-	Cmd           uint32
-	Seq           uint32
-	BodyLen       uint32
-	Body          []byte
+	HeaderLen uint32
+	Version   uint32
+	Cmd       uint32
+	Seq       uint32
+	BodyLen   uint32
+	Body      []byte
 }
 
 func (p *Packet) Read(data []byte) (err error) {
@@ -37,7 +37,7 @@ func (p *Packet) Read(data []byte) (err error) {
 	if err = binary.Read(buf, binary.BigEndian, &p.HeaderLen); err != nil {
 		return
 	}
-	if err = binary.Read(buf, binary.BigEndian, &p.ClientVersion); err != nil {
+	if err = binary.Read(buf, binary.BigEndian, &p.Version); err != nil {
 		return
 	}
 
@@ -69,7 +69,7 @@ func (p *Packet) Write(buf *bytes.Buffer) (err error) {
 		return
 	}
 
-	if err = binary.Write(buf, binary.BigEndian, p.ClientVersion); err != nil {
+	if err = binary.Write(buf, binary.BigEndian, p.Version); err != nil {
 		return
 	}
 

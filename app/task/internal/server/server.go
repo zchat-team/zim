@@ -5,13 +5,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/zmicro-team/zim/pkg/util"
+	"gorm.io/gorm"
 	"time"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/golang/protobuf/proto"
 	"github.com/nats-io/nats.go"
 	"github.com/zmicro-team/zim/app/task/internal/client"
-	"github.com/zmicro-team/zim/app/task/internal/dao"
 	"github.com/zmicro-team/zim/app/task/internal/model"
 	"github.com/zmicro-team/zim/pkg/constant"
 	"github.com/zmicro-team/zim/pkg/runtime"
@@ -90,7 +91,7 @@ func (s *Server) storeRedis(m *common.Msg) error {
 		Member: m.Id,
 	}
 
-	rc := dao.GetRedisClient()
+	rc := runtime.GetRedisClient()
 	b, err := json.Marshal(m)
 	if err != nil {
 		return err
@@ -98,11 +99,11 @@ func (s *Server) storeRedis(m *common.Msg) error {
 	// TODO: context
 	ctx := context.Background()
 	if _, err := rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
-		key := KeyMsgSync(m.Owner)
+		key := util.KeyMsgSync(m.Owner)
 		pipe.ZAdd(ctx, key, &member)
 		pipe.Expire(ctx, key, time.Duration(constant.MsgKeepDays*24)*time.Hour)
 
-		key = KeyMsg(m.Owner, m.Id)
+		key = util.KeyMsg(m.Owner, m.Id)
 		pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
 
 		return nil
@@ -175,7 +176,7 @@ func (s *Server) storeMysql(m *common.Msg) {
 		atUserList = string(b)
 	}
 
-	db := dao.GetDB()
+	db := runtime.GetDB()
 	msg := model.Msg{
 		Id:         m.Id,
 		ConvType:   int(m.ConvType),
@@ -192,6 +193,15 @@ func (s *Server) storeMysql(m *common.Msg) {
 	}
 
 	//if db.Take(&)
+
+	if err := db.Take(&model.Msg{Id: m.Id}).Error; err != nil {
+		if !errors.Is(err, gorm.ErrRecordNotFound) {
+			log.Error(err)
+			return
+		}
+	} else {
+		return
+	}
 
 	if err := db.Create(&msg).Error; err != nil {
 		log.Error(err)

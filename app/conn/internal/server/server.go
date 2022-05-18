@@ -175,12 +175,12 @@ func (s *Server) consumePush() error {
 				if c.Conn != nil {
 					log.Info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 					p := protocol.Packet{
-						HeaderLen:     20,
-						ClientVersion: uint32(c.Version),
-						Cmd:           uint32(conn.CmdId_Cmd_Msg),
-						Seq:           0,
-						BodyLen:       uint32(len(pushMsg.Msg)),
-						Body:          pushMsg.Msg,
+						HeaderLen: 20,
+						Version:   uint32(c.Version),
+						Cmd:       uint32(conn.CmdId_Cmd_Msg),
+						Seq:       0,
+						BodyLen:   uint32(len(pushMsg.Msg)),
+						Body:      pushMsg.Msg,
 					}
 					c.WritePacket(&p)
 				}
@@ -337,12 +337,12 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 			kick := &conn.Kick{Reason: reason}
 			if b, err := proto.Marshal(kick); err == nil {
 				pp := protocol.Packet{
-					HeaderLen:     p.HeaderLen,
-					ClientVersion: p.ClientVersion,
-					Cmd:           uint32(conn.CmdId_Cmd_Kick),
-					Seq:           0,
-					BodyLen:       uint32(len(b)),
-					Body:          b,
+					HeaderLen: p.HeaderLen,
+					Version:   p.Version,
+					Cmd:       uint32(conn.CmdId_Cmd_Kick),
+					Seq:       0,
+					BodyLen:   uint32(len(b)),
+					Body:      b,
 				}
 
 				oldClient.WritePacket(&pp)
@@ -357,7 +357,7 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 	c.Uin = reqL.Uin
 	c.Platform = req.Platform
 	c.Server = s.GetServerId()
-	c.Version = int(p.ClientVersion)
+	c.Version = int(p.Version)
 	s.GetClientManager().Add(c)
 
 	log.Infof("AUTH SUCC uin=%s", req.Uin)

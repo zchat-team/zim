@@ -93,7 +93,7 @@ func (_ *TcpCodec) Decode(c gnet.Conn) ([]byte, error) {
 		if err := binary.Read(byteBuffer, binary.BigEndian, &p.HeaderLen); err != nil {
 			return nil, err
 		}
-		if err := binary.Read(byteBuffer, binary.BigEndian, &p.ClientVersion); err != nil {
+		if err := binary.Read(byteBuffer, binary.BigEndian, &p.Version); err != nil {
 			return nil, err
 		}
 		if err := binary.Read(byteBuffer, binary.BigEndian, &p.Cmd); err != nil {
