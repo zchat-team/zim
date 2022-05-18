@@ -1,0 +1,24 @@
+app:
+  name: "zim.chat"
+logger:
+  level: "debug"
+  filename: "logs/app.log"
+  maxSize: 100
+  maxBackups: 10
+  maxAge: 7
+  compress: true
+registry:
+  basePath: "/zmicro"
+  updateInterval: 30
+  etcdAddr:
+    - "172.16.13.4:2379"
+mysql:
+  dataSource: "root:123456@tcp(172.16.13.4:3306)/zim?parseTime=true&loc=Local"
+  maxIdle: 10
+  maxOpen: 100
+redis:
+  addr: "172.16.13.4:6379"
+  password: "123456"
+  db: 1
+nats:
+  addr: "nats://127.0.0.1:4222"

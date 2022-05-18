@@ -1,7 +1,6 @@
 package db
 
 import (
-	"github.com/zmicro-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
 	"gorm.io/driver/mysql"
@@ -44,5 +43,30 @@ func Setup() {
 		log.Fatal(err)
 	}
 
-	runtime.SetDB(db)
+	//runtime.SetDB(db)
+}
+
+func Open(c *Config) (db *gorm.DB, err error) {
+	db, err = gorm.Open(mysql.Open(c.DataSource), &gorm.Config{})
+	if err != nil {
+		return
+	}
+
+	sqlDB, err := db.DB()
+	if err != nil {
+		return nil, err
+	}
+	if c.MaxIdle > 0 {
+		sqlDB.SetMaxIdleConns(c.MaxIdle)
+	}
+
+	if c.MaxOpen > 0 {
+		sqlDB.SetMaxOpenConns(c.MaxOpen)
+	}
+
+	if err := sqlDB.Ping(); err != nil {
+		return nil, err
+	}
+
+	return
 }
