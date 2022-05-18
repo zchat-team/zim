@@ -21,11 +21,11 @@ type Runtime struct {
 }
 
 func (r *Runtime) GetDB() *gorm.DB {
-	return nil
+	return r.db
 }
 
 func (r *Runtime) GetRedisClient() *redis.Client {
-	return nil
+	return r.rc
 }
 
 func (r *Runtime) GetNC() *nats.Conn {
@@ -76,18 +76,6 @@ func Setup() {
 			log.Fatal(err)
 		}
 		defaultRuntime.SetDB(db)
-	}
-
-	if config.Get("redis") != nil {
-		c := zredis.Config{}
-		if err := config.Scan("redis", &c); err != nil {
-			log.Fatal(err)
-		}
-		rc, err := zredis.NewClient(&c)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defaultRuntime.SetRedisClient(rc)
 	}
 
 	if config.Get("redis") != nil {

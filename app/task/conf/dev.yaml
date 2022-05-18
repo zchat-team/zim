@@ -1,12 +1,5 @@
 app:
-  name: "zim.chat"
-logger:
-  level: "debug"
-  filename: "logs/app.log"
-  maxSize: 100
-  maxBackups: 10
-  maxAge: 7
-  compress: true
+  name: "zim.task"
 registry:
   basePath: "/zmicro"
   updateInterval: 30

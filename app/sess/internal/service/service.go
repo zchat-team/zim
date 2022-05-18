@@ -4,16 +4,13 @@ import (
 	"context"
 	"fmt"
 	"github.com/zmicro-team/zim/pkg/constant"
-	"github.com/zmicro-team/zim/pkg/runtime"
 	"sync"
 	"time"
 
-	"github.com/go-redis/redis/v8"
 	"github.com/zmicro-team/zim/proto/sess"
 )
 
 type Service struct {
-	client *redis.Client
 }
 
 var (
@@ -23,8 +20,7 @@ var (
 
 func GetService() *Service {
 	once.Do(func() {
-		rc := runtime.GetRedisClient()
-		service = &Service{client: rc}
+		service = &Service{}
 	})
 	return service
 }

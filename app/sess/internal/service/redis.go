@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/zmicro-team/zim/pkg/runtime"
 	"sort"
 	"time"
 
@@ -52,7 +53,8 @@ func (s *Service) addConn(ctx context.Context, uin string, info *DeviceInfo) (er
 	if err != nil {
 		return
 	}
-	_, err = s.client.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
+	rc := runtime.GetRedisClient()
+	_, err = rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
 		key := util.KeyOnline(uin, info.DeviceId)
 		pipe.Set(ctx, key, string(b), time.Minute*30)
 		key = util.KeyDevice(uin)
@@ -67,7 +69,8 @@ func (s *Service) delConn(ctx context.Context, uin string, info *DeviceInfo) (er
 	if err != nil {
 		return
 	}
-	_, err = s.client.Pipelined(ctx, func(pipe redis.Pipeliner) error {
+	rc := runtime.GetRedisClient()
+	_, err = rc.Pipelined(ctx, func(pipe redis.Pipeliner) error {
 		pipe.Del(ctx, util.KeyOnline(uin, info.DeviceId))
 		pipe.HSet(ctx, util.KeyDevice(uin), info.DeviceId, string(b))
 		return nil
@@ -79,7 +82,8 @@ func (s *Service) delConn(ctx context.Context, uin string, info *DeviceInfo) (er
 func (s *Service) getDevice(ctx context.Context, uin, deviceId string) *DeviceInfo {
 	key := util.KeyDevice(uin)
 
-	if b, err := s.client.HGet(ctx, key, deviceId).Bytes(); err != nil {
+	rc := runtime.GetRedisClient()
+	if b, err := rc.HGet(ctx, key, deviceId).Bytes(); err != nil {
 		return nil
 	} else {
 		info := &DeviceInfo{}
@@ -130,7 +134,8 @@ func (s *Service) getDevice(ctx context.Context, uin, deviceId string) *DeviceIn
 
 func (s *Service) getOnline(ctx context.Context, uin string) (devices map[string][]*DeviceInfo, err error) {
 	devices = make(map[string][]*DeviceInfo)
-	keys, err := s.client.Keys(ctx, fmt.Sprintf("online:%s:*", uin)).Result()
+	rc := runtime.GetRedisClient()
+	keys, err := rc.Keys(ctx, fmt.Sprintf("online:%s:*", uin)).Result()
 	if err != nil {
 		return
 	}
@@ -138,7 +143,7 @@ func (s *Service) getOnline(ctx context.Context, uin string) (devices map[string
 		return
 	}
 	log.Infof("online keys=%v", keys)
-	result, err := s.client.MGet(ctx, keys...).Result()
+	result, err := rc.MGet(ctx, keys...).Result()
 	if err != nil {
 		return
 	}
@@ -156,7 +161,8 @@ func (s *Service) getOnline(ctx context.Context, uin string) (devices map[string
 
 func (s *Service) getOnlineOfTag(ctx context.Context, uin string, tag string) (devices []*DeviceInfo, err error) {
 	devices = make([]*DeviceInfo, 0)
-	keys, err := s.client.Keys(ctx, fmt.Sprintf("online:%s:*", uin)).Result()
+	rc := runtime.GetRedisClient()
+	keys, err := rc.Keys(ctx, fmt.Sprintf("online:%s:*", uin)).Result()
 	if err != nil {
 		return
 	}
@@ -165,7 +171,7 @@ func (s *Service) getOnlineOfTag(ctx context.Context, uin string, tag string) (d
 	}
 
 	log.Infof("online keys=%v", keys)
-	result, err := s.client.MGet(ctx, keys...).Result()
+	result, err := rc.MGet(ctx, keys...).Result()
 	if err != nil {
 		return
 	}

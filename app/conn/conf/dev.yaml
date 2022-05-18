@@ -5,6 +5,6 @@ app:
 registry:
   basePath: "/zmicro"
   etcdAddr:
-    - "172.16.13.4:2379"
+    - "127.0.0.1:2379"
 nats:
   addr: "nats://127.0.0.1:4222"
