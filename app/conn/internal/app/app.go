@@ -64,6 +64,11 @@ func New(opts ...Option) *App {
 }
 
 func (a *App) Run() error {
+	if a.opts.Before != nil {
+		if err := a.opts.Before(); err != nil {
+			return err
+		}
+	}
 	if err := a.server.Start(); err != nil {
 		return err
 	}

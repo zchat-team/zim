@@ -106,6 +106,7 @@ message Msg {
   int64 read_time = 10;
   string client_uuid = 11;
   bool is_transparent = 12;
+  string owner = 13;
 }
 
 // 同步消息，该接口从redis中同步消息

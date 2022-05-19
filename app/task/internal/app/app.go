@@ -2,7 +2,6 @@ package app
 
 import (
 	"flag"
-	"github.com/zmicro-team/zim/pkg/runtime"
 	"os"
 	"os/signal"
 	"syscall"
@@ -60,7 +59,11 @@ func New(opts ...Option) *App {
 }
 
 func (a *App) Run() error {
-	runtime.Setup()
+	if a.opts.Before != nil {
+		if err := a.opts.Before(); err != nil {
+			return err
+		}
+	}
 	if err := a.server.Start(); err != nil {
 		return err
 	}

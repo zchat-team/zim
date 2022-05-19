@@ -60,7 +60,6 @@ func NewServer(opts ...Option) *Server {
 
 	s.timer = ztimer.NewTimer(100*time.Millisecond, 20)
 
-	runtime.Setup()
 	s.registerCmdFunc()
 
 	return s

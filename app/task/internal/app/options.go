@@ -1,9 +1,12 @@
 package app
 
+type BeforeFunc func() error
+
 type Options struct {
 	Name     string
 	Version  string
 	Metadata map[string]string
+	Before   BeforeFunc
 }
 
 func newOptions(opts ...Option) Options {
@@ -33,5 +36,11 @@ func Version(version string) Option {
 func Metadata(md map[string]string) Option {
 	return func(o *Options) {
 		o.Metadata = md
+	}
+}
+
+func Before(f BeforeFunc) Option {
+	return func(o *Options) {
+		o.Before = f
 	}
 }

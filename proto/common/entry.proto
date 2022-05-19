@@ -4,19 +4,19 @@ option go_package = "github.com/zmicro-team/zim/proto/common";
 package github.com.zmicro.team.zim.proto.common;
 
 message Msg {
-  string owner = 1;
-  int64 id = 2;
-  int32 conv_type = 3;
-  int32 type = 4;
-  string content = 5;
-  string sender = 6;
-  string target = 7;
-  string extra = 8;
-  int64 send_time = 9;
-  repeated string at_user_list = 10;
-  int64 read_time = 11;
-  string client_uuid = 12;
-  bool is_transparent = 13;
+  int64 id = 1;
+  int32 conv_type = 2;
+  int32 type = 3;
+  string content = 4;
+  string sender = 5;
+  string target = 6;
+  string extra = 7;
+  int64 send_time = 8;
+  repeated string at_user_list = 9;
+  int64 read_time = 10;
+  string client_uuid = 11;
+  bool is_transparent = 12;
+  string owner = 13;
 }
 
 

@@ -9,9 +9,13 @@ import (
 )
 
 func main() {
-	app := zmicro.New(zmicro.InitRpcServer(InitRpcServer))
-
-	runtime.Setup()
+	app := zmicro.New(
+		zmicro.InitRpcServer(InitRpcServer),
+		zmicro.Before(func() error {
+			runtime.Setup()
+			return nil
+		}),
+	)
 
 	if err := app.Run(); err != nil {
 		log.Fatal(err.Error())
