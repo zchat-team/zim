@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+option go_package = "github.com/zmicro-team/zim/api/rest/user";
+package github.com.zmicro.team.zim.api.rest.user;
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/field_behavior.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service Client {
+  rpc CheckOnline(CheckOnlineReq) returns (CheckOnlineRsp) {
+    option (google.api.http) = {
+      post: "/zim/users/checkOnline",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "查询在线成员";
+      tags: "用户";
+    };
+  }
+  rpc UnreadCount(UnreadCountReq) returns (UnreadCountRsp) {
+    option (google.api.http) = {
+      get: "/zim/users/{uin}/unreadCount",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "查询未读计数";
+      tags: "用户";
+    };
+  }
+  rpc Kick(KickReq) returns (KickRsp) {
+    option (google.api.http) = {
+      patch: "/zim/clients/{uin}/kick",
+      body: ""
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "强制下线";
+      tags: "用户";
+    };
+  }
+  rpc GetMessage(GetMessageReq) returns (GetMessageRsp) {
+    option (google.api.http) = {
+      get: "/zim/clients/{uin}/messages",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "查询用户发送的消息";
+      tags: "用户";
+    };
+  }
+}
+
+message CheckOnlineReq {
+  // 要查询的用户列表
+  repeated string uins = 1 [ (google.api.field_behavior) = REQUIRED ];
+}
+
+message CheckOnlineRsp {
+  repeated string uins = 1;
+}
+
+message UnreadCountReq {
+  string uin = 1 [ (google.api.field_behavior) = REQUIRED ];
+  // 会话ID，如果为空，则查询所有会话的未读计数
+  string conv_id = 2;
+}
+
+message UnreadCountRsp {
+  int32 count = 1;
+}
+
+message KickReq {
+  string uin = 1;
+}
+
+message KickRsp {
+}
+
+message GetMessageReq {
+  string uin = 1;
+}
+
+message GetMessageRsp {
+
+}

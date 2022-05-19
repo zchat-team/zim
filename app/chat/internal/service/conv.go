@@ -273,8 +273,6 @@ func (l *Conv) SetConversationRead(ctx context.Context, req *chat.SetConversatio
 		}
 	}
 
-	rsp = &chat.SetConversationReadRsp{}
-
 	// 推送已送达回执
 	go func() {
 		defer func() {
@@ -359,7 +357,6 @@ func (l *Conv) SyncConversation(ctx context.Context, req *chat.SyncConversationR
 		keys = append(keys, key)
 	}
 
-	rsp = &chat.SyncConversationRsp{}
 	if len(keys) == 0 {
 		return
 	}
@@ -434,7 +431,6 @@ func (l *Conv) SyncConversationMsg(ctx context.Context, req *chat.SyncConversati
 		keys = append(keys, key)
 	}
 
-	rsp = &chat.SyncConversationMsgRsp{}
 	if len(keys) == 0 {
 		return
 	}

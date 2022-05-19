@@ -30,7 +30,6 @@ type CmdFunc func(client *Client, p *protocol.Packet) (err error)
 
 type Server struct {
 	opts      Options
-	nc        *nats.Conn
 	tcpServer *TcpServer
 	wsServer  *WsServer
 	timer     *ztimer.Timer
@@ -156,7 +155,8 @@ func (s *Server) consumePush() error {
 	// process push message
 	pushMsg := new(common.PushMsg)
 	topic := fmt.Sprintf("push.online.%s", s.GetServerId())
-	if _, err := s.nc.Subscribe(topic, func(msg *nats.Msg) {
+	nc := runtime.GetNC()
+	if _, err := nc.Subscribe(topic, func(msg *nats.Msg) {
 
 		if err := proto.Unmarshal(msg.Data, pushMsg); err != nil {
 			log.Errorf("proto.Unmarshal error=(%v)", err)

@@ -1,7 +1,7 @@
 app:
   name: "zim.conn"
-  tcpAddr: ":3001"
-  wsAddr: ":3002"
+  tcpAddr: ":2001"
+  wsAddr: ":2002"
 registry:
   basePath: "/zmicro"
   etcdAddr:
