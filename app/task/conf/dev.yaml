@@ -6,7 +6,7 @@ registry:
   etcdAddr:
     - "127.0.0.1:2379"
 mysql:
-  dataSource: "root:123456@tcp(127.0.0.1:3306)/zim?parseTime=true&loc=Local"
+  dataSource: "root:123456@tcp(127.0.0.1:3306)/zim?charset=utf8mb4&parseTime=true&loc=Local"
   maxIdle: 10
   maxOpen: 100
 redis:

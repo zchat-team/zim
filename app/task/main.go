@@ -5,6 +5,7 @@ import (
 
 	"github.com/nats-io/nats.go"
 	"github.com/zmicro-team/zim/app/task/internal/app"
+	"github.com/zmicro-team/zim/app/task/internal/model"
 	"github.com/zmicro-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zmicro/core/log"
 )
@@ -38,15 +39,20 @@ func before() error {
 			return err
 		}
 		//nats consumer add MSGS TASK --filter MSGS.received --ack explicit --pull --deliver all --max-deliver=-1
-		_, err := js.AddConsumer("ORDERS", &nats.ConsumerConfig{
+		if _, err := js.AddConsumer("ORDERS", &nats.ConsumerConfig{
 			Durable:       "TASK",
 			AckPolicy:     nats.AckExplicitPolicy,
 			FilterSubject: "MSGS.received",
-		})
-
-		if err != nil {
+		}); err != nil {
 			log.Error(err)
+			return err
 		}
+	}
+
+	db := runtime.GetDB()
+	if err := db.AutoMigrate(&model.Msg{}); err != nil {
+		log.Error(err)
+		return err
 	}
 	return nil
 }
