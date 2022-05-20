@@ -2,18 +2,16 @@ package server
 
 import (
 	"context"
-	"github.com/zmicro-team/zim/app/conn/internal/client"
-	"github.com/zmicro-team/zim/proto/chat"
-	"github.com/zmicro-team/zim/proto/conn"
-
 	"github.com/golang/protobuf/proto"
+	"github.com/zmicro-team/zim/app/conn/internal/client"
 	"github.com/zmicro-team/zim/app/conn/protocol"
+	"github.com/zmicro-team/zim/proto/chat"
 	"github.com/zmicro-team/zmicro/core/log"
 )
 
 func (s *Server) handleGetRecentConversation(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.GetRecentConversationReq{}
-	rsp := &conn.GetRecentConversationRsp{}
+	req := &protocol.GetRecentConversationReq{}
+	rsp := &protocol.GetRecentConversationRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -42,7 +40,7 @@ func (s *Server) handleGetRecentConversation(c *Client, p *protocol.Packet) (err
 	}
 
 	for _, v := range rspL.List {
-		conv := conn.Conversation{
+		conv := protocol.Conversation{
 			Type:   v.Type,
 			Target: v.Target,
 			IsTop:  v.IsTop,
@@ -56,8 +54,8 @@ func (s *Server) handleGetRecentConversation(c *Client, p *protocol.Packet) (err
 }
 
 func (s *Server) handleGetConversationMsg(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.GetConversationMsgReq{}
-	rsp := &conn.GetConversationMsgRsp{}
+	req := &protocol.GetConversationMsgReq{}
+	rsp := &protocol.GetConversationMsgRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -89,7 +87,7 @@ func (s *Server) handleGetConversationMsg(c *Client, p *protocol.Packet) (err er
 	}
 
 	for _, v := range rspL.List {
-		msg := &conn.Msg{
+		msg := &protocol.Msg{
 			Id:         v.Id,
 			ConvType:   v.ConvType,
 			Type:       v.Type,
@@ -108,8 +106,8 @@ func (s *Server) handleGetConversationMsg(c *Client, p *protocol.Packet) (err er
 }
 
 func (s *Server) handleDeleteConversation(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.DeleteConversationReq{}
-	rsp := &conn.DeleteConversationRsp{}
+	req := &protocol.DeleteConversationReq{}
+	rsp := &protocol.DeleteConversationRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -142,8 +140,8 @@ func (s *Server) handleDeleteConversation(c *Client, p *protocol.Packet) (err er
 }
 
 func (s *Server) handleGetConversation(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.GetConversationReq{}
-	rsp := &conn.GetConversationRsp{}
+	req := &protocol.GetConversationReq{}
+	rsp := &protocol.GetConversationRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -182,8 +180,8 @@ func (s *Server) handleGetConversation(c *Client, p *protocol.Packet) (err error
 }
 
 func (s *Server) handleSetConversationTop(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.SetConversationTopReq{}
-	rsp := &conn.SetConversationTopRsp{}
+	req := &protocol.SetConversationTopReq{}
+	rsp := &protocol.SetConversationTopRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -217,8 +215,8 @@ func (s *Server) handleSetConversationTop(c *Client, p *protocol.Packet) (err er
 }
 
 func (s *Server) handleSetConversationMute(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.SetConversationMuteReq{}
-	rsp := &conn.SetConversationMuteRsp{}
+	req := &protocol.SetConversationMuteReq{}
+	rsp := &protocol.SetConversationMuteRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -252,8 +250,8 @@ func (s *Server) handleSetConversationMute(c *Client, p *protocol.Packet) (err e
 }
 
 func (s *Server) handleSyncConversation(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.SyncConversationReq{}
-	rsp := &conn.SyncConversationRsp{}
+	req := &protocol.SyncConversationReq{}
+	rsp := &protocol.SyncConversationRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -292,7 +290,7 @@ func (s *Server) handleSyncConversation(c *Client, p *protocol.Packet) (err erro
 	}
 
 	for _, v := range rspL.List {
-		conv := conn.Conversation{
+		conv := protocol.Conversation{
 			Type:         v.Type,
 			Target:       v.Target,
 			IsTop:        v.IsTop,
@@ -304,7 +302,7 @@ func (s *Server) handleSyncConversation(c *Client, p *protocol.Packet) (err erro
 			UnreadCount:  v.UnreadCount,
 			//LastMsg:      v.LastMsg,
 		}
-		conv.LastMsg = &conn.Msg{
+		conv.LastMsg = &protocol.Msg{
 			Id:            v.LastMsg.Id,
 			ConvType:      v.LastMsg.ConvType,
 			Type:          v.LastMsg.Type,
@@ -325,8 +323,8 @@ func (s *Server) handleSyncConversation(c *Client, p *protocol.Packet) (err erro
 }
 
 func (s *Server) handleSyncConversationMsg(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.SyncConversationMsgReq{}
-	rsp := &conn.SyncConversationMsgRsp{}
+	req := &protocol.SyncConversationMsgReq{}
+	rsp := &protocol.SyncConversationMsgRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -358,7 +356,7 @@ func (s *Server) handleSyncConversationMsg(c *Client, p *protocol.Packet) (err e
 	}
 
 	for _, v := range rspL.List {
-		msg := &conn.Msg{
+		msg := &protocol.Msg{
 			Id:         v.Id,
 			ConvType:   v.ConvType,
 			Type:       v.Type,
@@ -377,8 +375,8 @@ func (s *Server) handleSyncConversationMsg(c *Client, p *protocol.Packet) (err e
 }
 
 func (s *Server) handleSetConversationRead(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.SetConversationReadReq{}
-	rsp := &conn.SetConversationReadRsp{}
+	req := &protocol.SetConversationReadReq{}
+	rsp := &protocol.SetConversationReadRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)

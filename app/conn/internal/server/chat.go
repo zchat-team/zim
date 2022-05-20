@@ -2,8 +2,6 @@ package server
 
 import (
 	"context"
-	"github.com/zmicro-team/zim/proto/conn"
-
 	"github.com/golang/protobuf/proto"
 	"github.com/zmicro-team/zim/app/conn/internal/client"
 	"github.com/zmicro-team/zim/app/conn/protocol"
@@ -13,8 +11,8 @@ import (
 )
 
 func (s *Server) handleMsgAck(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.MsgAckReq{}
-	rsp := &conn.MsgAckRsp{}
+	req := &protocol.MsgAckReq{}
+	rsp := &protocol.MsgAckRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -47,8 +45,8 @@ func (s *Server) handleMsgAck(c *Client, p *protocol.Packet) (err error) {
 }
 
 func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.SyncMsgReq{}
-	rsp := &conn.SyncMsgRsp{}
+	req := &protocol.SyncMsgReq{}
+	rsp := &protocol.SyncMsgRsp{}
 
 	defer func() {
 		b, err := proto.Marshal(rsp)
@@ -79,7 +77,7 @@ func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	for _, v := range rspL.List {
-		msg := &conn.Msg{
+		msg := &protocol.Msg{
 			Id:         v.Id,
 			ConvType:   v.ConvType,
 			Type:       v.Type,
@@ -100,9 +98,9 @@ func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
 
 func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 	log.Info("handleSend ...")
-	req := &conn.SendReq{}
+	req := &protocol.SendReq{}
 
-	rsp := &conn.SendRsp{
+	rsp := &protocol.SendRsp{
 		Code:    200,
 		Message: "成功",
 	}

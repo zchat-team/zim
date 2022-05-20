@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/zmicro-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zim/proto/common"
-	"github.com/zmicro-team/zim/proto/conn"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -36,7 +35,7 @@ type Server struct {
 	// TODO: 分桶
 	clientManager *ClientManager
 	workerPool    *goroutine.Pool
-	mapCmdFunc    map[conn.CmdId]CmdFunc
+	mapCmdFunc    map[protocol.CmdId]CmdFunc
 }
 
 type Registry struct {
@@ -66,22 +65,22 @@ func NewServer(opts ...Option) *Server {
 }
 
 func (s *Server) registerCmdFunc() {
-	s.mapCmdFunc = make(map[conn.CmdId]CmdFunc)
-	s.mapCmdFunc[conn.CmdId_Cmd_Noop] = s.handleNoop
-	s.mapCmdFunc[conn.CmdId_Cmd_Logout] = s.handleLogout
-	s.mapCmdFunc[conn.CmdId_Cmd_Send] = s.handleSend
-	s.mapCmdFunc[conn.CmdId_Cmd_Sync] = s.handleSync
-	s.mapCmdFunc[conn.CmdId_Cmd_MsgAck] = s.handleMsgAck
+	s.mapCmdFunc = make(map[protocol.CmdId]CmdFunc)
+	s.mapCmdFunc[protocol.CmdId_Cmd_Noop] = s.handleNoop
+	s.mapCmdFunc[protocol.CmdId_Cmd_Logout] = s.handleLogout
+	s.mapCmdFunc[protocol.CmdId_Cmd_Send] = s.handleSend
+	s.mapCmdFunc[protocol.CmdId_Cmd_Sync] = s.handleSync
+	s.mapCmdFunc[protocol.CmdId_Cmd_MsgAck] = s.handleMsgAck
 
-	s.mapCmdFunc[conn.CmdId_Cmd_GetRecentConversation] = s.handleGetRecentConversation
-	s.mapCmdFunc[conn.CmdId_Cmd_GetConversationMsg] = s.handleGetConversationMsg
-	s.mapCmdFunc[conn.CmdId_Cmd_DeleteConversation] = s.handleDeleteConversation
-	s.mapCmdFunc[conn.CmdId_Cmd_GetConversation] = s.handleGetConversation
-	s.mapCmdFunc[conn.CmdId_Cmd_SetConversationTop] = s.handleSetConversationTop
-	s.mapCmdFunc[conn.CmdId_Cmd_SetConversationMute] = s.handleSetConversationMute
-	s.mapCmdFunc[conn.CmdId_Cmd_SyncConversation] = s.handleSyncConversation
-	s.mapCmdFunc[conn.CmdId_Cmd_SyncConversationMsg] = s.handleSyncConversationMsg
-	s.mapCmdFunc[conn.CmdId_Cmd_SetConversationRead] = s.handleSetConversationRead
+	s.mapCmdFunc[protocol.CmdId_Cmd_GetRecentConversation] = s.handleGetRecentConversation
+	s.mapCmdFunc[protocol.CmdId_Cmd_GetConversationMsg] = s.handleGetConversationMsg
+	s.mapCmdFunc[protocol.CmdId_Cmd_DeleteConversation] = s.handleDeleteConversation
+	s.mapCmdFunc[protocol.CmdId_Cmd_GetConversation] = s.handleGetConversation
+	s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationTop] = s.handleSetConversationTop
+	s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationMute] = s.handleSetConversationMute
+	s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversation] = s.handleSyncConversation
+	s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversationMsg] = s.handleSyncConversationMsg
+	s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationRead] = s.handleSetConversationRead
 }
 
 func (s *Server) GetClientManager() *ClientManager {
@@ -169,7 +168,7 @@ func (s *Server) consumePush() error {
 					p := protocol.Packet{
 						HeaderLen: 20,
 						Version:   uint32(c.Version),
-						Cmd:       uint32(conn.CmdId_Cmd_Msg),
+						Cmd:       uint32(protocol.CmdId_Cmd_Msg),
 						Seq:       0,
 						BodyLen:   uint32(len(pushMsg.Msg)),
 						Body:      pushMsg.Msg,
@@ -224,8 +223,8 @@ func (s *Server) OnMessage(data []byte, client *Client) {
 		}
 
 		if client.Status == AuthPending {
-			cmd := conn.CmdId(p.Cmd)
-			if cmd != conn.CmdId_Cmd_Login {
+			cmd := protocol.CmdId(p.Cmd)
+			if cmd != protocol.CmdId_Cmd_Login {
 				log.Error("first packet must be cmd_login")
 				client.Close()
 				return
@@ -244,9 +243,9 @@ func (s *Server) OnMessage(data []byte, client *Client) {
 }
 
 func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
-	req := &conn.LoginReq{}
+	req := &protocol.LoginReq{}
 
-	rsp := &conn.LoginRsp{
+	rsp := &protocol.LoginRsp{
 		Code:    200,
 		Message: "成功",
 	}
@@ -326,12 +325,12 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 		oldClient := s.GetClientManager().Get(rspL.ConflictDeviceId)
 		if oldClient != nil && oldClient.Conn != nil {
 			reason := fmt.Sprintf("您的账号在设备%s上登录，如果不是本人操作，您的账号可能被盗", req.DeviceName)
-			kick := &conn.Kick{Reason: reason}
+			kick := &protocol.Kick{Reason: reason}
 			if b, err := proto.Marshal(kick); err == nil {
 				pp := protocol.Packet{
 					HeaderLen: p.HeaderLen,
 					Version:   p.Version,
-					Cmd:       uint32(conn.CmdId_Cmd_Kick),
+					Cmd:       uint32(protocol.CmdId_Cmd_Kick),
 					Seq:       0,
 					BodyLen:   uint32(len(b)),
 					Body:      b,
@@ -370,7 +369,7 @@ func (s *Server) handleLogout(c *Client, p *protocol.Packet) (err error) {
 
 func (s *Server) handleProto(c *Client, p *protocol.Packet) (err error) {
 	log.Infof("cmd=%d", p.Cmd)
-	cmd := conn.CmdId(p.Cmd)
+	cmd := protocol.CmdId(p.Cmd)
 
 	if s.mapCmdFunc[cmd] != nil {
 		err = s.mapCmdFunc[cmd](c, p)
