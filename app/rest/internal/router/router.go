@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 
-	"github.com/zmicro-team/zchat/pkg/validate"
+	"github.com/zmicro-team/zim/pkg/validate"
 )
 
 func Setup(engine *gin.Engine) {
