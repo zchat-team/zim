@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-option go_package = "github.com/zmicro-team/zim/conn/prototol";
+option go_package = "github.com/zmicro-team/zim/conn/protocol";
 option java_package = "com.iobrother.zimsdk.core.proto";
 
-package github.com.zmicro.team.zim.conn.prototol;
+package github.com.zmicro.team.zim.conn.protocol;
 
 enum CmdId {
   Cmd_Raw = 0;

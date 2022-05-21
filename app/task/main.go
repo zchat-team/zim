@@ -39,7 +39,7 @@ func before() error {
 			return err
 		}
 		//nats consumer add MSGS TASK --filter MSGS.received --ack explicit --pull --deliver all --max-deliver=-1
-		if _, err := js.AddConsumer("ORDERS", &nats.ConsumerConfig{
+		if _, err := js.AddConsumer("MSGS", &nats.ConsumerConfig{
 			Durable:       "TASK",
 			AckPolicy:     nats.AckExplicitPolicy,
 			FilterSubject: "MSGS.received",
