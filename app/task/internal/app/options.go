@@ -3,10 +3,7 @@ package app
 type BeforeFunc func() error
 
 type Options struct {
-	Name     string
-	Version  string
-	Metadata map[string]string
-	Before   BeforeFunc
+	Before BeforeFunc
 }
 
 func newOptions(opts ...Option) Options {
@@ -20,24 +17,6 @@ func newOptions(opts ...Option) Options {
 }
 
 type Option func(*Options)
-
-func Name(name string) Option {
-	return func(o *Options) {
-		o.Name = name
-	}
-}
-
-func Version(version string) Option {
-	return func(o *Options) {
-		o.Version = version
-	}
-}
-
-func Metadata(md map[string]string) Option {
-	return func(o *Options) {
-		o.Metadata = md
-	}
-}
 
 func Before(f BeforeFunc) Option {
 	return func(o *Options) {

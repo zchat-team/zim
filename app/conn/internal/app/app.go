@@ -2,6 +2,7 @@ package app
 
 import (
 	"flag"
+	"io"
 	"os"
 	"os/signal"
 	"syscall"
@@ -9,6 +10,9 @@ import (
 	"github.com/zmicro-team/zim/app/conn/internal/server"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
+	"github.com/zmicro-team/zmicro/core/util/env"
+	"go.uber.org/zap/zapcore"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 var cfgFile string
@@ -19,13 +23,24 @@ func init() {
 
 type App struct {
 	opts   Options
-	conf   *zconfig
+	zc     *zconfig
 	server *server.Server
 }
 
 type zconfig struct {
 	App struct {
-		Name    string
+		Mode string
+		Name string
+	}
+	Logger struct {
+		Level      string `json:"level"`
+		Filename   string `json:"filename"`
+		MaxSize    int    `json:"maxSize"`
+		MaxBackups int    `json:"maxBackups"`
+		MaxAge     int    `json:"maxAge"`
+		Compress   bool   `json:"compress"`
+	}
+	Server struct {
 		TcpAddr string
 		WsAddr  string
 	}
@@ -45,20 +60,51 @@ func New(opts ...Option) *App {
 	c := config.New(config.Path(cfgFile))
 	config.ResetDefault(c)
 
-	conf := &zconfig{}
-	if err = config.Scan("app", &conf.App); err != nil {
-		log.Fatal(err)
+	zc := &zconfig{}
+	if err = config.Unmarshal(zc); err != nil {
+		log.Fatal(err.Error())
 	}
-	options.Name = conf.App.Name
+
+	if zc.App.Name == "" {
+		log.Fatal("配置项app.name不能为空")
+	}
+
+	env.Set(zc.App.Mode)
+
+	level, err := zapcore.ParseLevel(zc.Logger.Level)
+	if err != nil {
+		level = log.InfoLevel
+	}
+	if env.IsDevelop() {
+		w := &lumberjack.Logger{
+			Filename:   zc.Logger.Filename,
+			MaxSize:    zc.Logger.MaxSize,
+			MaxBackups: zc.Logger.MaxBackups,
+			MaxAge:     zc.Logger.MaxAge,
+			Compress:   zc.Logger.Compress,
+		}
+		l := log.NewTee([]io.Writer{os.Stderr, w}, level, log.WithCaller(true))
+		log.ResetDefault(l)
+	} else {
+		w := &lumberjack.Logger{
+			Filename:   zc.Logger.Filename,
+			MaxSize:    zc.Logger.MaxSize,
+			MaxBackups: zc.Logger.MaxBackups,
+			MaxAge:     zc.Logger.MaxAge,
+			Compress:   zc.Logger.Compress,
+		}
+		l := log.New(w, level, log.WithCaller(true))
+		log.ResetDefault(l)
+	}
 
 	app := &App{
 		opts: options,
-		conf: conf,
+		zc:   zc,
 	}
 
 	app.server = server.NewServer(
-		server.TcpAddr(conf.App.TcpAddr),
-		server.WsAddr(conf.App.WsAddr),
+		server.TcpAddr(zc.Server.TcpAddr),
+		server.WsAddr(zc.Server.WsAddr),
 	)
 	return app
 }
