@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "github.com/zmicro-team/zim/errno";
+package github.com.zmicro.team.zim.errno;
+
+import "github.com/zmicro-team/zmicro/core/errors/errors.proto";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+  internal_server          = 0 [(errors.code) = 500, (errors.msg) = "服务器错误"];
+  bad_request              = 1 [(errors.code) = 400, (errors.msg) = "请求参数错误"];
+
+  custom                   = 100 [(errors.code) = 1000, (errors.msg) = "自定义错误"];
+  invalid_token            = 101 [(errors.code) = 1001, (errors.msg) = "无效的令牌"];
+  token_expired            = 102 [(errors.code) = 1002, (errors.msg) = "令牌过期"];
+  token_revoked            = 103 [(errors.code) = 1003, (errors.msg) = "令牌已被吊销"];
+  login_conflict           = 104 [(errors.code) = 1004, (errors.msg) = "登录冲突"];
+}
+
+

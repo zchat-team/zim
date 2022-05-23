@@ -55,7 +55,10 @@ enum CmdId {
 
 enum ErrorCode {
   Success = 0;
-  InvalidToken = 1;
+  InvalidToken = 1001; // 无效的令牌
+  TokenExpired = 1002; // 令牌过期
+  TokenRevoked = 1003; // 令牌已被吊销
+  LoginConflict = 1004; // 登录冲突
 }
 
 message Error {
@@ -74,8 +77,7 @@ message LoginReq {
 }
 
 message LoginRsp {
-  int32 code = 1;
-  string message = 2;
+
 }
 
 message LogoutReq {
@@ -133,11 +135,9 @@ message SendReq {
 }
 
 message SendRsp {
-  int32 code = 1;
-  string message = 2;
-  int64 id = 3;
-  int64 send_time = 4;
-  string client_uuid = 5;
+  int64 id = 1;
+  int64 send_time = 2;
+  string client_uuid = 3;
 }
 
 message MsgAckReq {

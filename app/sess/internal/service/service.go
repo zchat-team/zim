@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"github.com/zmicro-team/zim/pkg/constant"
 	"sync"
 	"time"
@@ -27,10 +26,6 @@ func GetService() *Service {
 
 func (s *Service) Login(ctx context.Context, req *sess.LoginReq, rsp *sess.LoginRsp) (err error) {
 	// TODO: token验证
-	*rsp = sess.LoginRsp{
-		Code:    200,
-		Message: "成功",
-	}
 	var devices []*DeviceInfo
 	if req.Tag != "" {
 		v, e := s.getOnlineOfTag(ctx, req.Uin, req.Tag)
@@ -43,8 +38,6 @@ func (s *Service) Login(ctx context.Context, req *sess.LoginReq, rsp *sess.Login
 
 	if len(devices) > 0 {
 		if req.Reconnect {
-			rsp.Code = 409
-			rsp.Message = fmt.Sprintf("登录冲突，您的账号已在设备%s上登录", devices[len(devices)-1].DeviceName)
 			rsp.ConflictDeviceId = devices[len(devices)-1].DeviceId
 			rsp.ConflictDeviceName = devices[len(devices)-1].DeviceName
 			return

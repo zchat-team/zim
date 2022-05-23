@@ -24,10 +24,8 @@ message LoginReq {
 }
 
 message LoginRsp {
-  int32 code = 1;
-  string message = 2;
-  string conflict_device_id = 3;
-  string conflict_device_name = 4;
+  string conflict_device_id = 1;
+  string conflict_device_name = 2;
 }
 
 message LogoutReq {

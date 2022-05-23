@@ -15,14 +15,31 @@ func (s *Server) handleMsgAck(c *Client, p *protocol.Packet) (err error) {
 	rsp := &protocol.MsgAckRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -49,14 +66,31 @@ func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
 	rsp := &protocol.SyncMsgRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -100,25 +134,37 @@ func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 	log.Info("handleSend ...")
 	req := &protocol.SendReq{}
 
-	rsp := &protocol.SendRsp{
-		Code:    200,
-		Message: "成功",
-	}
+	rsp := &protocol.SendRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
-		rsp.Code = 500
-		rsp.Message = "协议解析错误"
 		log.Error(err)
 		return
 	}
@@ -137,18 +183,10 @@ func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 	}
 	rspL, err := client.GetChatClient().SendMsg(context.Background(), &r)
 	if err != nil {
-		// TODO
-		e := zerrors.FromError(err)
-		rsp.Code = e.Code
-		rsp.Message = e.Message
-		if e.Message == "" {
-			rsp.Message = e.Detail
-		}
+		log.Error(err)
 		return
 	}
 
-	rsp.Code = rspL.Code
-	rsp.Message = rspL.Message
 	rsp.Id = rspL.Id
 	rsp.SendTime = rspL.SendTime
 	rsp.ClientUuid = rspL.ClientUuid

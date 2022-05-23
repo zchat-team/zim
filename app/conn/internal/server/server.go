@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/zmicro-team/zim/errno"
 	"github.com/zmicro-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zim/proto/common"
 	"time"
@@ -244,43 +245,46 @@ func (s *Server) OnMessage(data []byte, client *Client) {
 
 func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 	req := &protocol.LoginReq{}
-
-	rsp := &protocol.LoginRsp{
-		Code:    200,
-		Message: "成功",
-	}
+	rsp := &protocol.LoginRsp{}
 
 	defer func() {
 		// 不论登录成功与失败，均取消定时任务
 		c.TimerTask.Cancel()
 		c.TimerTask = nil
 
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			rsp.Code = 500
-			rsp.Message = err.Error()
-			log.Error(err)
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		if err := c.WritePacket(p); err != nil {
+		if errr != nil {
 			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
 		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
 		log.Error(err)
-		rsp.Code = 500
-		rsp.Message = "协议解析错误"
-		err = errors.New("协议解析错误")
 		return
 	}
 
 	if req.Uin == "" {
-		rsp.Code = 500
-		rsp.Message = "账号不能为空"
-		log.Error("账号不能为空")
 		err = errors.New("账号不能为空")
 		return
 	}
@@ -301,23 +305,14 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 	}
 	rspL, err := client.GetSessClient().Login(context.Background(), &reqL)
 	if err != nil {
-		// TODO:
-		e := zerrors.FromError(err)
-		rsp.Code = e.Code
-		rsp.Message = e.Message
-		if e.Message == "" {
-			rsp.Message = e.Detail
-		}
+		log.Error(err)
 		return
 	}
 
-	rsp.Code = rspL.Code
-	rsp.Message = rspL.Message
-
-	if req.Reconnect && rsp.Code == 409 {
+	if req.Reconnect && rspL.ConflictDeviceId != "" {
 		log.Infof("登录冲突 uin=%s cur_device_id=%s conflict_device_id=%s conflict_device_name=%s",
 			req.Uin, req.DeviceId, rspL.ConflictDeviceId, rspL.ConflictDeviceName)
-		return
+		return errno.ErrLoginConflict()
 	}
 	// 踢掉旧的连接
 	if rspL.ConflictDeviceId != "" {

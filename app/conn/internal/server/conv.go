@@ -6,22 +6,39 @@ import (
 	"github.com/zmicro-team/zim/app/conn/internal/client"
 	"github.com/zmicro-team/zim/app/conn/protocol"
 	"github.com/zmicro-team/zim/proto/chat"
+	zerrors "github.com/zmicro-team/zmicro/core/errors"
 	"github.com/zmicro-team/zmicro/core/log"
 )
 
 func (s *Server) handleGetRecentConversation(c *Client, p *protocol.Packet) (err error) {
 	req := &protocol.GetRecentConversationReq{}
 	rsp := &protocol.GetRecentConversationRsp{}
-
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -58,14 +75,31 @@ func (s *Server) handleGetConversationMsg(c *Client, p *protocol.Packet) (err er
 	rsp := &protocol.GetConversationMsgRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -110,14 +144,31 @@ func (s *Server) handleDeleteConversation(c *Client, p *protocol.Packet) (err er
 	rsp := &protocol.DeleteConversationRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -144,14 +195,31 @@ func (s *Server) handleGetConversation(c *Client, p *protocol.Packet) (err error
 	rsp := &protocol.GetConversationRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -184,14 +252,31 @@ func (s *Server) handleSetConversationTop(c *Client, p *protocol.Packet) (err er
 	rsp := &protocol.SetConversationTopRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -219,14 +304,31 @@ func (s *Server) handleSetConversationMute(c *Client, p *protocol.Packet) (err e
 	rsp := &protocol.SetConversationMuteRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -254,22 +356,31 @@ func (s *Server) handleSyncConversation(c *Client, p *protocol.Packet) (err erro
 	rsp := &protocol.SyncConversationRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		//x := protocol.SyncConversationRsp{}
-		//err = proto.Unmarshal(b, &x)
-		//if err != nil {
-		//	logger.Error(err)
-		//} else {
-		//	logger.Error("kadfadfadfafdadf")
-		//}
-		//logger.Errorf("bbbbbbbbbb=%s len=%d", string(b), len(b))
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -327,14 +438,31 @@ func (s *Server) handleSyncConversationMsg(c *Client, p *protocol.Packet) (err e
 	rsp := &protocol.SyncConversationMsgRsp{}
 
 	defer func() {
-		b, err := proto.Marshal(rsp)
+		var b []byte
+		var errr error
+
 		if err != nil {
-			return
+			rspErr := &protocol.Error{}
+			ze := zerrors.FromError(err)
+			rspErr.Code = ze.Code
+			rspErr.Message = ze.Message
+			if ze.Message == "" {
+				rspErr.Message = ze.Detail
+			}
+			b, errr = proto.Marshal(rspErr)
+		} else {
+			b, errr = proto.Marshal(rsp)
 		}
 
-		p.BodyLen = uint32(len(b))
-		p.Body = b
-		c.WritePacket(p)
+		if errr != nil {
+			log.Error(err)
+		} else {
+			p.BodyLen = uint32(len(b))
+			p.Body = b
+			if err := c.WritePacket(p); err != nil {
+				log.Error(err)
+			}
+		}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
