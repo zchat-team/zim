@@ -2,6 +2,7 @@ package client
 
 import (
 	"github.com/zmicro-team/zim/proto/chat"
+	"github.com/zmicro-team/zim/proto/group"
 	"github.com/zmicro-team/zim/proto/sess"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
@@ -9,9 +10,10 @@ import (
 )
 
 var (
-	chatClient *chat.ChatClient
-	convClient *chat.ConvClient
-	sessClient *sess.SessClient
+	chatClient  *chat.ChatClient
+	convClient  *chat.ConvClient
+	groupClient *group.GroupClient
+	sessClient  *sess.SessClient
 )
 
 type Registry struct {
@@ -83,4 +85,26 @@ func GetConvClient() *chat.ConvClient {
 		convClient = chat.NewConvClient(cli)
 	}
 	return convClient
+}
+
+func GetGroupClient() *group.GroupClient {
+	if groupClient == nil {
+		r := &Registry{}
+		if err := config.Scan("registry", &r); err != nil {
+			log.Errorf("getGroupClient error=%v", err)
+			return nil
+		}
+		cc, err := client.NewClient(
+			client.WithServiceName("Group"),
+			client.BasePath(r.BasePath),
+			client.EtcdAddr(r.EtcdAddr),
+		)
+		if err != nil {
+			log.Errorf("getGroupClient error=%v", err)
+			return nil
+		}
+		cli := cc.GetXClient()
+		groupClient = group.NewGroupClient(cli)
+	}
+	return groupClient
 }

@@ -82,6 +82,10 @@ func (s *Server) registerCmdFunc() {
 	s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversation] = s.handleSyncConversation
 	s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversationMsg] = s.handleSyncConversationMsg
 	s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationRead] = s.handleSetConversationRead
+
+	s.mapCmdFunc[protocol.CmdId_Cmd_CreateGroup] = s.handleCreateGroup
+	s.mapCmdFunc[protocol.CmdId_Cmd_GetJoinedGroups] = s.handleGetJoinedGroups
+	s.mapCmdFunc[protocol.CmdId_Cmd_SyncGroups] = s.handleSyncGroups
 }
 
 func (s *Server) GetClientManager() *ClientManager {

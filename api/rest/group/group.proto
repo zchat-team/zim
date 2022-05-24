@@ -44,6 +44,9 @@ message CreateReq {
   string name = 3;
   // 群ID，如果不传，zim会生成一个群ID
   string group_id = 4;
+  string notice = 5;
+  string introduction = 6;
+  string avatar = 7;
 }
 
 message CreateRsp {
