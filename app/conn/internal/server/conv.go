@@ -466,6 +466,7 @@ func (s *Server) handleSyncConversationMsg(c *Client, p *protocol.Packet) (err e
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
+		log.Error(err)
 		return
 	}
 

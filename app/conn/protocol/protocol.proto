@@ -45,9 +45,28 @@ enum CmdId {
   Cmd_BlackList = 1303;
 
   // group
-  Cmd_CreateGroup = 1401;
-  Cmd_GetJoinedGroups = 1402;
-  Cmd_SyncGroups = 1403;
+  // 群组管理
+  Cmd_SyncGroup = 1401; // 同步群
+  Cmd_CreateGroup = 1402;
+  Cmd_JoinGroup = 1403;
+  Cmd_InviteUserToGroup = 1404;
+  Cmd_QuitGroup = 1405;
+  Cmd_KickGroupMember = 1406;
+  Cmd_GetJoinedGroupList = 1407;
+  Cmd_DismissGroup = 1408;
+  // 群资料管理
+  Cmd_GetGroupInfo = 1411; // 查询用户在群的资料
+  Cmd_SetGroupInfo = 1412; // 设置群资料
+  // 群成员管理
+  Cmd_GetGroupMemberList = 1421; // 获取群成员列表
+  Cmd_GetGroupMemberInfo = 1422; // 查询群内某个群成员信息
+  Cmd_SetGroupMemberInfo = 1423; // 设置群成员资料
+  Cmd_SetGroupMemberRole = 1424;
+  Cmd_TransferGroup = 1425;
+  // 群属性管理
+  Cmd_SetGroupAttributes = 1431;
+  Cmd_GetGroupAttributes = 1432;
+  Cmd_DeleteGroupAttributes = 1433;
   // TODO: 更多
 }
 
@@ -293,37 +312,170 @@ message GroupInfo {
   int32 type = 9;
 }
 
+message SyncGroupReq {
+  int64 offset = 1;
+  int64 limit = 2;
+}
+
+message SyncGroupRsp {
+  repeated GroupInfo list = 1;
+}
+
 message CreateGroupReq {
-  // 群主
-  string owner = 1;
   // 成员
-  repeated string members = 2;
+  repeated string members = 1;
   // 群名称
-  string name = 3;
+  string name = 2;
   // 群ID，如果不传，zim会生成一个群ID
-  string group_id = 4;
-  string notice = 5;
-  string introduction = 6;
-  string avatar = 7;
+  string group_id = 3;
+  string notice = 4;
+  string introduction = 5;
+  string avatar = 6;
 }
 
 message CreateGroupRsp {
   string group_id = 1;
 }
 
-message GetJoinedGroupsReq {
-  string uin = 1;
+message JoinGroupReq {
+  string group_id = 1;
 }
 
-message GetJoinedGroupsRsp {
-  repeated GroupInfo groups = 1;
+message JoinGroupRsp {
 }
 
-message SyncGroupsReq {
-  int64 offset = 1;
-  int64 limit = 2;
+message InviteUserToGroupReq {
+  repeated string user_list = 1;
+  string group_id = 2;
 }
 
-message SyncGroupsRsp {
+message InviteUserToGroupRsp {
+
+}
+
+message QuitGroupReq {
+  string group_id = 1;
+}
+
+message QuitGroupRsp {
+
+}
+
+message KickGroupMemberReq {
+  repeated string user_list = 1;
+  string group_id = 2;
+}
+
+message KickGroupMemberRsp {
+  repeated string success_list = 1;
+  repeated string fail_list = 2;
+}
+
+message GetJoinedGroupListReq {
+}
+
+message GetJoinedGroupListRsp {
   repeated GroupInfo list = 1;
+}
+
+message DismissGroupReq {
+  string group_id = 1;
+}
+
+message DismissGroupRsp {
+
+}
+
+message GroupMemberInfo {
+  string group_id = 1;
+  string member = 2;
+  string nickname = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}
+
+message GetGroupInfoReq {
+  string group_id = 1;
+  string member = 2;
+}
+
+message GetGroupInfoRsp {
+  string group_id = 1;
+  string member = 2;
+  string nickname = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}
+
+message GetGroupMemberListReq {
+  string group_id = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+}
+
+message GetGroupMemberListRsp {
+  repeated GroupMemberInfo list = 1;
+}
+
+message GetGroupMemberInfoReq {
+  string group_id = 1;
+  string member = 2;
+}
+
+message GetGroupMemberInfoRsp {
+  string group_id = 1;
+  string member = 2;
+  string nickname = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}
+
+message SetGroupMemberInfoReq {
+  string group_id = 1;
+  string member = 2;
+  string nickname = 3;
+}
+
+message SetGroupMemberInfoRsp {
+
+}
+
+message SetGroupMemberRoleReq {
+
+}
+
+message SetGroupMemberRoleRsp {
+
+}
+
+message TransferGroupReq {
+
+}
+
+message TransferGroupRsp {
+
+}
+
+message SetGroupAttributesReq {
+
+}
+
+message SetGroupAttributesRsp {
+
+}
+
+message GetGroupAttributesReq {
+
+}
+
+message GetGroupAttributesRsp {
+
+}
+
+message DeleteGroupAttributesReq {
+
+}
+
+message DeleteGroupAttributesRsp {
+
 }

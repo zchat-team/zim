@@ -106,6 +106,32 @@ func (s *Server) storeRedis(m *common.Msg) error {
 		key = util.KeyMsg(m.Owner, m.Id)
 		pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
 
+		// TODO: 方案二，优化或者直接废弃
+		if m.ConvType == constant.ConvTypeC2C {
+			if m.Owner == m.Sender {
+				key = util.KeyConvMsgSync(m.Owner, m.Target)
+			} else {
+				key = util.KeyConvMsgSync(m.Owner, m.Sender)
+			}
+			pipe.ZAdd(ctx, key, &member)
+
+			pipe.Expire(ctx, key, time.Duration(constant.MsgKeepDays*24)*time.Hour)
+
+			if m.Sender < m.Target {
+				key = util.KeyConvMsg(m.Sender, m.Target, m.Id)
+			} else {
+				key = util.KeyConvMsg(m.Target, m.Sender, m.Id)
+			}
+			pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
+
+		} else {
+			key = util.KeyConvMsgSync(m.Owner, m.Target)
+			pipe.ZAdd(ctx, key, &member)
+			pipe.Expire(ctx, key, time.Duration(constant.MsgKeepDays*24)*time.Hour)
+			key = util.KeyConvMsg(m.Owner, m.Target, m.Id)
+			pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
+		}
+
 		return nil
 	}); err != nil {
 		return err
@@ -149,7 +175,6 @@ func (s *Server) push(m *common.Msg) {
 					continue
 				}
 
-				log.Info("begin send .......")
 				mm := nats.Msg{
 					Subject: fmt.Sprintf("push.online.%s", v.Server),
 					Reply:   "",

@@ -282,25 +282,25 @@ func (m *CreateRsp) GetGroupId() string {
 	return ""
 }
 
-type GetJoinedGroupsReq struct {
+type GetJoinedGroupListReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetJoinedGroupsReq) Reset()         { *m = GetJoinedGroupsReq{} }
-func (m *GetJoinedGroupsReq) String() string { return proto.CompactTextString(m) }
-func (*GetJoinedGroupsReq) ProtoMessage()    {}
-func (*GetJoinedGroupsReq) Descriptor() ([]byte, []int) {
+func (m *GetJoinedGroupListReq) Reset()         { *m = GetJoinedGroupListReq{} }
+func (m *GetJoinedGroupListReq) String() string { return proto.CompactTextString(m) }
+func (*GetJoinedGroupListReq) ProtoMessage()    {}
+func (*GetJoinedGroupListReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_85ea302c57b6519c, []int{3}
 }
-func (m *GetJoinedGroupsReq) XXX_Unmarshal(b []byte) error {
+func (m *GetJoinedGroupListReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *GetJoinedGroupsReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *GetJoinedGroupListReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_GetJoinedGroupsReq.Marshal(b, m, deterministic)
+		return xxx_messageInfo_GetJoinedGroupListReq.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -310,44 +310,44 @@ func (m *GetJoinedGroupsReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
-func (m *GetJoinedGroupsReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetJoinedGroupsReq.Merge(m, src)
+func (m *GetJoinedGroupListReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetJoinedGroupListReq.Merge(m, src)
 }
-func (m *GetJoinedGroupsReq) XXX_Size() int {
+func (m *GetJoinedGroupListReq) XXX_Size() int {
 	return m.Size()
 }
-func (m *GetJoinedGroupsReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetJoinedGroupsReq.DiscardUnknown(m)
+func (m *GetJoinedGroupListReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetJoinedGroupListReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetJoinedGroupsReq proto.InternalMessageInfo
+var xxx_messageInfo_GetJoinedGroupListReq proto.InternalMessageInfo
 
-func (m *GetJoinedGroupsReq) GetUin() string {
+func (m *GetJoinedGroupListReq) GetUin() string {
 	if m != nil {
 		return m.Uin
 	}
 	return ""
 }
 
-type GetJoinedGroupsRsp struct {
-	Groups               []*GroupInfo `protobuf:"bytes,1,rep,name=groups,proto3" json:"groups,omitempty"`
+type GetJoinedGroupListRsp struct {
+	List                 []*GroupInfo `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
 }
 
-func (m *GetJoinedGroupsRsp) Reset()         { *m = GetJoinedGroupsRsp{} }
-func (m *GetJoinedGroupsRsp) String() string { return proto.CompactTextString(m) }
-func (*GetJoinedGroupsRsp) ProtoMessage()    {}
-func (*GetJoinedGroupsRsp) Descriptor() ([]byte, []int) {
+func (m *GetJoinedGroupListRsp) Reset()         { *m = GetJoinedGroupListRsp{} }
+func (m *GetJoinedGroupListRsp) String() string { return proto.CompactTextString(m) }
+func (*GetJoinedGroupListRsp) ProtoMessage()    {}
+func (*GetJoinedGroupListRsp) Descriptor() ([]byte, []int) {
 	return fileDescriptor_85ea302c57b6519c, []int{4}
 }
-func (m *GetJoinedGroupsRsp) XXX_Unmarshal(b []byte) error {
+func (m *GetJoinedGroupListRsp) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *GetJoinedGroupsRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *GetJoinedGroupListRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_GetJoinedGroupsRsp.Marshal(b, m, deterministic)
+		return xxx_messageInfo_GetJoinedGroupListRsp.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -357,30 +357,30 @@ func (m *GetJoinedGroupsRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, 
 		return b[:n], nil
 	}
 }
-func (m *GetJoinedGroupsRsp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetJoinedGroupsRsp.Merge(m, src)
+func (m *GetJoinedGroupListRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetJoinedGroupListRsp.Merge(m, src)
 }
-func (m *GetJoinedGroupsRsp) XXX_Size() int {
+func (m *GetJoinedGroupListRsp) XXX_Size() int {
 	return m.Size()
 }
-func (m *GetJoinedGroupsRsp) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetJoinedGroupsRsp.DiscardUnknown(m)
+func (m *GetJoinedGroupListRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetJoinedGroupListRsp.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetJoinedGroupsRsp proto.InternalMessageInfo
+var xxx_messageInfo_GetJoinedGroupListRsp proto.InternalMessageInfo
 
-func (m *GetJoinedGroupsRsp) GetGroups() []*GroupInfo {
+func (m *GetJoinedGroupListRsp) GetList() []*GroupInfo {
 	if m != nil {
-		return m.Groups
+		return m.List
 	}
 	return nil
 }
 
 type SyncReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	Offset               int64    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset               int64    `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit                int64    `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	DeviceId             string   `protobuf:"bytes,4,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -426,13 +426,6 @@ func (m *SyncReq) GetUin() string {
 	return ""
 }
 
-func (m *SyncReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
-	}
-	return ""
-}
-
 func (m *SyncReq) GetOffset() int64 {
 	if m != nil {
 		return m.Offset
@@ -445,6 +438,13 @@ func (m *SyncReq) GetLimit() int64 {
 		return m.Limit
 	}
 	return 0
+}
+
+func (m *SyncReq) GetDeviceId() string {
+	if m != nil {
+		return m.DeviceId
+	}
+	return ""
 }
 
 type SyncRsp struct {
@@ -494,53 +494,1051 @@ func (m *SyncRsp) GetList() []*GroupInfo {
 	return nil
 }
 
+type JoinGroupReq struct {
+	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
+	GroupId              string   `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	DeviceId             string   `protobuf:"bytes,3,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *JoinGroupReq) Reset()         { *m = JoinGroupReq{} }
+func (m *JoinGroupReq) String() string { return proto.CompactTextString(m) }
+func (*JoinGroupReq) ProtoMessage()    {}
+func (*JoinGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{7}
+}
+func (m *JoinGroupReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *JoinGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_JoinGroupReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *JoinGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JoinGroupReq.Merge(m, src)
+}
+func (m *JoinGroupReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *JoinGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_JoinGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_JoinGroupReq proto.InternalMessageInfo
+
+func (m *JoinGroupReq) GetUin() string {
+	if m != nil {
+		return m.Uin
+	}
+	return ""
+}
+
+func (m *JoinGroupReq) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *JoinGroupReq) GetDeviceId() string {
+	if m != nil {
+		return m.DeviceId
+	}
+	return ""
+}
+
+type JoinGroupRsp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *JoinGroupRsp) Reset()         { *m = JoinGroupRsp{} }
+func (m *JoinGroupRsp) String() string { return proto.CompactTextString(m) }
+func (*JoinGroupRsp) ProtoMessage()    {}
+func (*JoinGroupRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{8}
+}
+func (m *JoinGroupRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *JoinGroupRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_JoinGroupRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *JoinGroupRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_JoinGroupRsp.Merge(m, src)
+}
+func (m *JoinGroupRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *JoinGroupRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_JoinGroupRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_JoinGroupRsp proto.InternalMessageInfo
+
+type InviteUserToGroupReq struct {
+	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
+	UserList             []string `protobuf:"bytes,2,rep,name=user_list,json=userList,proto3" json:"user_list,omitempty"`
+	DeviceId             string   `protobuf:"bytes,3,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *InviteUserToGroupReq) Reset()         { *m = InviteUserToGroupReq{} }
+func (m *InviteUserToGroupReq) String() string { return proto.CompactTextString(m) }
+func (*InviteUserToGroupReq) ProtoMessage()    {}
+func (*InviteUserToGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{9}
+}
+func (m *InviteUserToGroupReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *InviteUserToGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_InviteUserToGroupReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *InviteUserToGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InviteUserToGroupReq.Merge(m, src)
+}
+func (m *InviteUserToGroupReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *InviteUserToGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_InviteUserToGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InviteUserToGroupReq proto.InternalMessageInfo
+
+func (m *InviteUserToGroupReq) GetUin() string {
+	if m != nil {
+		return m.Uin
+	}
+	return ""
+}
+
+func (m *InviteUserToGroupReq) GetUserList() []string {
+	if m != nil {
+		return m.UserList
+	}
+	return nil
+}
+
+func (m *InviteUserToGroupReq) GetDeviceId() string {
+	if m != nil {
+		return m.DeviceId
+	}
+	return ""
+}
+
+type InviteUserToGroupRsp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *InviteUserToGroupRsp) Reset()         { *m = InviteUserToGroupRsp{} }
+func (m *InviteUserToGroupRsp) String() string { return proto.CompactTextString(m) }
+func (*InviteUserToGroupRsp) ProtoMessage()    {}
+func (*InviteUserToGroupRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{10}
+}
+func (m *InviteUserToGroupRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *InviteUserToGroupRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_InviteUserToGroupRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *InviteUserToGroupRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_InviteUserToGroupRsp.Merge(m, src)
+}
+func (m *InviteUserToGroupRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *InviteUserToGroupRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_InviteUserToGroupRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_InviteUserToGroupRsp proto.InternalMessageInfo
+
+type QuitGroupReq struct {
+	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
+	GroupId              string   `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	DeviceId             string   `protobuf:"bytes,3,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QuitGroupReq) Reset()         { *m = QuitGroupReq{} }
+func (m *QuitGroupReq) String() string { return proto.CompactTextString(m) }
+func (*QuitGroupReq) ProtoMessage()    {}
+func (*QuitGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{11}
+}
+func (m *QuitGroupReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QuitGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QuitGroupReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QuitGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QuitGroupReq.Merge(m, src)
+}
+func (m *QuitGroupReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *QuitGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_QuitGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QuitGroupReq proto.InternalMessageInfo
+
+func (m *QuitGroupReq) GetUin() string {
+	if m != nil {
+		return m.Uin
+	}
+	return ""
+}
+
+func (m *QuitGroupReq) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *QuitGroupReq) GetDeviceId() string {
+	if m != nil {
+		return m.DeviceId
+	}
+	return ""
+}
+
+type QuitGroupRsp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *QuitGroupRsp) Reset()         { *m = QuitGroupRsp{} }
+func (m *QuitGroupRsp) String() string { return proto.CompactTextString(m) }
+func (*QuitGroupRsp) ProtoMessage()    {}
+func (*QuitGroupRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{12}
+}
+func (m *QuitGroupRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QuitGroupRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QuitGroupRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QuitGroupRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QuitGroupRsp.Merge(m, src)
+}
+func (m *QuitGroupRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *QuitGroupRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_QuitGroupRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QuitGroupRsp proto.InternalMessageInfo
+
+type KickGroupMemberReq struct {
+	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
+	GroupId              string   `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	UserList             []string `protobuf:"bytes,3,rep,name=user_list,json=userList,proto3" json:"user_list,omitempty"`
+	DeviceId             string   `protobuf:"bytes,4,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *KickGroupMemberReq) Reset()         { *m = KickGroupMemberReq{} }
+func (m *KickGroupMemberReq) String() string { return proto.CompactTextString(m) }
+func (*KickGroupMemberReq) ProtoMessage()    {}
+func (*KickGroupMemberReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{13}
+}
+func (m *KickGroupMemberReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *KickGroupMemberReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_KickGroupMemberReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *KickGroupMemberReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KickGroupMemberReq.Merge(m, src)
+}
+func (m *KickGroupMemberReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *KickGroupMemberReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_KickGroupMemberReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KickGroupMemberReq proto.InternalMessageInfo
+
+func (m *KickGroupMemberReq) GetUin() string {
+	if m != nil {
+		return m.Uin
+	}
+	return ""
+}
+
+func (m *KickGroupMemberReq) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *KickGroupMemberReq) GetUserList() []string {
+	if m != nil {
+		return m.UserList
+	}
+	return nil
+}
+
+func (m *KickGroupMemberReq) GetDeviceId() string {
+	if m != nil {
+		return m.DeviceId
+	}
+	return ""
+}
+
+type KickGroupMemberRsp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *KickGroupMemberRsp) Reset()         { *m = KickGroupMemberRsp{} }
+func (m *KickGroupMemberRsp) String() string { return proto.CompactTextString(m) }
+func (*KickGroupMemberRsp) ProtoMessage()    {}
+func (*KickGroupMemberRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{14}
+}
+func (m *KickGroupMemberRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *KickGroupMemberRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_KickGroupMemberRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *KickGroupMemberRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_KickGroupMemberRsp.Merge(m, src)
+}
+func (m *KickGroupMemberRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *KickGroupMemberRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_KickGroupMemberRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_KickGroupMemberRsp proto.InternalMessageInfo
+
+type DismissGroupReq struct {
+	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
+	GroupId              string   `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	DeviceId             string   `protobuf:"bytes,3,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DismissGroupReq) Reset()         { *m = DismissGroupReq{} }
+func (m *DismissGroupReq) String() string { return proto.CompactTextString(m) }
+func (*DismissGroupReq) ProtoMessage()    {}
+func (*DismissGroupReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{15}
+}
+func (m *DismissGroupReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DismissGroupReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DismissGroupReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DismissGroupReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DismissGroupReq.Merge(m, src)
+}
+func (m *DismissGroupReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *DismissGroupReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_DismissGroupReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DismissGroupReq proto.InternalMessageInfo
+
+func (m *DismissGroupReq) GetUin() string {
+	if m != nil {
+		return m.Uin
+	}
+	return ""
+}
+
+func (m *DismissGroupReq) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *DismissGroupReq) GetDeviceId() string {
+	if m != nil {
+		return m.DeviceId
+	}
+	return ""
+}
+
+type DismissGroupRsp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DismissGroupRsp) Reset()         { *m = DismissGroupRsp{} }
+func (m *DismissGroupRsp) String() string { return proto.CompactTextString(m) }
+func (*DismissGroupRsp) ProtoMessage()    {}
+func (*DismissGroupRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{16}
+}
+func (m *DismissGroupRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *DismissGroupRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_DismissGroupRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *DismissGroupRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DismissGroupRsp.Merge(m, src)
+}
+func (m *DismissGroupRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *DismissGroupRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_DismissGroupRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DismissGroupRsp proto.InternalMessageInfo
+
+type GroupMemberInfo struct {
+	GroupId              string   `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Member               string   `protobuf:"bytes,2,opt,name=member,proto3" json:"member,omitempty"`
+	Nickname             string   `protobuf:"bytes,3,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	CreatedAt            int64    `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            int64    `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GroupMemberInfo) Reset()         { *m = GroupMemberInfo{} }
+func (m *GroupMemberInfo) String() string { return proto.CompactTextString(m) }
+func (*GroupMemberInfo) ProtoMessage()    {}
+func (*GroupMemberInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{17}
+}
+func (m *GroupMemberInfo) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GroupMemberInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GroupMemberInfo.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GroupMemberInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GroupMemberInfo.Merge(m, src)
+}
+func (m *GroupMemberInfo) XXX_Size() int {
+	return m.Size()
+}
+func (m *GroupMemberInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_GroupMemberInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GroupMemberInfo proto.InternalMessageInfo
+
+func (m *GroupMemberInfo) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *GroupMemberInfo) GetMember() string {
+	if m != nil {
+		return m.Member
+	}
+	return ""
+}
+
+func (m *GroupMemberInfo) GetNickname() string {
+	if m != nil {
+		return m.Nickname
+	}
+	return ""
+}
+
+func (m *GroupMemberInfo) GetCreatedAt() int64 {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return 0
+}
+
+func (m *GroupMemberInfo) GetUpdatedAt() int64 {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return 0
+}
+
+type GetGroupMemberListReq struct {
+	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
+	GroupId              string   `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Offset               int64    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit                int64    `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
+	DeviceId             string   `protobuf:"bytes,5,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetGroupMemberListReq) Reset()         { *m = GetGroupMemberListReq{} }
+func (m *GetGroupMemberListReq) String() string { return proto.CompactTextString(m) }
+func (*GetGroupMemberListReq) ProtoMessage()    {}
+func (*GetGroupMemberListReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{18}
+}
+func (m *GetGroupMemberListReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetGroupMemberListReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetGroupMemberListReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetGroupMemberListReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetGroupMemberListReq.Merge(m, src)
+}
+func (m *GetGroupMemberListReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetGroupMemberListReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetGroupMemberListReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetGroupMemberListReq proto.InternalMessageInfo
+
+func (m *GetGroupMemberListReq) GetUin() string {
+	if m != nil {
+		return m.Uin
+	}
+	return ""
+}
+
+func (m *GetGroupMemberListReq) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *GetGroupMemberListReq) GetOffset() int64 {
+	if m != nil {
+		return m.Offset
+	}
+	return 0
+}
+
+func (m *GetGroupMemberListReq) GetLimit() int64 {
+	if m != nil {
+		return m.Limit
+	}
+	return 0
+}
+
+func (m *GetGroupMemberListReq) GetDeviceId() string {
+	if m != nil {
+		return m.DeviceId
+	}
+	return ""
+}
+
+type GetGroupMemberListRsp struct {
+	List                 []*GroupMemberInfo `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
+}
+
+func (m *GetGroupMemberListRsp) Reset()         { *m = GetGroupMemberListRsp{} }
+func (m *GetGroupMemberListRsp) String() string { return proto.CompactTextString(m) }
+func (*GetGroupMemberListRsp) ProtoMessage()    {}
+func (*GetGroupMemberListRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{19}
+}
+func (m *GetGroupMemberListRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetGroupMemberListRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetGroupMemberListRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetGroupMemberListRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetGroupMemberListRsp.Merge(m, src)
+}
+func (m *GetGroupMemberListRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetGroupMemberListRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetGroupMemberListRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetGroupMemberListRsp proto.InternalMessageInfo
+
+func (m *GetGroupMemberListRsp) GetList() []*GroupMemberInfo {
+	if m != nil {
+		return m.List
+	}
+	return nil
+}
+
+type GetGroupMemberInfoReq struct {
+	GroupId              string   `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Member               string   `protobuf:"bytes,2,opt,name=member,proto3" json:"member,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetGroupMemberInfoReq) Reset()         { *m = GetGroupMemberInfoReq{} }
+func (m *GetGroupMemberInfoReq) String() string { return proto.CompactTextString(m) }
+func (*GetGroupMemberInfoReq) ProtoMessage()    {}
+func (*GetGroupMemberInfoReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{20}
+}
+func (m *GetGroupMemberInfoReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetGroupMemberInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetGroupMemberInfoReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetGroupMemberInfoReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetGroupMemberInfoReq.Merge(m, src)
+}
+func (m *GetGroupMemberInfoReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetGroupMemberInfoReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetGroupMemberInfoReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetGroupMemberInfoReq proto.InternalMessageInfo
+
+func (m *GetGroupMemberInfoReq) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *GetGroupMemberInfoReq) GetMember() string {
+	if m != nil {
+		return m.Member
+	}
+	return ""
+}
+
+type GetGroupMemberInfoRsp struct {
+	GroupId              string   `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Member               string   `protobuf:"bytes,2,opt,name=member,proto3" json:"member,omitempty"`
+	Nickname             string   `protobuf:"bytes,3,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	CreatedAt            int64    `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            int64    `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetGroupMemberInfoRsp) Reset()         { *m = GetGroupMemberInfoRsp{} }
+func (m *GetGroupMemberInfoRsp) String() string { return proto.CompactTextString(m) }
+func (*GetGroupMemberInfoRsp) ProtoMessage()    {}
+func (*GetGroupMemberInfoRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{21}
+}
+func (m *GetGroupMemberInfoRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *GetGroupMemberInfoRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_GetGroupMemberInfoRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *GetGroupMemberInfoRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetGroupMemberInfoRsp.Merge(m, src)
+}
+func (m *GetGroupMemberInfoRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *GetGroupMemberInfoRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetGroupMemberInfoRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetGroupMemberInfoRsp proto.InternalMessageInfo
+
+func (m *GetGroupMemberInfoRsp) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *GetGroupMemberInfoRsp) GetMember() string {
+	if m != nil {
+		return m.Member
+	}
+	return ""
+}
+
+func (m *GetGroupMemberInfoRsp) GetNickname() string {
+	if m != nil {
+		return m.Nickname
+	}
+	return ""
+}
+
+func (m *GetGroupMemberInfoRsp) GetCreatedAt() int64 {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return 0
+}
+
+func (m *GetGroupMemberInfoRsp) GetUpdatedAt() int64 {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return 0
+}
+
+type SetGroupMemberInfoReq struct {
+	GroupId              string   `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Member               string   `protobuf:"bytes,2,opt,name=member,proto3" json:"member,omitempty"`
+	Nickname             string   `protobuf:"bytes,3,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SetGroupMemberInfoReq) Reset()         { *m = SetGroupMemberInfoReq{} }
+func (m *SetGroupMemberInfoReq) String() string { return proto.CompactTextString(m) }
+func (*SetGroupMemberInfoReq) ProtoMessage()    {}
+func (*SetGroupMemberInfoReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{22}
+}
+func (m *SetGroupMemberInfoReq) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *SetGroupMemberInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_SetGroupMemberInfoReq.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *SetGroupMemberInfoReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SetGroupMemberInfoReq.Merge(m, src)
+}
+func (m *SetGroupMemberInfoReq) XXX_Size() int {
+	return m.Size()
+}
+func (m *SetGroupMemberInfoReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_SetGroupMemberInfoReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SetGroupMemberInfoReq proto.InternalMessageInfo
+
+func (m *SetGroupMemberInfoReq) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *SetGroupMemberInfoReq) GetMember() string {
+	if m != nil {
+		return m.Member
+	}
+	return ""
+}
+
+func (m *SetGroupMemberInfoReq) GetNickname() string {
+	if m != nil {
+		return m.Nickname
+	}
+	return ""
+}
+
+type SetGroupMemberInfoRsp struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SetGroupMemberInfoRsp) Reset()         { *m = SetGroupMemberInfoRsp{} }
+func (m *SetGroupMemberInfoRsp) String() string { return proto.CompactTextString(m) }
+func (*SetGroupMemberInfoRsp) ProtoMessage()    {}
+func (*SetGroupMemberInfoRsp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_85ea302c57b6519c, []int{23}
+}
+func (m *SetGroupMemberInfoRsp) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *SetGroupMemberInfoRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_SetGroupMemberInfoRsp.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *SetGroupMemberInfoRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SetGroupMemberInfoRsp.Merge(m, src)
+}
+func (m *SetGroupMemberInfoRsp) XXX_Size() int {
+	return m.Size()
+}
+func (m *SetGroupMemberInfoRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_SetGroupMemberInfoRsp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SetGroupMemberInfoRsp proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*GroupInfo)(nil), "github.com.zmicro.team.zim.proto.group.GroupInfo")
 	proto.RegisterType((*CreateReq)(nil), "github.com.zmicro.team.zim.proto.group.CreateReq")
 	proto.RegisterType((*CreateRsp)(nil), "github.com.zmicro.team.zim.proto.group.CreateRsp")
-	proto.RegisterType((*GetJoinedGroupsReq)(nil), "github.com.zmicro.team.zim.proto.group.GetJoinedGroupsReq")
-	proto.RegisterType((*GetJoinedGroupsRsp)(nil), "github.com.zmicro.team.zim.proto.group.GetJoinedGroupsRsp")
+	proto.RegisterType((*GetJoinedGroupListReq)(nil), "github.com.zmicro.team.zim.proto.group.GetJoinedGroupListReq")
+	proto.RegisterType((*GetJoinedGroupListRsp)(nil), "github.com.zmicro.team.zim.proto.group.GetJoinedGroupListRsp")
 	proto.RegisterType((*SyncReq)(nil), "github.com.zmicro.team.zim.proto.group.SyncReq")
 	proto.RegisterType((*SyncRsp)(nil), "github.com.zmicro.team.zim.proto.group.SyncRsp")
+	proto.RegisterType((*JoinGroupReq)(nil), "github.com.zmicro.team.zim.proto.group.JoinGroupReq")
+	proto.RegisterType((*JoinGroupRsp)(nil), "github.com.zmicro.team.zim.proto.group.JoinGroupRsp")
+	proto.RegisterType((*InviteUserToGroupReq)(nil), "github.com.zmicro.team.zim.proto.group.InviteUserToGroupReq")
+	proto.RegisterType((*InviteUserToGroupRsp)(nil), "github.com.zmicro.team.zim.proto.group.InviteUserToGroupRsp")
+	proto.RegisterType((*QuitGroupReq)(nil), "github.com.zmicro.team.zim.proto.group.QuitGroupReq")
+	proto.RegisterType((*QuitGroupRsp)(nil), "github.com.zmicro.team.zim.proto.group.QuitGroupRsp")
+	proto.RegisterType((*KickGroupMemberReq)(nil), "github.com.zmicro.team.zim.proto.group.KickGroupMemberReq")
+	proto.RegisterType((*KickGroupMemberRsp)(nil), "github.com.zmicro.team.zim.proto.group.KickGroupMemberRsp")
+	proto.RegisterType((*DismissGroupReq)(nil), "github.com.zmicro.team.zim.proto.group.DismissGroupReq")
+	proto.RegisterType((*DismissGroupRsp)(nil), "github.com.zmicro.team.zim.proto.group.DismissGroupRsp")
+	proto.RegisterType((*GroupMemberInfo)(nil), "github.com.zmicro.team.zim.proto.group.GroupMemberInfo")
+	proto.RegisterType((*GetGroupMemberListReq)(nil), "github.com.zmicro.team.zim.proto.group.GetGroupMemberListReq")
+	proto.RegisterType((*GetGroupMemberListRsp)(nil), "github.com.zmicro.team.zim.proto.group.GetGroupMemberListRsp")
+	proto.RegisterType((*GetGroupMemberInfoReq)(nil), "github.com.zmicro.team.zim.proto.group.GetGroupMemberInfoReq")
+	proto.RegisterType((*GetGroupMemberInfoRsp)(nil), "github.com.zmicro.team.zim.proto.group.GetGroupMemberInfoRsp")
+	proto.RegisterType((*SetGroupMemberInfoReq)(nil), "github.com.zmicro.team.zim.proto.group.SetGroupMemberInfoReq")
+	proto.RegisterType((*SetGroupMemberInfoRsp)(nil), "github.com.zmicro.team.zim.proto.group.SetGroupMemberInfoRsp")
 }
 
 func init() { proto.RegisterFile("proto/group/group.proto", fileDescriptor_85ea302c57b6519c) }
 
 var fileDescriptor_85ea302c57b6519c = []byte{
-	// 513 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0xc1, 0x6e, 0xd3, 0x40,
-	0x10, 0xed, 0xc6, 0xb1, 0x1d, 0x0f, 0x48, 0xa0, 0x15, 0x82, 0x25, 0x88, 0xc8, 0xf2, 0x21, 0xca,
-	0x05, 0x5b, 0x94, 0x0b, 0xe2, 0x56, 0x10, 0xaa, 0xc2, 0x09, 0x99, 0x1b, 0x97, 0xc8, 0xb1, 0x37,
-	0x65, 0x51, 0xed, 0x35, 0xf6, 0xba, 0xa8, 0xf9, 0x05, 0x7e, 0x80, 0xaf, 0xe1, 0xcc, 0x91, 0x4f,
-	0x40, 0xe1, 0x13, 0x90, 0x38, 0xa3, 0x9d, 0x5d, 0xa2, 0x84, 0x36, 0x55, 0xda, 0x8b, 0xb5, 0xef,
-	0xcd, 0xce, 0x9b, 0x9d, 0x37, 0x23, 0xc3, 0x83, 0xba, 0x91, 0x4a, 0x26, 0x27, 0x8d, 0xec, 0x6a,
-	0xf3, 0x8d, 0x91, 0xa1, 0xe3, 0x13, 0xa1, 0x3e, 0x74, 0xf3, 0x38, 0x97, 0x65, 0xbc, 0x2c, 0x45,
-	0xde, 0xc8, 0x58, 0xf1, 0xac, 0x8c, 0x97, 0xa2, 0x34, 0x37, 0x62, 0xbc, 0x1d, 0xfd, 0x21, 0x10,
-	0x1c, 0xeb, 0xd3, 0xb4, 0x5a, 0x48, 0x7a, 0x0f, 0x5c, 0xf9, 0xb9, 0xe2, 0x0d, 0x23, 0x21, 0x99,
-	0x04, 0xa9, 0x01, 0x94, 0x42, 0xbf, 0xca, 0x4a, 0xce, 0x7a, 0x48, 0xe2, 0x99, 0x3e, 0x84, 0x01,
-	0x0a, 0xcc, 0x44, 0xc1, 0x1c, 0xe4, 0x7d, 0xc4, 0xd3, 0x82, 0xde, 0x07, 0xaf, 0x92, 0x4a, 0xe4,
-	0x9c, 0xf5, 0x31, 0x60, 0x11, 0x8d, 0xe0, 0xb6, 0xa8, 0x54, 0x23, 0x8b, 0x2e, 0x57, 0x42, 0x56,
-	0xcc, 0xc5, 0xe8, 0x16, 0xa7, 0x73, 0xb3, 0xb3, 0x4c, 0x65, 0x0d, 0xf3, 0x4c, 0xae, 0x41, 0xf4,
-	0x31, 0x40, 0xde, 0xf0, 0x4c, 0xf1, 0x62, 0x96, 0x29, 0xe6, 0x87, 0x64, 0xe2, 0xa4, 0x81, 0x65,
-	0x8e, 0x94, 0x0e, 0x77, 0x75, 0xf1, 0x2f, 0x3c, 0x30, 0x61, 0xcb, 0x1c, 0x29, 0xdd, 0x80, 0x3a,
-	0xaf, 0x39, 0x0b, 0x42, 0x32, 0x71, 0x53, 0x3c, 0x47, 0xdf, 0x08, 0x04, 0xaf, 0x50, 0x20, 0xe5,
-	0x9f, 0x76, 0x34, 0xce, 0xc0, 0x2f, 0x79, 0x39, 0xe7, 0x4d, 0xcb, 0x7a, 0xa1, 0xa3, 0x7b, 0xb4,
-	0x70, 0x6d, 0x89, 0xb3, 0xc3, 0x92, 0xfe, 0x2e, 0x4b, 0xdc, 0x2b, 0x2d, 0xf1, 0xae, 0xb4, 0xc4,
-	0xdf, 0xb4, 0x24, 0x1a, 0xaf, 0xdf, 0xdf, 0xd6, 0x5b, 0xb5, 0xc9, 0x56, 0xed, 0x68, 0x0c, 0xf4,
-	0x98, 0xab, 0x37, 0x52, 0x54, 0xbc, 0xc0, 0x49, 0xb7, 0xba, 0xe1, 0xbb, 0xe0, 0x74, 0xa2, 0xb2,
-	0x77, 0xf5, 0x31, 0x9a, 0x5d, 0xbc, 0xd7, 0xd6, 0x74, 0x0a, 0x1e, 0x0a, 0xb5, 0x8c, 0x84, 0xce,
-	0xe4, 0xd6, 0xe1, 0xd3, 0x78, 0xbf, 0xc5, 0x8a, 0xd7, 0x4b, 0x95, 0x5a, 0x81, 0x68, 0x01, 0xfe,
-	0xbb, 0xf3, 0x2a, 0xbf, 0xb4, 0x3a, 0x7d, 0x04, 0x41, 0xc1, 0xcf, 0x44, 0xce, 0x75, 0x07, 0x66,
-	0xd1, 0x06, 0x86, 0x30, 0xf6, 0xc9, 0xc5, 0xa2, 0xe5, 0x0a, 0xfd, 0x76, 0x52, 0x8b, 0xf4, 0xd4,
-	0x4e, 0x45, 0x29, 0x14, 0xda, 0xed, 0xa4, 0x06, 0x44, 0x6f, 0x6d, 0x9d, 0xb6, 0xa6, 0xaf, 0xa1,
-	0x7f, 0x2a, 0x5a, 0x75, 0xf3, 0xb7, 0x63, 0xfa, 0xe1, 0xef, 0x1e, 0xb8, 0xc8, 0xd1, 0x1a, 0x3c,
-	0x63, 0x3a, 0xdd, 0x5b, 0x6c, 0xbd, 0x64, 0xc3, 0xeb, 0xa6, 0xb4, 0x75, 0x74, 0x40, 0xbf, 0x10,
-	0xb8, 0xf3, 0xdf, 0x5c, 0xe8, 0x8b, 0xbd, 0x1b, 0xb9, 0x30, 0xf8, 0xe1, 0x8d, 0x73, 0xf1, 0x35,
-	0x1f, 0xa1, 0xaf, 0xbd, 0xa5, 0xc9, 0xbe, 0x2a, 0x76, 0xe2, 0xc3, 0xeb, 0x25, 0xe8, 0x5a, 0x2f,
-	0x9f, 0x7f, 0x5f, 0x8d, 0xc8, 0x8f, 0xd5, 0x88, 0xfc, 0x5c, 0x8d, 0xc8, 0xd7, 0x5f, 0xa3, 0x83,
-	0xf7, 0x1b, 0x3f, 0xb5, 0xc4, 0x68, 0x3c, 0xd1, 0x1a, 0xc9, 0x52, 0x94, 0xc9, 0xc6, 0x8f, 0x70,
-	0xee, 0x21, 0x78, 0xf6, 0x37, 0x00, 0x00, 0xff, 0xff, 0x9a, 0xdc, 0x25, 0xb1, 0x1e, 0x05, 0x00,
-	0x00,
+	// 879 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x57, 0x4d, 0x6f, 0xf3, 0x44,
+	0x10, 0xee, 0xd6, 0xf9, 0xf2, 0xb4, 0xa2, 0x74, 0xd5, 0x0f, 0xe3, 0x8a, 0x28, 0xda, 0x43, 0x15,
+	0x0e, 0x38, 0xa2, 0x20, 0x81, 0x10, 0x1c, 0xca, 0x87, 0xaa, 0xb4, 0x20, 0x41, 0x02, 0x12, 0x02,
+	0x89, 0x2a, 0xb1, 0x37, 0x65, 0x69, 0xfd, 0x51, 0xef, 0xa6, 0xa8, 0xe5, 0xc6, 0x95, 0x03, 0x42,
+	0xe2, 0xc0, 0x89, 0x13, 0xbf, 0x83, 0x33, 0x47, 0x7e, 0x01, 0x42, 0xe5, 0x3f, 0xbc, 0xe7, 0x57,
+	0xbb, 0x76, 0x1d, 0xc7, 0x71, 0x2c, 0x27, 0x69, 0xf5, 0x5e, 0x2a, 0xcf, 0xec, 0xce, 0xcc, 0x33,
+	0x33, 0x3b, 0xf3, 0x34, 0xb0, 0x1f, 0x84, 0xbe, 0xf0, 0x3b, 0x17, 0xa1, 0x3f, 0x0e, 0xa2, 0xbf,
+	0x96, 0xd2, 0xe0, 0xc3, 0x0b, 0x26, 0xbe, 0x1b, 0x0f, 0x2d, 0xdb, 0x77, 0xad, 0x3b, 0x97, 0xd9,
+	0xa1, 0x6f, 0x09, 0x3a, 0x70, 0xad, 0x3b, 0xe6, 0x46, 0x37, 0x2c, 0x75, 0x9b, 0x3c, 0x43, 0xa0,
+	0x9f, 0xc8, 0xaf, 0xae, 0x37, 0xf2, 0xf1, 0x0e, 0x54, 0xfd, 0x1f, 0x3c, 0x1a, 0x1a, 0xa8, 0x85,
+	0xda, 0x7a, 0x2f, 0x12, 0x30, 0x86, 0x8a, 0x37, 0x70, 0xa9, 0xb1, 0xae, 0x94, 0xea, 0x1b, 0xbf,
+	0x02, 0x0d, 0xe5, 0xe0, 0x9c, 0x39, 0x86, 0xa6, 0xf4, 0x75, 0x25, 0x77, 0x1d, 0xbc, 0x07, 0x35,
+	0xcf, 0x17, 0xcc, 0xa6, 0x46, 0x45, 0x1d, 0xc4, 0x12, 0x26, 0xb0, 0xc9, 0x3c, 0x11, 0xfa, 0xce,
+	0xd8, 0x16, 0xcc, 0xf7, 0x8c, 0xaa, 0x3a, 0x9d, 0xd2, 0x49, 0xdb, 0xc1, 0xcd, 0x40, 0x0c, 0x42,
+	0xa3, 0x16, 0xd9, 0x46, 0x12, 0x7e, 0x15, 0xc0, 0x0e, 0xe9, 0x40, 0x50, 0xe7, 0x7c, 0x20, 0x8c,
+	0x7a, 0x0b, 0xb5, 0xb5, 0x9e, 0x1e, 0x6b, 0x8e, 0x85, 0x3c, 0x1e, 0x07, 0xce, 0xc3, 0x71, 0x23,
+	0x3a, 0x8e, 0x35, 0xc7, 0x42, 0x26, 0x20, 0x6e, 0x03, 0x6a, 0xe8, 0x2d, 0xd4, 0xae, 0xf6, 0xd4,
+	0x37, 0xf9, 0x0b, 0x81, 0xfe, 0xa1, 0x72, 0xd0, 0xa3, 0xd7, 0x73, 0x12, 0x37, 0xa0, 0xee, 0x52,
+	0x77, 0x48, 0x43, 0x6e, 0xac, 0xb7, 0x34, 0x99, 0x63, 0x2c, 0x26, 0x25, 0xd1, 0xe6, 0x94, 0xa4,
+	0x32, 0xaf, 0x24, 0xd5, 0xc2, 0x92, 0xd4, 0x0a, 0x4b, 0x52, 0x4f, 0x97, 0x84, 0x1c, 0x26, 0xf8,
+	0x79, 0x30, 0x15, 0x1b, 0x4d, 0xc5, 0x26, 0xaf, 0xc1, 0xee, 0x09, 0x15, 0xa7, 0x3e, 0xf3, 0xa8,
+	0xa3, 0x3a, 0xfd, 0x09, 0xe3, 0x42, 0xe6, 0xfc, 0x32, 0x68, 0x63, 0xe6, 0xc5, 0xd7, 0xe5, 0x27,
+	0xf9, 0x36, 0xf7, 0x2a, 0x0f, 0xf0, 0xc7, 0x50, 0xb9, 0x62, 0x5c, 0x18, 0xa8, 0xa5, 0xb5, 0x37,
+	0x8e, 0xde, 0xb0, 0xca, 0x3d, 0x2e, 0x2b, 0x79, 0x58, 0x3d, 0x65, 0x4e, 0x46, 0x50, 0xef, 0xdf,
+	0x7a, 0x76, 0x6e, 0x70, 0x99, 0xa7, 0x3f, 0x1a, 0x71, 0x2a, 0xd4, 0x3b, 0xd3, 0x7a, 0xb1, 0x24,
+	0x5b, 0x73, 0xc5, 0x5c, 0x26, 0x54, 0xad, 0xb5, 0x5e, 0x24, 0xe0, 0x03, 0xd0, 0x1d, 0x7a, 0xc3,
+	0x6c, 0x3a, 0xa9, 0x76, 0x23, 0x52, 0x74, 0x1d, 0xf2, 0x59, 0x1c, 0xe7, 0xf1, 0x90, 0x7f, 0x05,
+	0x9b, 0xb2, 0x2c, 0x4a, 0x9d, 0x0f, 0x3f, 0xdd, 0x81, 0xf5, 0xe9, 0xee, 0x4f, 0x61, 0xd5, 0x32,
+	0x58, 0x5f, 0x4a, 0x7b, 0xe6, 0x01, 0x19, 0xc2, 0x4e, 0xd7, 0xbb, 0x61, 0x82, 0x7e, 0xc9, 0x69,
+	0xf8, 0x85, 0x5f, 0x10, 0xf1, 0x00, 0xf4, 0x31, 0xa7, 0xe1, 0xb9, 0xca, 0x2f, 0x7a, 0x9f, 0x0d,
+	0xa9, 0x90, 0x4d, 0x2b, 0x8e, 0xb9, 0x97, 0x17, 0x83, 0x07, 0x32, 0xcb, 0xcf, 0xc7, 0x4c, 0x3c,
+	0x4d, 0x96, 0x13, 0xcf, 0x3c, 0x20, 0x3f, 0x02, 0x3e, 0x63, 0xf6, 0xa5, 0x92, 0x3f, 0x55, 0x33,
+	0xb5, 0x4c, 0xbc, 0x49, 0xfa, 0x5a, 0x51, 0xfa, 0xd9, 0xe7, 0xb1, 0x33, 0x1b, 0x9c, 0x07, 0xe4,
+	0x1b, 0xd8, 0xfa, 0x88, 0x71, 0x97, 0x71, 0xfe, 0x04, 0xf9, 0x6f, 0x67, 0x9c, 0xf3, 0x80, 0xfc,
+	0x81, 0x60, 0x2b, 0x05, 0x41, 0xed, 0xdf, 0xf9, 0x63, 0x2c, 0xc7, 0x23, 0x5a, 0x3e, 0x71, 0xdc,
+	0x58, 0xc2, 0x26, 0x34, 0x3c, 0x66, 0x5f, 0xa6, 0xb6, 0x51, 0x22, 0x67, 0xb6, 0x66, 0xa5, 0x78,
+	0x6b, 0x56, 0x33, 0x5b, 0x93, 0xfc, 0x82, 0xd4, 0x3a, 0x48, 0x61, 0x9c, 0xbb, 0x39, 0x8a, 0xea,
+	0x32, 0x99, 0x6b, 0x2d, 0x7f, 0xae, 0x2b, 0x73, 0xe7, 0xba, 0x9a, 0xa9, 0xa2, 0x93, 0x0b, 0x88,
+	0x07, 0xf8, 0x6c, 0x6a, 0xca, 0xdf, 0x5e, 0x68, 0xca, 0x27, 0xe5, 0x8f, 0x67, 0xfd, 0x34, 0x1b,
+	0x45, 0x9d, 0xd1, 0xeb, 0x25, 0xba, 0x43, 0xfe, 0x44, 0xb9, 0xce, 0x0a, 0x37, 0xf6, 0x0b, 0x68,
+	0xf5, 0x08, 0x76, 0xfb, 0x8f, 0x94, 0x72, 0x11, 0x4a, 0xb2, 0x9f, 0x1b, 0x87, 0x07, 0x47, 0xff,
+	0x6e, 0x40, 0x55, 0xa9, 0xf1, 0xf7, 0x50, 0x91, 0xbb, 0x1b, 0x77, 0xca, 0x36, 0x31, 0x66, 0x14,
+	0x73, 0x31, 0x03, 0x1e, 0x90, 0x35, 0x1c, 0x40, 0x2d, 0xa2, 0x50, 0x5c, 0x9a, 0x18, 0x92, 0x7f,
+	0x19, 0xcc, 0x45, 0x4d, 0x54, 0xc4, 0xdf, 0x10, 0xe0, 0x59, 0x8a, 0xc5, 0xef, 0x97, 0x7e, 0xb1,
+	0x79, 0x4c, 0x6e, 0xae, 0x62, 0xae, 0x60, 0xdd, 0x82, 0x9e, 0x90, 0x10, 0x7e, 0xab, 0xac, 0xb7,
+	0x34, 0x23, 0x9a, 0x4b, 0x58, 0xa9, 0xd0, 0xbf, 0x22, 0xd8, 0x9e, 0x21, 0x23, 0xfc, 0x5e, 0x59,
+	0x6f, 0x79, 0x5c, 0x69, 0xae, 0x60, 0xfd, 0x50, 0x8e, 0x84, 0xad, 0xca, 0x97, 0x23, 0x4d, 0x9d,
+	0xe6, 0x12, 0x56, 0x2a, 0xf4, 0xcf, 0x08, 0xb6, 0x32, 0xe4, 0x84, 0xdf, 0x2d, 0xeb, 0x6b, 0x96,
+	0x52, 0xcd, 0xa5, 0x6d, 0x15, 0x9a, 0x9f, 0x10, 0x6c, 0xa6, 0x79, 0x0b, 0x97, 0x5e, 0xad, 0x19,
+	0x2a, 0x35, 0x97, 0x33, 0x4c, 0xcf, 0x4c, 0x66, 0xed, 0x2f, 0x34, 0x33, 0xb3, 0x1c, 0x66, 0xae,
+	0x62, 0x3e, 0x07, 0x96, 0xa2, 0xf0, 0x25, 0xfd, 0xc6, 0x0b, 0xd7, 0x5c, 0xc5, 0x3c, 0x81, 0xd5,
+	0x5f, 0x01, 0x56, 0x7f, 0x35, 0x58, 0xfd, 0x7c, 0x58, 0x1f, 0xbc, 0xf3, 0xf7, 0x7d, 0x13, 0xfd,
+	0x73, 0xdf, 0x44, 0xff, 0xdd, 0x37, 0xd1, 0xef, 0xff, 0x37, 0xd7, 0xbe, 0x4e, 0xfd, 0x42, 0xed,
+	0x44, 0x1e, 0x5f, 0x97, 0x1e, 0x3b, 0x77, 0xcc, 0xed, 0xa4, 0x7e, 0xd5, 0x0e, 0x6b, 0x4a, 0x78,
+	0xf3, 0x79, 0x00, 0x00, 0x00, 0xff, 0xff, 0xab, 0x09, 0xca, 0x27, 0xeb, 0x0e, 0x00, 0x00,
 }
 
 func (m *GroupInfo) Marshal() (dAtA []byte, err error) {
@@ -739,7 +1737,7 @@ func (m *CreateRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *GetJoinedGroupsReq) Marshal() (dAtA []byte, err error) {
+func (m *GetJoinedGroupListReq) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -749,12 +1747,12 @@ func (m *GetJoinedGroupsReq) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetJoinedGroupsReq) MarshalTo(dAtA []byte) (int, error) {
+func (m *GetJoinedGroupListReq) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *GetJoinedGroupsReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *GetJoinedGroupListReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -773,7 +1771,7 @@ func (m *GetJoinedGroupsReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *GetJoinedGroupsRsp) Marshal() (dAtA []byte, err error) {
+func (m *GetJoinedGroupListRsp) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -783,12 +1781,12 @@ func (m *GetJoinedGroupsRsp) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetJoinedGroupsRsp) MarshalTo(dAtA []byte) (int, error) {
+func (m *GetJoinedGroupListRsp) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *GetJoinedGroupsRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *GetJoinedGroupListRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -797,10 +1795,10 @@ func (m *GetJoinedGroupsRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	if len(m.Groups) > 0 {
-		for iNdEx := len(m.Groups) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.List) > 0 {
+		for iNdEx := len(m.List) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.Groups[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.List[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -838,22 +1836,22 @@ func (m *SyncReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
 	}
-	if m.Limit != 0 {
-		i = encodeVarintGroup(dAtA, i, uint64(m.Limit))
-		i--
-		dAtA[i] = 0x20
-	}
-	if m.Offset != 0 {
-		i = encodeVarintGroup(dAtA, i, uint64(m.Offset))
-		i--
-		dAtA[i] = 0x18
-	}
 	if len(m.DeviceId) > 0 {
 		i -= len(m.DeviceId)
 		copy(dAtA[i:], m.DeviceId)
 		i = encodeVarintGroup(dAtA, i, uint64(len(m.DeviceId)))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x22
+	}
+	if m.Limit != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x18
+	}
+	if m.Offset != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x10
 	}
 	if len(m.Uin) > 0 {
 		i -= len(m.Uin)
@@ -902,6 +1900,723 @@ func (m *SyncRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			i--
 			dAtA[i] = 0xa
 		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *JoinGroupReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *JoinGroupReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *JoinGroupReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.DeviceId) > 0 {
+		i -= len(m.DeviceId)
+		copy(dAtA[i:], m.DeviceId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.DeviceId)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Uin) > 0 {
+		i -= len(m.Uin)
+		copy(dAtA[i:], m.Uin)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Uin)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *JoinGroupRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *JoinGroupRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *JoinGroupRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InviteUserToGroupReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InviteUserToGroupReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *InviteUserToGroupReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.DeviceId) > 0 {
+		i -= len(m.DeviceId)
+		copy(dAtA[i:], m.DeviceId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.DeviceId)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.UserList) > 0 {
+		for iNdEx := len(m.UserList) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.UserList[iNdEx])
+			copy(dAtA[i:], m.UserList[iNdEx])
+			i = encodeVarintGroup(dAtA, i, uint64(len(m.UserList[iNdEx])))
+			i--
+			dAtA[i] = 0x12
+		}
+	}
+	if len(m.Uin) > 0 {
+		i -= len(m.Uin)
+		copy(dAtA[i:], m.Uin)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Uin)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *InviteUserToGroupRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *InviteUserToGroupRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *InviteUserToGroupRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QuitGroupReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QuitGroupReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QuitGroupReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.DeviceId) > 0 {
+		i -= len(m.DeviceId)
+		copy(dAtA[i:], m.DeviceId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.DeviceId)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Uin) > 0 {
+		i -= len(m.Uin)
+		copy(dAtA[i:], m.Uin)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Uin)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QuitGroupRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QuitGroupRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QuitGroupRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *KickGroupMemberReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *KickGroupMemberReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *KickGroupMemberReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.DeviceId) > 0 {
+		i -= len(m.DeviceId)
+		copy(dAtA[i:], m.DeviceId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.DeviceId)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.UserList) > 0 {
+		for iNdEx := len(m.UserList) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.UserList[iNdEx])
+			copy(dAtA[i:], m.UserList[iNdEx])
+			i = encodeVarintGroup(dAtA, i, uint64(len(m.UserList[iNdEx])))
+			i--
+			dAtA[i] = 0x1a
+		}
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Uin) > 0 {
+		i -= len(m.Uin)
+		copy(dAtA[i:], m.Uin)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Uin)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *KickGroupMemberRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *KickGroupMemberRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *KickGroupMemberRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DismissGroupReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DismissGroupReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DismissGroupReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.DeviceId) > 0 {
+		i -= len(m.DeviceId)
+		copy(dAtA[i:], m.DeviceId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.DeviceId)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Uin) > 0 {
+		i -= len(m.Uin)
+		copy(dAtA[i:], m.Uin)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Uin)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *DismissGroupRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *DismissGroupRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *DismissGroupRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GroupMemberInfo) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GroupMemberInfo) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GroupMemberInfo) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.UpdatedAt != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.UpdatedAt))
+		i--
+		dAtA[i] = 0x28
+	}
+	if m.CreatedAt != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.CreatedAt))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.Nickname) > 0 {
+		i -= len(m.Nickname)
+		copy(dAtA[i:], m.Nickname)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Nickname)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Member) > 0 {
+		i -= len(m.Member)
+		copy(dAtA[i:], m.Member)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Member)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetGroupMemberListReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetGroupMemberListReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetGroupMemberListReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.DeviceId) > 0 {
+		i -= len(m.DeviceId)
+		copy(dAtA[i:], m.DeviceId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.DeviceId)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if m.Limit != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.Limit))
+		i--
+		dAtA[i] = 0x20
+	}
+	if m.Offset != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.Offset))
+		i--
+		dAtA[i] = 0x18
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Uin) > 0 {
+		i -= len(m.Uin)
+		copy(dAtA[i:], m.Uin)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Uin)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetGroupMemberListRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetGroupMemberListRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetGroupMemberListRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.List) > 0 {
+		for iNdEx := len(m.List) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.List[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintGroup(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetGroupMemberInfoReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetGroupMemberInfoReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetGroupMemberInfoReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Member) > 0 {
+		i -= len(m.Member)
+		copy(dAtA[i:], m.Member)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Member)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *GetGroupMemberInfoRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *GetGroupMemberInfoRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *GetGroupMemberInfoRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if m.UpdatedAt != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.UpdatedAt))
+		i--
+		dAtA[i] = 0x28
+	}
+	if m.CreatedAt != 0 {
+		i = encodeVarintGroup(dAtA, i, uint64(m.CreatedAt))
+		i--
+		dAtA[i] = 0x20
+	}
+	if len(m.Nickname) > 0 {
+		i -= len(m.Nickname)
+		copy(dAtA[i:], m.Nickname)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Nickname)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Member) > 0 {
+		i -= len(m.Member)
+		copy(dAtA[i:], m.Member)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Member)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *SetGroupMemberInfoReq) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SetGroupMemberInfoReq) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SetGroupMemberInfoReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	if len(m.Nickname) > 0 {
+		i -= len(m.Nickname)
+		copy(dAtA[i:], m.Nickname)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Nickname)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Member) > 0 {
+		i -= len(m.Member)
+		copy(dAtA[i:], m.Member)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.Member)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.GroupId) > 0 {
+		i -= len(m.GroupId)
+		copy(dAtA[i:], m.GroupId)
+		i = encodeVarintGroup(dAtA, i, uint64(len(m.GroupId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *SetGroupMemberInfoRsp) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *SetGroupMemberInfoRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *SetGroupMemberInfoRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		i -= len(m.XXX_unrecognized)
+		copy(dAtA[i:], m.XXX_unrecognized)
 	}
 	return len(dAtA) - i, nil
 }
@@ -1020,7 +2735,7 @@ func (m *CreateRsp) Size() (n int) {
 	return n
 }
 
-func (m *GetJoinedGroupsReq) Size() (n int) {
+func (m *GetJoinedGroupListReq) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1036,14 +2751,14 @@ func (m *GetJoinedGroupsReq) Size() (n int) {
 	return n
 }
 
-func (m *GetJoinedGroupsRsp) Size() (n int) {
+func (m *GetJoinedGroupListRsp) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.Groups) > 0 {
-		for _, e := range m.Groups {
+	if len(m.List) > 0 {
+		for _, e := range m.List {
 			l = e.Size()
 			n += 1 + l + sovGroup(uint64(l))
 		}
@@ -1064,15 +2779,15 @@ func (m *SyncReq) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovGroup(uint64(l))
 	}
-	l = len(m.DeviceId)
-	if l > 0 {
-		n += 1 + l + sovGroup(uint64(l))
-	}
 	if m.Offset != 0 {
 		n += 1 + sovGroup(uint64(m.Offset))
 	}
 	if m.Limit != 0 {
 		n += 1 + sovGroup(uint64(m.Limit))
+	}
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -1092,6 +2807,358 @@ func (m *SyncRsp) Size() (n int) {
 			n += 1 + l + sovGroup(uint64(l))
 		}
 	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *JoinGroupReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Uin)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *JoinGroupRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *InviteUserToGroupReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Uin)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if len(m.UserList) > 0 {
+		for _, s := range m.UserList {
+			l = len(s)
+			n += 1 + l + sovGroup(uint64(l))
+		}
+	}
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *InviteUserToGroupRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *QuitGroupReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Uin)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *QuitGroupRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *KickGroupMemberReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Uin)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if len(m.UserList) > 0 {
+		for _, s := range m.UserList {
+			l = len(s)
+			n += 1 + l + sovGroup(uint64(l))
+		}
+	}
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *KickGroupMemberRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *DismissGroupReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Uin)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *DismissGroupRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *GroupMemberInfo) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.Member)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.Nickname)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.CreatedAt != 0 {
+		n += 1 + sovGroup(uint64(m.CreatedAt))
+	}
+	if m.UpdatedAt != 0 {
+		n += 1 + sovGroup(uint64(m.UpdatedAt))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *GetGroupMemberListReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Uin)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.Offset != 0 {
+		n += 1 + sovGroup(uint64(m.Offset))
+	}
+	if m.Limit != 0 {
+		n += 1 + sovGroup(uint64(m.Limit))
+	}
+	l = len(m.DeviceId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *GetGroupMemberListRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.List) > 0 {
+		for _, e := range m.List {
+			l = e.Size()
+			n += 1 + l + sovGroup(uint64(l))
+		}
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *GetGroupMemberInfoReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.Member)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *GetGroupMemberInfoRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.Member)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.Nickname)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.CreatedAt != 0 {
+		n += 1 + sovGroup(uint64(m.CreatedAt))
+	}
+	if m.UpdatedAt != 0 {
+		n += 1 + sovGroup(uint64(m.UpdatedAt))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *SetGroupMemberInfoReq) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.GroupId)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.Member)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	l = len(m.Nickname)
+	if l > 0 {
+		n += 1 + l + sovGroup(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *SetGroupMemberInfoRsp) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -1762,7 +3829,7 @@ func (m *CreateRsp) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetJoinedGroupsReq) Unmarshal(dAtA []byte) error {
+func (m *GetJoinedGroupListReq) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1785,10 +3852,10 @@ func (m *GetJoinedGroupsReq) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetJoinedGroupsReq: wiretype end group for non-group")
+			return fmt.Errorf("proto: GetJoinedGroupListReq: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetJoinedGroupsReq: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: GetJoinedGroupListReq: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1845,7 +3912,7 @@ func (m *GetJoinedGroupsReq) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetJoinedGroupsRsp) Unmarshal(dAtA []byte) error {
+func (m *GetJoinedGroupListRsp) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1868,15 +3935,15 @@ func (m *GetJoinedGroupsRsp) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetJoinedGroupsRsp: wiretype end group for non-group")
+			return fmt.Errorf("proto: GetJoinedGroupListRsp: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetJoinedGroupsRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: GetJoinedGroupListRsp: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Groups", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field List", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -1903,8 +3970,8 @@ func (m *GetJoinedGroupsRsp) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Groups = append(m.Groups, &GroupInfo{})
-			if err := m.Groups[len(m.Groups)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.List = append(m.List, &GroupInfo{})
+			if err := m.List[len(m.List)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -1992,6 +4059,44 @@ func (m *SyncReq) Unmarshal(dAtA []byte) error {
 			m.Uin = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
 			}
@@ -2023,44 +4128,6 @@ func (m *SyncReq) Unmarshal(dAtA []byte) error {
 			}
 			m.DeviceId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
-			}
-			m.Offset = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowGroup
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Offset |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 4:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
-			}
-			m.Limit = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowGroup
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Limit |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGroup(dAtA[iNdEx:])
@@ -2146,6 +4213,1981 @@ func (m *SyncRsp) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *JoinGroupReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: JoinGroupReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: JoinGroupReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uin", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uin = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *JoinGroupRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: JoinGroupRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: JoinGroupRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InviteUserToGroupReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InviteUserToGroupReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InviteUserToGroupReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uin", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uin = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UserList", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UserList = append(m.UserList, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *InviteUserToGroupRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: InviteUserToGroupRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: InviteUserToGroupRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QuitGroupReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QuitGroupReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QuitGroupReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uin", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uin = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QuitGroupRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QuitGroupRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QuitGroupRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *KickGroupMemberReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: KickGroupMemberReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: KickGroupMemberReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uin", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uin = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UserList", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UserList = append(m.UserList, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *KickGroupMemberRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: KickGroupMemberRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: KickGroupMemberRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DismissGroupReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DismissGroupReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DismissGroupReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uin", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uin = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *DismissGroupRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: DismissGroupRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: DismissGroupRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GroupMemberInfo) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GroupMemberInfo: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GroupMemberInfo: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Member", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Member = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Nickname", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Nickname = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			m.CreatedAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CreatedAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			m.UpdatedAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.UpdatedAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetGroupMemberListReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetGroupMemberListReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetGroupMemberListReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Uin", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Uin = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
+			}
+			m.Offset = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Offset |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
+			}
+			m.Limit = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Limit |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetGroupMemberListRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetGroupMemberListRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetGroupMemberListRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field List", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.List = append(m.List, &GroupMemberInfo{})
+			if err := m.List[len(m.List)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetGroupMemberInfoReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetGroupMemberInfoReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetGroupMemberInfoReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Member", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Member = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *GetGroupMemberInfoRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: GetGroupMemberInfoRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: GetGroupMemberInfoRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Member", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Member = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Nickname", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Nickname = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			m.CreatedAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CreatedAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdatedAt", wireType)
+			}
+			m.UpdatedAt = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.UpdatedAt |= int64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SetGroupMemberInfoReq) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SetGroupMemberInfoReq: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SetGroupMemberInfoReq: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field GroupId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.GroupId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Member", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Member = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Nickname", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowGroup
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthGroup
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Nickname = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipGroup(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthGroup
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *SetGroupMemberInfoRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowGroup
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: SetGroupMemberInfoRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: SetGroupMemberInfoRsp: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
 		default:
 			iNdEx = preIndex
 			skippy, err := skipGroup(dAtA[iNdEx:])

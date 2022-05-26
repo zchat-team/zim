@@ -380,7 +380,6 @@ func (l *Conv) SyncConversation(ctx context.Context, req *chat.SyncConversationR
 }
 
 func (l *Conv) SyncConversationMsg(ctx context.Context, req *chat.SyncConversationMsgReq, rsp *chat.SyncConversationMsgRsp) (err error) {
-
 	arr := strings.Split(req.ConvId, "#")
 	if len(arr) != 2 {
 		err = errors.New("参数错误")
@@ -404,6 +403,7 @@ func (l *Conv) SyncConversationMsg(ctx context.Context, req *chat.SyncConversati
 	rc := runtime.GetRedisClient()
 
 	key := util.KeyConvMsgSync(req.Uin, arr[1])
+	log.Infof("Key=%s", key)
 	cmd := rc.ZRangeByScore(ctx, key, &zr)
 	val, err := cmd.Result()
 	if err != nil {
@@ -412,7 +412,7 @@ func (l *Conv) SyncConversationMsg(ctx context.Context, req *chat.SyncConversati
 	}
 
 	var first, second string
-	if arr[1] == "C2C" {
+	if arr[0] == "C2C" {
 		if req.Uin < arr[1] {
 			first = req.Uin
 			second = arr[1]

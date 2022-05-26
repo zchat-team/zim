@@ -23,14 +23,38 @@ var _ = protocol.NewMessage
 type GroupAble interface {
 	// GroupAble can be used for interface verification.
 
+	// Sync is server rpc method as defined
+	Sync(ctx context.Context, args *SyncReq, reply *SyncRsp) (err error)
+
 	// Create is server rpc method as defined
 	Create(ctx context.Context, args *CreateReq, reply *CreateRsp) (err error)
 
-	// GetJoinedGroups is server rpc method as defined
-	GetJoinedGroups(ctx context.Context, args *GetJoinedGroupsReq, reply *GetJoinedGroupsRsp) (err error)
+	// GetJoinedGroupList is server rpc method as defined
+	GetJoinedGroupList(ctx context.Context, args *GetJoinedGroupListReq, reply *GetJoinedGroupListRsp) (err error)
 
-	// Sync is server rpc method as defined
-	Sync(ctx context.Context, args *SyncReq, reply *SyncRsp) (err error)
+	// JoinGroup is server rpc method as defined
+	JoinGroup(ctx context.Context, args *JoinGroupReq, reply *JoinGroupRsp) (err error)
+
+	// InviteUserToGroup is server rpc method as defined
+	InviteUserToGroup(ctx context.Context, args *InviteUserToGroupReq, reply *InviteUserToGroupRsp) (err error)
+
+	// QuitGroup is server rpc method as defined
+	QuitGroup(ctx context.Context, args *QuitGroupReq, reply *QuitGroupRsp) (err error)
+
+	// KickGroupMember is server rpc method as defined
+	KickGroupMember(ctx context.Context, args *KickGroupMemberReq, reply *KickGroupMemberRsp) (err error)
+
+	// DismissGroup is server rpc method as defined
+	DismissGroup(ctx context.Context, args *DismissGroupReq, reply *DismissGroupRsp) (err error)
+
+	// GetGroupMemberList is server rpc method as defined
+	GetGroupMemberList(ctx context.Context, args *GetGroupMemberListReq, reply *GetGroupMemberListRsp) (err error)
+
+	// GetGroupMemberInfo is server rpc method as defined
+	GetGroupMemberInfo(ctx context.Context, args *GetGroupMemberInfoReq, reply *GetGroupMemberInfoRsp) (err error)
+
+	// SetGroupMemberInfo is server rpc method as defined
+	SetGroupMemberInfo(ctx context.Context, args *SetGroupMemberInfoReq, reply *SetGroupMemberInfoRsp) (err error)
 }
 
 //================== server skeleton ===================
@@ -45,6 +69,16 @@ func ServeForGroup(addr string) error {
 	return s.Serve("tcp", addr)
 }
 
+// Sync is server rpc method as defined
+func (s *GroupImpl) Sync(ctx context.Context, args *SyncReq, reply *SyncRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = SyncRsp{}
+
+	return nil
+}
+
 // Create is server rpc method as defined
 func (s *GroupImpl) Create(ctx context.Context, args *CreateReq, reply *CreateRsp) (err error) {
 	// TODO: add business logics
@@ -55,22 +89,92 @@ func (s *GroupImpl) Create(ctx context.Context, args *CreateReq, reply *CreateRs
 	return nil
 }
 
-// GetJoinedGroups is server rpc method as defined
-func (s *GroupImpl) GetJoinedGroups(ctx context.Context, args *GetJoinedGroupsReq, reply *GetJoinedGroupsRsp) (err error) {
+// GetJoinedGroupList is server rpc method as defined
+func (s *GroupImpl) GetJoinedGroupList(ctx context.Context, args *GetJoinedGroupListReq, reply *GetJoinedGroupListRsp) (err error) {
 	// TODO: add business logics
 
 	// TODO: setting return values
-	*reply = GetJoinedGroupsRsp{}
+	*reply = GetJoinedGroupListRsp{}
 
 	return nil
 }
 
-// Sync is server rpc method as defined
-func (s *GroupImpl) Sync(ctx context.Context, args *SyncReq, reply *SyncRsp) (err error) {
+// JoinGroup is server rpc method as defined
+func (s *GroupImpl) JoinGroup(ctx context.Context, args *JoinGroupReq, reply *JoinGroupRsp) (err error) {
 	// TODO: add business logics
 
 	// TODO: setting return values
-	*reply = SyncRsp{}
+	*reply = JoinGroupRsp{}
+
+	return nil
+}
+
+// InviteUserToGroup is server rpc method as defined
+func (s *GroupImpl) InviteUserToGroup(ctx context.Context, args *InviteUserToGroupReq, reply *InviteUserToGroupRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = InviteUserToGroupRsp{}
+
+	return nil
+}
+
+// QuitGroup is server rpc method as defined
+func (s *GroupImpl) QuitGroup(ctx context.Context, args *QuitGroupReq, reply *QuitGroupRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = QuitGroupRsp{}
+
+	return nil
+}
+
+// KickGroupMember is server rpc method as defined
+func (s *GroupImpl) KickGroupMember(ctx context.Context, args *KickGroupMemberReq, reply *KickGroupMemberRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = KickGroupMemberRsp{}
+
+	return nil
+}
+
+// DismissGroup is server rpc method as defined
+func (s *GroupImpl) DismissGroup(ctx context.Context, args *DismissGroupReq, reply *DismissGroupRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = DismissGroupRsp{}
+
+	return nil
+}
+
+// GetGroupMemberList is server rpc method as defined
+func (s *GroupImpl) GetGroupMemberList(ctx context.Context, args *GetGroupMemberListReq, reply *GetGroupMemberListRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = GetGroupMemberListRsp{}
+
+	return nil
+}
+
+// GetGroupMemberInfo is server rpc method as defined
+func (s *GroupImpl) GetGroupMemberInfo(ctx context.Context, args *GetGroupMemberInfoReq, reply *GetGroupMemberInfoRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = GetGroupMemberInfoRsp{}
+
+	return nil
+}
+
+// SetGroupMemberInfo is server rpc method as defined
+func (s *GroupImpl) SetGroupMemberInfo(ctx context.Context, args *SetGroupMemberInfoReq, reply *SetGroupMemberInfoRsp) (err error) {
+	// TODO: add business logics
+
+	// TODO: setting return values
+	*reply = SetGroupMemberInfoRsp{}
 
 	return nil
 }
@@ -103,6 +207,13 @@ func NewXClientForGroup(addr string) (client.XClient, error) {
 	return xclient, nil
 }
 
+// Sync is client rpc method as defined
+func (c *GroupClient) Sync(ctx context.Context, args *SyncReq) (reply *SyncRsp, err error) {
+	reply = &SyncRsp{}
+	err = c.xclient.Call(ctx, "Sync", args, reply)
+	return reply, err
+}
+
 // Create is client rpc method as defined
 func (c *GroupClient) Create(ctx context.Context, args *CreateReq) (reply *CreateRsp, err error) {
 	reply = &CreateRsp{}
@@ -110,17 +221,66 @@ func (c *GroupClient) Create(ctx context.Context, args *CreateReq) (reply *Creat
 	return reply, err
 }
 
-// GetJoinedGroups is client rpc method as defined
-func (c *GroupClient) GetJoinedGroups(ctx context.Context, args *GetJoinedGroupsReq) (reply *GetJoinedGroupsRsp, err error) {
-	reply = &GetJoinedGroupsRsp{}
-	err = c.xclient.Call(ctx, "GetJoinedGroups", args, reply)
+// GetJoinedGroupList is client rpc method as defined
+func (c *GroupClient) GetJoinedGroupList(ctx context.Context, args *GetJoinedGroupListReq) (reply *GetJoinedGroupListRsp, err error) {
+	reply = &GetJoinedGroupListRsp{}
+	err = c.xclient.Call(ctx, "GetJoinedGroupList", args, reply)
 	return reply, err
 }
 
-// Sync is client rpc method as defined
-func (c *GroupClient) Sync(ctx context.Context, args *SyncReq) (reply *SyncRsp, err error) {
-	reply = &SyncRsp{}
-	err = c.xclient.Call(ctx, "Sync", args, reply)
+// JoinGroup is client rpc method as defined
+func (c *GroupClient) JoinGroup(ctx context.Context, args *JoinGroupReq) (reply *JoinGroupRsp, err error) {
+	reply = &JoinGroupRsp{}
+	err = c.xclient.Call(ctx, "JoinGroup", args, reply)
+	return reply, err
+}
+
+// InviteUserToGroup is client rpc method as defined
+func (c *GroupClient) InviteUserToGroup(ctx context.Context, args *InviteUserToGroupReq) (reply *InviteUserToGroupRsp, err error) {
+	reply = &InviteUserToGroupRsp{}
+	err = c.xclient.Call(ctx, "InviteUserToGroup", args, reply)
+	return reply, err
+}
+
+// QuitGroup is client rpc method as defined
+func (c *GroupClient) QuitGroup(ctx context.Context, args *QuitGroupReq) (reply *QuitGroupRsp, err error) {
+	reply = &QuitGroupRsp{}
+	err = c.xclient.Call(ctx, "QuitGroup", args, reply)
+	return reply, err
+}
+
+// KickGroupMember is client rpc method as defined
+func (c *GroupClient) KickGroupMember(ctx context.Context, args *KickGroupMemberReq) (reply *KickGroupMemberRsp, err error) {
+	reply = &KickGroupMemberRsp{}
+	err = c.xclient.Call(ctx, "KickGroupMember", args, reply)
+	return reply, err
+}
+
+// DismissGroup is client rpc method as defined
+func (c *GroupClient) DismissGroup(ctx context.Context, args *DismissGroupReq) (reply *DismissGroupRsp, err error) {
+	reply = &DismissGroupRsp{}
+	err = c.xclient.Call(ctx, "DismissGroup", args, reply)
+	return reply, err
+}
+
+// GetGroupMemberList is client rpc method as defined
+func (c *GroupClient) GetGroupMemberList(ctx context.Context, args *GetGroupMemberListReq) (reply *GetGroupMemberListRsp, err error) {
+	reply = &GetGroupMemberListRsp{}
+	err = c.xclient.Call(ctx, "GetGroupMemberList", args, reply)
+	return reply, err
+}
+
+// GetGroupMemberInfo is client rpc method as defined
+func (c *GroupClient) GetGroupMemberInfo(ctx context.Context, args *GetGroupMemberInfoReq) (reply *GetGroupMemberInfoRsp, err error) {
+	reply = &GetGroupMemberInfoRsp{}
+	err = c.xclient.Call(ctx, "GetGroupMemberInfo", args, reply)
+	return reply, err
+}
+
+// SetGroupMemberInfo is client rpc method as defined
+func (c *GroupClient) SetGroupMemberInfo(ctx context.Context, args *SetGroupMemberInfoReq) (reply *SetGroupMemberInfoRsp, err error) {
+	reply = &SetGroupMemberInfoRsp{}
+	err = c.xclient.Call(ctx, "SetGroupMemberInfo", args, reply)
 	return reply, err
 }
 
@@ -142,6 +302,13 @@ func NewGroupOneClient(oneclient *client.OneClient) *GroupOneClient {
 
 // ======================================================
 
+// Sync is client rpc method as defined
+func (c *GroupOneClient) Sync(ctx context.Context, args *SyncReq) (reply *SyncRsp, err error) {
+	reply = &SyncRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "Sync", args, reply)
+	return reply, err
+}
+
 // Create is client rpc method as defined
 func (c *GroupOneClient) Create(ctx context.Context, args *CreateReq) (reply *CreateRsp, err error) {
 	reply = &CreateRsp{}
@@ -149,16 +316,65 @@ func (c *GroupOneClient) Create(ctx context.Context, args *CreateReq) (reply *Cr
 	return reply, err
 }
 
-// GetJoinedGroups is client rpc method as defined
-func (c *GroupOneClient) GetJoinedGroups(ctx context.Context, args *GetJoinedGroupsReq) (reply *GetJoinedGroupsRsp, err error) {
-	reply = &GetJoinedGroupsRsp{}
-	err = c.oneclient.Call(ctx, c.serviceName, "GetJoinedGroups", args, reply)
+// GetJoinedGroupList is client rpc method as defined
+func (c *GroupOneClient) GetJoinedGroupList(ctx context.Context, args *GetJoinedGroupListReq) (reply *GetJoinedGroupListRsp, err error) {
+	reply = &GetJoinedGroupListRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "GetJoinedGroupList", args, reply)
 	return reply, err
 }
 
-// Sync is client rpc method as defined
-func (c *GroupOneClient) Sync(ctx context.Context, args *SyncReq) (reply *SyncRsp, err error) {
-	reply = &SyncRsp{}
-	err = c.oneclient.Call(ctx, c.serviceName, "Sync", args, reply)
+// JoinGroup is client rpc method as defined
+func (c *GroupOneClient) JoinGroup(ctx context.Context, args *JoinGroupReq) (reply *JoinGroupRsp, err error) {
+	reply = &JoinGroupRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "JoinGroup", args, reply)
+	return reply, err
+}
+
+// InviteUserToGroup is client rpc method as defined
+func (c *GroupOneClient) InviteUserToGroup(ctx context.Context, args *InviteUserToGroupReq) (reply *InviteUserToGroupRsp, err error) {
+	reply = &InviteUserToGroupRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "InviteUserToGroup", args, reply)
+	return reply, err
+}
+
+// QuitGroup is client rpc method as defined
+func (c *GroupOneClient) QuitGroup(ctx context.Context, args *QuitGroupReq) (reply *QuitGroupRsp, err error) {
+	reply = &QuitGroupRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "QuitGroup", args, reply)
+	return reply, err
+}
+
+// KickGroupMember is client rpc method as defined
+func (c *GroupOneClient) KickGroupMember(ctx context.Context, args *KickGroupMemberReq) (reply *KickGroupMemberRsp, err error) {
+	reply = &KickGroupMemberRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "KickGroupMember", args, reply)
+	return reply, err
+}
+
+// DismissGroup is client rpc method as defined
+func (c *GroupOneClient) DismissGroup(ctx context.Context, args *DismissGroupReq) (reply *DismissGroupRsp, err error) {
+	reply = &DismissGroupRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "DismissGroup", args, reply)
+	return reply, err
+}
+
+// GetGroupMemberList is client rpc method as defined
+func (c *GroupOneClient) GetGroupMemberList(ctx context.Context, args *GetGroupMemberListReq) (reply *GetGroupMemberListRsp, err error) {
+	reply = &GetGroupMemberListRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "GetGroupMemberList", args, reply)
+	return reply, err
+}
+
+// GetGroupMemberInfo is client rpc method as defined
+func (c *GroupOneClient) GetGroupMemberInfo(ctx context.Context, args *GetGroupMemberInfoReq) (reply *GetGroupMemberInfoRsp, err error) {
+	reply = &GetGroupMemberInfoRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "GetGroupMemberInfo", args, reply)
+	return reply, err
+}
+
+// SetGroupMemberInfo is client rpc method as defined
+func (c *GroupOneClient) SetGroupMemberInfo(ctx context.Context, args *SetGroupMemberInfoReq) (reply *SetGroupMemberInfoRsp, err error) {
+	reply = &SetGroupMemberInfoRsp{}
+	err = c.oneclient.Call(ctx, c.serviceName, "SetGroupMemberInfo", args, reply)
 	return reply, err
 }
