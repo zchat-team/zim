@@ -3,9 +3,9 @@ package server
 import (
 	"context"
 	"github.com/golang/protobuf/proto"
-	"github.com/zmicro-team/zim/app/conn/internal/client"
-	"github.com/zmicro-team/zim/app/conn/protocol"
-	"github.com/zmicro-team/zim/proto/chat"
+	"github.com/zchat-team/zim/app/conn/internal/client"
+	"github.com/zchat-team/zim/app/conn/protocol"
+	"github.com/zchat-team/zim/proto/chat"
 	zerrors "github.com/zmicro-team/zmicro/core/errors"
 	"github.com/zmicro-team/zmicro/core/log"
 )

@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/zmicro-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/pkg/runtime"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -14,13 +14,13 @@ import (
 	"github.com/zmicro-team/zmicro/core/log"
 	"gorm.io/gorm"
 
-	"github.com/zmicro-team/zim/app/chat/internal/model"
-	"github.com/zmicro-team/zim/app/chat/internal/typ"
-	"github.com/zmicro-team/zim/pkg/constant"
-	"github.com/zmicro-team/zim/pkg/idgen"
-	"github.com/zmicro-team/zim/pkg/util"
-	"github.com/zmicro-team/zim/proto/chat"
-	"github.com/zmicro-team/zim/proto/common"
+	"github.com/zchat-team/zim/app/chat/internal/model"
+	"github.com/zchat-team/zim/app/chat/internal/typ"
+	"github.com/zchat-team/zim/pkg/constant"
+	"github.com/zchat-team/zim/pkg/idgen"
+	"github.com/zchat-team/zim/pkg/util"
+	"github.com/zchat-team/zim/proto/chat"
+	"github.com/zchat-team/zim/proto/common"
 )
 
 type Chat struct {

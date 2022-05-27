@@ -1,7 +1,7 @@
 package client
 
 import (
-	"github.com/zmicro-team/zim/proto/sess"
+	"github.com/zchat-team/zim/proto/sess"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
 	"github.com/zmicro-team/zmicro/core/transport/rpc/client"

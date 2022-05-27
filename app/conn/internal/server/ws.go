@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/panjf2000/gnet"
-	"github.com/zmicro-team/zim/app/conn/internal/server/websocket"
+	"github.com/zchat-team/zim/app/conn/internal/server/websocket"
 	"github.com/zmicro-team/zmicro/core/log"
 
 	"time"

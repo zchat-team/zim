@@ -2,7 +2,7 @@ package conv
 
 import (
 	"context"
-	"github.com/zmicro-team/zim/api/rest/conv"
+	"github.com/zchat-team/zim/api/rest/conv"
 	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 	"sync"
 )

@@ -6,10 +6,10 @@ import (
 	"errors"
 	"fmt"
 	"github.com/nats-io/nats.go"
-	"github.com/zmicro-team/zim/pkg/constant"
-	"github.com/zmicro-team/zim/pkg/runtime"
-	"github.com/zmicro-team/zim/pkg/util"
-	"github.com/zmicro-team/zim/proto/common"
+	"github.com/zchat-team/zim/pkg/constant"
+	"github.com/zchat-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/pkg/util"
+	"github.com/zchat-team/zim/proto/common"
 	"strings"
 	"time"
 
@@ -18,9 +18,9 @@ import (
 	"github.com/spf13/cast"
 	"github.com/zmicro-team/zmicro/core/log"
 
-	"github.com/zmicro-team/zim/app/chat/internal/model"
-	"github.com/zmicro-team/zim/app/chat/internal/typ"
-	"github.com/zmicro-team/zim/proto/chat"
+	"github.com/zchat-team/zim/app/chat/internal/model"
+	"github.com/zchat-team/zim/app/chat/internal/typ"
+	"github.com/zchat-team/zim/proto/chat"
 )
 
 type Conv struct {

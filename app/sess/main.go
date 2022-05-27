@@ -5,8 +5,8 @@ import (
 	"github.com/zmicro-team/zmicro"
 	"github.com/zmicro-team/zmicro/core/log"
 
-	"github.com/zmicro-team/zim/app/sess/internal/service"
-	"github.com/zmicro-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/app/sess/internal/service"
+	"github.com/zchat-team/zim/pkg/runtime"
 )
 
 func main() {

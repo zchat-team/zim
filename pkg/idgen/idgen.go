@@ -1,7 +1,7 @@
 package idgen
 
 import (
-	"github.com/zmicro-team/zim/pkg/idgen/snowflake"
+	"github.com/zchat-team/zim/pkg/idgen/snowflake"
 )
 
 var sf *snowflake.Snowflake

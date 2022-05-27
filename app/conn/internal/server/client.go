@@ -5,7 +5,7 @@ import (
 
 	"github.com/iobrother/ztimer"
 	"github.com/panjf2000/gnet"
-	"github.com/zmicro-team/zim/app/conn/protocol"
+	"github.com/zchat-team/zim/app/conn/protocol"
 )
 
 type Client struct {

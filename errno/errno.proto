@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-option go_package = "github.com/zmicro-team/zim/errno";
-package github.com.zmicro.team.zim.errno;
+option go_package = "github.com/zchat-team/zim/errno";
+package github.com.zchat.team.zim.errno;
 
 import "github.com/zmicro-team/zmicro/core/errors/errors.proto";
 

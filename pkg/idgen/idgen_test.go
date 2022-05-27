@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"github.com/zmicro-team/zim/pkg/idgen/snowflake"
+	"github.com/zchat-team/zim/pkg/idgen/snowflake"
 )
 
 func TestNext(t *testing.T) {

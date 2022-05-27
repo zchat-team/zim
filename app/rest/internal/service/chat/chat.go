@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/zmicro-team/zim/api/rest/chat"
-	"github.com/zmicro-team/zim/app/rest/internal/client"
-	pb "github.com/zmicro-team/zim/proto/chat"
+	"github.com/zchat-team/zim/api/rest/chat"
+	"github.com/zchat-team/zim/app/rest/internal/client"
+	pb "github.com/zchat-team/zim/proto/chat"
 	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 )
 

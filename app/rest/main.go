@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/zmicro-team/zim/app/rest/internal/router"
-	"github.com/zmicro-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/app/rest/internal/router"
+	"github.com/zchat-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zmicro"
 	"github.com/zmicro-team/zmicro/core/log"
 )

@@ -5,7 +5,7 @@ import (
 
 	"sync"
 
-	"github.com/zmicro-team/zim/api/rest/group"
+	"github.com/zchat-team/zim/api/rest/group"
 	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 )
 

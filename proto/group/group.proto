@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-option go_package = "github.com/zmicro-team/zim/proto/group";
-package github.com.zmicro.team.zim.proto.group;
+option go_package = "github.com/zchat-team/zim/proto/group";
+package github.com.zchat.team.zim.proto.group;
 
 service Group {
   rpc Sync(SyncReq) returns (SyncRsp) {}

@@ -1,4 +1,4 @@
-module github.com/zmicro-team/zim
+module github.com/zchat-team/zim
 
 go 1.18
 

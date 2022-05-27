@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-option go_package = "github.com/zmicro-team/zim/proto/sess";
-package github.com.zmicro.team.zim.proto.sess;
+option go_package = "github.com/zchat-team/zim/proto/sess";
+package github.com.zchat.team.zim.proto.sess;
 
 service Sess {
   rpc Login(LoginReq) returns (LoginRsp) {}

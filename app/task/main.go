@@ -4,9 +4,9 @@ import (
 	"errors"
 
 	"github.com/nats-io/nats.go"
-	"github.com/zmicro-team/zim/app/task/internal/app"
-	"github.com/zmicro-team/zim/app/task/internal/model"
-	"github.com/zmicro-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/app/task/internal/app"
+	"github.com/zchat-team/zim/app/task/internal/model"
+	"github.com/zchat-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zmicro/core/log"
 )
 

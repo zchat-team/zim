@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 	"github.com/spf13/cast"
-	"github.com/zmicro-team/zim/app/chat/internal/model"
-	"github.com/zmicro-team/zim/pkg/idgen"
-	"github.com/zmicro-team/zim/pkg/runtime"
-	"github.com/zmicro-team/zim/proto/group"
+	"github.com/zchat-team/zim/app/chat/internal/model"
+	"github.com/zchat-team/zim/pkg/idgen"
+	"github.com/zchat-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/proto/group"
 	"github.com/zmicro-team/zmicro/core/log"
 	"gorm.io/gorm"
 )

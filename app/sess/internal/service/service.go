@@ -2,11 +2,11 @@ package service
 
 import (
 	"context"
-	"github.com/zmicro-team/zim/pkg/constant"
+	"github.com/zchat-team/zim/pkg/constant"
 	"sync"
 	"time"
 
-	"github.com/zmicro-team/zim/proto/sess"
+	"github.com/zchat-team/zim/proto/sess"
 )
 
 type Service struct {

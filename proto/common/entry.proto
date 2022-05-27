@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-option go_package = "github.com/zmicro-team/zim/proto/common";
-package github.com.zmicro.team.zim.proto.common;
+option go_package = "github.com/zchat-team/zim/proto/common";
+package github.com.zchat.team.zim.proto.common;
 
 message Msg {
   int64 id = 1;

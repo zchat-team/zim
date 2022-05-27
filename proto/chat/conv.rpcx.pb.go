@@ -11,7 +11,7 @@ import (
 	client "github.com/smallnest/rpcx/client"
 	protocol "github.com/smallnest/rpcx/protocol"
 	server "github.com/smallnest/rpcx/server"
-	common "github.com/zmicro-team/zim/proto/common"
+	common "github.com/zchat-team/zim/proto/common"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

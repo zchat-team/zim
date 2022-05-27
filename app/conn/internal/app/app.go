@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/zmicro-team/zim/app/conn/internal/server"
+	"github.com/zchat-team/zim/app/conn/internal/server"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
 	"github.com/zmicro-team/zmicro/core/util/env"

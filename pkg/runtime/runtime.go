@@ -3,9 +3,9 @@ package runtime
 import (
 	"github.com/go-redis/redis/v8"
 	"github.com/nats-io/nats.go"
-	zdb "github.com/zmicro-team/zim/pkg/database/db"
-	zredis "github.com/zmicro-team/zim/pkg/database/redis"
-	znats "github.com/zmicro-team/zim/pkg/nats"
+	zdb "github.com/zchat-team/zim/pkg/database/db"
+	zredis "github.com/zchat-team/zim/pkg/database/redis"
+	znats "github.com/zchat-team/zim/pkg/nats"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
 	"gorm.io/gorm"

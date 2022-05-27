@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/zmicro-team/zim/conn/protocol";
+option go_package = "github.com/zchat-team/zim/conn/protocol";
 option java_package = "com.iobrother.zimsdk.core.proto";
 
 package github.com.zmicro.team.zim.conn.protocol;
