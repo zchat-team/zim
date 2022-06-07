@@ -25,7 +25,7 @@ message GroupInfo {
   string name = 2;
   string group_id = 3;
   string notice = 4;
-  string introduction = 5;
+  string intro = 5;
   string avatar = 6;
   int64 created_at = 7;
   int64 updated_at = 8;
@@ -42,7 +42,7 @@ message CreateReq {
   // 群ID，如果不传，zim会生成一个群ID
   string group_id = 4;
   string notice = 5;
-  string introduction = 6;
+  string intro = 6;
   string avatar = 7;
 }
 

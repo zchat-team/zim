@@ -247,7 +247,7 @@ func (l *Conv) SetConversationRead(ctx context.Context, req *chat.SetConversatio
 		return
 	}
 	convType := constant.ConvTypeC2C
-	if arr[0] == "C2G" {
+	if arr[0] == "GROUP" {
 		convType = constant.ConvTypeGroup
 	}
 	now := time.Now().Unix() / 1e6

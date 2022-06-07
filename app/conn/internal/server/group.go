@@ -48,13 +48,13 @@ func (s *Server) handleCreateGroup(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	reqL := group.CreateReq{
-		Owner:        c.Uin,
-		Members:      req.Members,
-		Name:         req.Name,
-		GroupId:      req.GroupId,
-		Notice:       req.Notice,
-		Introduction: req.Introduction,
-		Avatar:       req.Avatar,
+		Owner:   c.Uin,
+		Members: req.Members,
+		Name:    req.Name,
+		GroupId: req.GroupId,
+		Notice:  req.Notice,
+		Intro:   req.Intro,
+		Avatar:  req.Avatar,
 	}
 
 	rspL, err := client.GetGroupClient().Create(context.Background(), &reqL)
@@ -116,15 +116,15 @@ func (s *Server) handleGetJoinedGroupList(c *Client, p *protocol.Packet) (err er
 
 	for _, v := range rspL.List {
 		g := protocol.GroupInfo{
-			Owner:        v.Owner,
-			Name:         v.Name,
-			GroupId:      v.GroupId,
-			Notice:       v.Notice,
-			Introduction: v.Introduction,
-			Avatar:       v.Avatar,
-			CreatedAt:    v.CreatedAt,
-			UpdatedAt:    v.UpdatedAt,
-			Type:         v.Type,
+			Owner:     v.Owner,
+			Name:      v.Name,
+			GroupId:   v.GroupId,
+			Notice:    v.Notice,
+			Intro:     v.Intro,
+			Avatar:    v.Avatar,
+			CreatedAt: v.CreatedAt,
+			UpdatedAt: v.UpdatedAt,
+			Type:      v.Type,
 		}
 		rsp.List = append(rsp.List, &g)
 	}
@@ -183,15 +183,15 @@ func (s *Server) handleSyncGroup(c *Client, p *protocol.Packet) (err error) {
 
 	for _, v := range rspL.List {
 		grp := &protocol.GroupInfo{
-			Owner:        v.Owner,
-			Name:         v.Name,
-			GroupId:      v.GroupId,
-			Notice:       v.Notice,
-			Introduction: v.Introduction,
-			Avatar:       v.Avatar,
-			CreatedAt:    v.CreatedAt,
-			UpdatedAt:    v.UpdatedAt,
-			Type:         v.Type,
+			Owner:     v.Owner,
+			Name:      v.Name,
+			GroupId:   v.GroupId,
+			Notice:    v.Notice,
+			Intro:     v.Intro,
+			Avatar:    v.Avatar,
+			CreatedAt: v.CreatedAt,
+			UpdatedAt: v.UpdatedAt,
+			Type:      v.Type,
 		}
 		rsp.List = append(rsp.List, grp)
 	}
