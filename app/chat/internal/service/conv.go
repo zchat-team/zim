@@ -101,17 +101,14 @@ func (l *Conv) GetConversationMsg(ctx context.Context, req *chat.GetConversation
 	*rsp = chat.GetConversationMsgRsp{}
 	for _, v := range rows {
 		msg := common.Msg{
-			Id:            v.Id,
-			ConvType:      int32(v.ConvType),
-			Type:          int32(v.Type),
-			Content:       v.Content,
-			Sender:        v.Sender,
-			Target:        v.Target,
-			Extra:         v.Extra,
-			SendTime:      v.SendTime,
-			ReadTime:      v.ReadTime,
-			ClientUuid:    v.ClientUuid,
-			IsTransparent: false,
+			Id:         v.Id,
+			ConvType:   int32(v.ConvType),
+			Type:       int32(v.Type),
+			Content:    v.Content,
+			Sender:     v.Sender,
+			Target:     v.Target,
+			SendTime:   v.SendTime,
+			ClientUuid: v.ClientUuid,
 		}
 		if v.AtUserList != "" {
 			json.Unmarshal([]byte(v.AtUserList), &msg.AtUserList)
@@ -291,15 +288,13 @@ func (l *Conv) SetConversationRead(ctx context.Context, req *chat.SetConversatio
 		}
 
 		p := common.Msg{
-			Id:            0,
-			ConvType:      0,
-			Type:          constant.MsgReadReceipt,
-			Content:       string(b),
-			Sender:        "",
-			Target:        "",
-			Extra:         "",
-			SendTime:      now,
-			IsTransparent: true,
+			Id:       0,
+			ConvType: 0,
+			Type:     constant.MsgReadReceipt,
+			Content:  string(b),
+			Sender:   "",
+			Target:   "",
+			SendTime: now,
 		}
 
 		b, e = proto.Marshal(&p)

@@ -178,17 +178,15 @@ func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 	now := time.Now().UnixNano() / 1e6
 	id := idgen.Next()
 	p := common.Msg{
-		Id:            id,
-		ConvType:      req.ConvType,
-		Type:          req.MsgType,
-		Content:       req.Content,
-		Sender:        req.Sender,
-		Target:        req.Target,
-		Extra:         req.Extra,
-		SendTime:      now,
-		AtUserList:    req.AtUserList,
-		ClientUuid:    req.ClientUuid,
-		IsTransparent: req.IsTransparent,
+		Id:         id,
+		ConvType:   req.ConvType,
+		Type:       req.MsgType,
+		Content:    req.Content,
+		Sender:     req.Sender,
+		Target:     req.Target,
+		SendTime:   now,
+		ClientUuid: req.ClientUuid,
+		AtUserList: req.AtUserList,
 	}
 
 	if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeC2C, &p); err != nil {
@@ -244,10 +242,9 @@ func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 		Content:    req.Content,
 		Sender:     req.Sender,
 		Target:     req.Target,
-		Extra:      req.Extra,
 		SendTime:   now,
-		AtUserList: req.AtUserList,
 		ClientUuid: req.ClientUuid,
+		AtUserList: req.AtUserList,
 	}
 
 	db := runtime.GetDB()

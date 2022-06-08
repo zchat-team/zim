@@ -128,10 +128,9 @@ func (s *Server) handleGetConversationMsg(c *Client, p *protocol.Packet) (err er
 			Content:    v.Content,
 			Sender:     v.Sender,
 			Target:     v.Target,
-			Extra:      v.Extra,
 			SendTime:   v.SendTime,
+			ClientUuid: v.ClientUuid,
 			AtUserList: v.AtUserList,
-			ReadTime:   v.ReadTime,
 		}
 		rsp.List = append(rsp.List, msg)
 	}
@@ -414,18 +413,15 @@ func (s *Server) handleSyncConversation(c *Client, p *protocol.Packet) (err erro
 			//LastMsg:      v.LastMsg,
 		}
 		conv.LastMsg = &protocol.Msg{
-			Id:            v.LastMsg.Id,
-			ConvType:      v.LastMsg.ConvType,
-			Type:          v.LastMsg.Type,
-			Content:       v.LastMsg.Content,
-			Sender:        v.LastMsg.Sender,
-			Target:        v.LastMsg.Target,
-			Extra:         v.LastMsg.Extra,
-			SendTime:      v.LastMsg.SendTime,
-			AtUserList:    v.LastMsg.AtUserList,
-			ReadTime:      v.LastMsg.ReadTime,
-			ClientUuid:    v.LastMsg.ClientUuid,
-			IsTransparent: v.LastMsg.IsTransparent,
+			Id:         v.LastMsg.Id,
+			ConvType:   v.LastMsg.ConvType,
+			Type:       v.LastMsg.Type,
+			Content:    v.LastMsg.Content,
+			Sender:     v.LastMsg.Sender,
+			Target:     v.LastMsg.Target,
+			SendTime:   v.LastMsg.SendTime,
+			ClientUuid: v.LastMsg.ClientUuid,
+			AtUserList: v.LastMsg.AtUserList,
 		}
 		rsp.List = append(rsp.List, &conv)
 	}
@@ -492,10 +488,9 @@ func (s *Server) handleSyncConversationMsg(c *Client, p *protocol.Packet) (err e
 			Content:    v.Content,
 			Sender:     v.Sender,
 			Target:     v.Target,
-			Extra:      v.Extra,
 			SendTime:   v.SendTime,
+			ClientUuid: v.ClientUuid,
 			AtUserList: v.AtUserList,
-			ReadTime:   v.ReadTime,
 		}
 		rsp.List = append(rsp.List, msg)
 	}

@@ -2,6 +2,8 @@ package group
 
 import (
 	"context"
+	"github.com/zchat-team/zim/app/rest/internal/client"
+	pb "github.com/zchat-team/zim/proto/group"
 
 	"sync"
 
@@ -25,7 +27,23 @@ func GetService() *Service {
 	return service
 }
 
-func (s *Service) Create(ctx context.Context, req *group.CreateReq, rsp *group.CreateRsp) error {
-	//TODO implement me
-	panic("implement me")
+func (s *Service) Create(ctx context.Context, req *group.CreateReq, rsp *group.CreateRsp) (err error) {
+
+	reqL := pb.CreateReq{
+		Owner:   req.Owner,
+		Members: req.Members,
+		Name:    req.Name,
+		GroupId: req.GroupId,
+		Notice:  req.Notice,
+		Intro:   req.Intro,
+		Avatar:  req.Avatar,
+	}
+
+	cli := client.GetGroupClient()
+	rspL, err := cli.Create(ctx, &reqL)
+	if err != nil {
+		return
+	}
+	rsp.GroupId = rspL.GroupId
+	return
 }

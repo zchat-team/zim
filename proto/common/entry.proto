@@ -10,13 +10,10 @@ message Msg {
   string content = 4;
   string sender = 5;
   string target = 6;
-  string extra = 7;
-  int64 send_time = 8;
+  int64 send_time = 7;
+  string client_uuid = 8;
   repeated string at_user_list = 9;
-  int64 read_time = 10;
-  string client_uuid = 11;
-  bool is_transparent = 12;
-  string owner = 13;
+  string owner = 10;
 }
 
 

@@ -82,9 +82,7 @@ func (s *Server) onMsg(m *common.Msg) error {
 }
 
 func (s *Server) storeRedis(m *common.Msg) error {
-	if m.IsTransparent {
-		return nil
-	}
+	// TODO: 判断透传消息，不存储
 
 	member := redis.Z{
 		Score:  float64(m.SendTime),
@@ -206,7 +204,6 @@ func (s *Server) storeMysql(m *common.Msg) {
 		Id:         m.Id,
 		ConvType:   int(m.ConvType),
 		Content:    m.Content,
-		Extra:      m.Extra,
 		Type:       int(m.Type),
 		DeletedAt:  0,
 		Sender:     m.Sender,

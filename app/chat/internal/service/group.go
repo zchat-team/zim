@@ -40,7 +40,7 @@ func (g *Group) Create(ctx context.Context, req *group.CreateReq, rsp *group.Cre
 	var members []*model.GroupMember
 	for _, v := range req.Members {
 		member := &model.GroupMember{
-			Id:      grp.Id,
+			Id:      idgen.Next(),
 			GroupId: grp.GroupId,
 			Member:  v,
 		}

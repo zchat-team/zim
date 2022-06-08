@@ -5,6 +5,25 @@ option java_package = "com.iobrother.zimsdk.core.proto";
 
 package github.com.zmicro.team.zim.conn.protocol;
 
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "gogoproto/gogo.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
 enum CmdId {
   Cmd_Raw = 0;
 
@@ -84,9 +103,15 @@ message Error {
 }
 
 message LoginReq {
-  string uin = 1;
+  string uin = 1 [
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
   string tag = 2;
-  string token = 3;
+  string token = 3 [
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
   string device_id = 4;
   string device_name = 5;
   string platform = 6;
@@ -120,13 +145,10 @@ message Msg {
   string content = 4;
   string sender = 5;
   string target = 6;
-  string extra = 7;
-  int64 send_time = 8;
+  int64 send_time = 7;
+  string client_uuid = 8;
   repeated string at_user_list = 9;
-  int64 read_time = 10;
-  string client_uuid = 11;
-  bool is_transparent = 12;
-  string owner = 13;
+  string owner = 10;
 }
 
 // 同步消息，该接口从redis中同步消息
@@ -140,15 +162,28 @@ message SyncMsgRsp {
 }
 
 message SendReq {
-  int32 conv_type = 1;
-  int32 msg_type = 2;
-  string sender = 3;
-  string target = 4;
-  string content = 5;
-  string extra = 6;
+  int32 conv_type = 1 [
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
+  int32 msg_type = 2 [
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
+  string sender = 3 [
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
+  string target = 4 [
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
+  string content = 5 [
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
+  string client_uuid = 6;
   repeated string at_user_list = 7;
-  bool is_transparent = 8;
-  string client_uuid = 9;
 }
 
 message SendRsp {

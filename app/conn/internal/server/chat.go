@@ -118,11 +118,9 @@ func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
 			Content:    v.Content,
 			Sender:     v.Sender,
 			Target:     v.Target,
-			Extra:      v.Extra,
 			SendTime:   v.SendTime,
-			AtUserList: v.AtUserList,
-			ReadTime:   v.ReadTime,
 			ClientUuid: v.ClientUuid,
+			AtUserList: v.AtUserList,
 		}
 		rsp.List = append(rsp.List, msg)
 	}
@@ -170,16 +168,14 @@ func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	r := chat.SendReq{
-		DeviceId:      c.DeviceId,
-		ConvType:      req.ConvType,
-		MsgType:       req.MsgType,
-		Sender:        req.Sender,
-		Target:        req.Target,
-		Content:       req.Content,
-		Extra:         req.Extra,
-		AtUserList:    req.AtUserList,
-		IsTransparent: req.IsTransparent,
-		ClientUuid:    req.ClientUuid,
+		DeviceId:   c.DeviceId,
+		ConvType:   req.ConvType,
+		MsgType:    req.MsgType,
+		Sender:     req.Sender,
+		Target:     req.Target,
+		Content:    req.Content,
+		ClientUuid: req.ClientUuid,
+		AtUserList: req.AtUserList,
 	}
 	rspL, err := client.GetChatClient().SendMsg(context.Background(), &r)
 	if err != nil {

@@ -40,8 +40,6 @@ message SendReq {
   string sender = 3;
   string target = 4;
   string content = 5;
-  string extra = 6;
-  bool is_transparent = 7;
 }
 
 message SendRsp {

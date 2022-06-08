@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo 'Generating protocol'
+protoc -I. -I./third_party --gofast_out=. --gofast_opt paths=source_relative ./app/conn/protocol/protocol.proto
+
 echo 'Generating rpc api'
 PROTOS=$(find ./proto -type f -name '*.proto')
 

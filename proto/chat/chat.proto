@@ -20,10 +20,8 @@ message SendReq {
   string sender = 4;
   string target = 5;
   string content = 6;
-  string extra = 7;
+  string client_uuid = 7;
   repeated string at_user_list = 8;
-  bool is_transparent = 9;
-  string client_uuid = 10;
 }
 
 message SendRsp {

@@ -8,7 +8,6 @@ type Msg struct {
 	Id         int64                 `json:"id" gorm:"primaryKey;column:id;type:bigint(20)"`
 	ConvType   int                   `json:"conv_type" gorm:"column:conv_type;type:tinyint(4);not null"`
 	Content    string                `json:"content" gorm:"column:content;type:varchar(5000);not null"`
-	Extra      string                `json:"extra" gorm:"column:extra;type:varchar(1000);not null"`
 	Type       int                   `json:"type" gorm:"column:type;type:int(11);not null;default:0"`
 	DeletedAt  soft_delete.DeletedAt `json:"deleted_at" gorm:"column:deleted_at;type:bigint(20);not null;default:0"`
 	Sender     string                `json:"sender" gorm:"column:sender;type:varchar(50);not null"`
