@@ -14,8 +14,8 @@ message Msg {
   string client_uuid = 8;
   repeated string at_user_list = 9;
   string owner = 10;
+  bool is_transparent = 11;
 }
-
 
 message MergerMsgItem {
   int64 id = 1;

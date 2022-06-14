@@ -168,14 +168,15 @@ func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	r := chat.SendReq{
-		DeviceId:   c.DeviceId,
-		ConvType:   req.ConvType,
-		MsgType:    req.MsgType,
-		Sender:     req.Sender,
-		Target:     req.Target,
-		Content:    req.Content,
-		ClientUuid: req.ClientUuid,
-		AtUserList: req.AtUserList,
+		DeviceId:      c.DeviceId,
+		ConvType:      req.ConvType,
+		MsgType:       req.MsgType,
+		Sender:        req.Sender,
+		Target:        req.Target,
+		Content:       req.Content,
+		ClientUuid:    req.ClientUuid,
+		AtUserList:    req.AtUserList,
+		IsTransparent: req.IsTransparent,
 	}
 	rspL, err := client.GetChatClient().SendMsg(context.Background(), &r)
 	if err != nil {

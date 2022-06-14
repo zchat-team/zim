@@ -26,9 +26,9 @@ func (g *Group) Create(ctx context.Context, req *group.CreateReq, rsp *group.Cre
 		Type:      0,
 		Name:      req.Name,
 		DeletedAt: 0,
-		Notice:    req.Notice,
-		Intro:     req.Intro,
-		Avatar:    req.Avatar,
+		//Notice:    req.Notice,
+		//Intro:     req.Intro,
+		//Avatar:    req.Avatar,
 	}
 
 	if req.GroupId != "" {
@@ -38,7 +38,15 @@ func (g *Group) Create(ctx context.Context, req *group.CreateReq, rsp *group.Cre
 	}
 
 	var members []*model.GroupMember
+	members = append(members, &model.GroupMember{
+		Id:      idgen.Next(),
+		GroupId: grp.GroupId,
+		Member:  req.Owner,
+	})
 	for _, v := range req.Members {
+		if v == req.Owner {
+			continue
+		}
 		member := &model.GroupMember{
 			Id:      idgen.Next(),
 			GroupId: grp.GroupId,
@@ -77,21 +85,21 @@ func (g *Group) GetJoinedGroupList(ctx context.Context, req *group.GetJoinedGrou
 			"group.name",
 			"group.created_at",
 			"group.updated_at",
-			"group.notice",
-			"group.intro",
-			"group.avatar",
+			//"group.notice",
+			//"group.intro",
+			//"group.avatar",
 		}).
 		Joins("INNER JOIN `group` on group_member.group_id=group.group_id").
 		Find(&rows).Error
 
 	for _, v := range rows {
 		groupInfo := group.GroupInfo{
-			Owner:     v.Owner,
-			Name:      v.Name,
-			GroupId:   v.GroupId,
-			Notice:    v.Notice,
-			Intro:     v.Intro,
-			Avatar:    v.Avatar,
+			Owner:   v.Owner,
+			Name:    v.Name,
+			GroupId: v.GroupId,
+			//Notice:    v.Notice,
+			//Intro:     v.Intro,
+			//Avatar:    v.Avatar,
 			CreatedAt: v.CreatedAt.Unix(),
 			UpdatedAt: v.UpdatedAt.Unix(),
 			Type:      int32(v.Type),
@@ -118,9 +126,9 @@ func (g *Group) Sync(ctx context.Context, req *group.SyncReq, rsp *group.SyncRsp
 			"group.name",
 			"UNIX_TIMESTAMP(group.created_at) AS created_at",
 			"UNIX_TIMESTAMP(group.updated_at) AS updated_at",
-			"group.notice",
-			"group.intro",
-			"group.avatar",
+			//"group.notice",
+			//"group.intro",
+			//"group.avatar",
 		}).
 		Scopes(func(db *gorm.DB) *gorm.DB {
 			if req.Offset > 0 {
@@ -149,6 +157,20 @@ func (g *Group) JoinGroup(ctx context.Context, req *group.JoinGroupReq, rsp *gro
 }
 
 func (g *Group) InviteUserToGroup(ctx context.Context, req *group.InviteUserToGroupReq, rsp *group.InviteUserToGroupRsp) (err error) {
+	// TODO: 判断群是否存在
+	db := runtime.GetDB()
+	var members []*model.GroupMember
+	for _, v := range req.UserList {
+		member := &model.GroupMember{
+			Id:      idgen.Next(),
+			GroupId: req.GroupId,
+			Member:  v,
+		}
+		members = append(members, member)
+	}
+
+	err = db.Create(&members).Error
+
 	return
 }
 
@@ -176,7 +198,6 @@ func (g *Group) GetGroupMemberList(ctx context.Context, req *group.GetGroupMembe
 		Select([]string{
 			"group_id",
 			"member",
-			"nickname",
 			"UNIX_TIMESTAMP(created_at) AS created_at",
 			"UNIX_TIMESTAMP(updated_at) AS updated_at",
 		}).
@@ -193,38 +214,37 @@ func (g *Group) GetGroupMemberList(ctx context.Context, req *group.GetGroupMembe
 }
 
 func (g *Group) GetGroupMemberInfo(ctx context.Context, req *group.GetGroupMemberInfoReq, rsp *group.GetGroupMemberInfoRsp) (err error) {
-	db := runtime.GetDB()
-	v := model.GroupMember{}
-	if err = db.Model(&model.GroupMember{}).
-		Find(&v, &model.GroupMember{GroupId: req.GroupId, Member: req.Member}).
-		Error; err != nil {
-		log.Error(err)
-		return
-	}
-	if v.Id != 0 {
-		*rsp = group.GetGroupMemberInfoRsp{
-			GroupId:   v.GroupId,
-			Member:    v.Member,
-			Nickname:  v.Nickname,
-			CreatedAt: v.CreatedAt.Unix(),
-			UpdatedAt: v.UpdatedAt.Unix(),
-		}
-	}
+	//db := runtime.GetDB()
+	//v := model.GroupMember{}
+	//if err = db.Model(&model.GroupMember{}).
+	//	Find(&v, &model.GroupMember{GroupId: req.GroupId, Member: req.Member}).
+	//	Error; err != nil {
+	//	log.Error(err)
+	//	return
+	//}
+	//if v.Id != 0 {
+	//	*rsp = group.GetGroupMemberInfoRsp{
+	//		GroupId:   v.GroupId,
+	//		Member:    v.Member,
+	//		CreatedAt: v.CreatedAt.Unix(),
+	//		UpdatedAt: v.UpdatedAt.Unix(),
+	//	}
+	//}
 	return
 }
 
 func (g *Group) SetGroupMemberInfo(ctx context.Context, req *group.SetGroupMemberInfoReq, rsp *group.SetGroupMemberInfoRsp) (err error) {
-	db := runtime.GetDB()
-	if err = db.Model(&model.GroupMember{}).
-		Where(&model.GroupMember{
-			GroupId: req.GroupId,
-			Member:  req.Member,
-		}).
-		Updates(&model.GroupMember{
-			Nickname: req.Nickname,
-		}).Error; err != nil {
-		log.Error(err)
-		return
-	}
+	//db := runtime.GetDB()
+	//if err = db.Model(&model.GroupMember{}).
+	//	Where(&model.GroupMember{
+	//		GroupId: req.GroupId,
+	//		Member:  req.Member,
+	//	}).
+	//	Updates(&model.GroupMember{
+	//		Nickname: req.Nickname,
+	//	}).Error; err != nil {
+	//	log.Error(err)
+	//	return
+	//}
 	return
 }

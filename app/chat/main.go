@@ -24,9 +24,9 @@ func InitRpcServer(s *server.Server) error {
 	if err := s.RegisterName("Chat", service.GetChatService(), ""); err != nil {
 		log.Fatal(err)
 	}
-	if err := s.RegisterName("Conv", service.GetConvService(), ""); err != nil {
-		log.Fatal(err)
-	}
+	//if err := s.RegisterName("Conv", service.GetConvService(), ""); err != nil {
+	//	log.Fatal(err)
+	//}
 	if err := s.RegisterName("Group", service.GetGroupService(), ""); err != nil {
 		log.Fatal(err)
 	}

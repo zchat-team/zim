@@ -82,7 +82,9 @@ func (s *Server) onMsg(m *common.Msg) error {
 }
 
 func (s *Server) storeRedis(m *common.Msg) error {
-	// TODO: 判断透传消息，不存储
+	if m.IsTransparent {
+		return nil
+	}
 
 	member := redis.Z{
 		Score:  float64(m.SendTime),
@@ -193,6 +195,10 @@ func (s *Server) push(m *common.Msg) {
 }
 
 func (s *Server) storeMysql(m *common.Msg) {
+	if m.IsTransparent {
+		return
+	}
+
 	var atUserList string
 	if len(m.AtUserList) > 0 {
 		b, _ := json.Marshal(m.AtUserList)

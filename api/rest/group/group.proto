@@ -33,6 +33,16 @@ service Group {
       tags: "群组";
     };
   }
+  rpc Add(AddReq) returns (AddRsp) {
+    option (google.api.http) = {
+      post: "/zim/groups/{group_id}/members",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "添加成员";
+      tags: "群组";
+    };
+  }
 }
 
 message CreateReq {
@@ -55,3 +65,11 @@ message CreateRsp {
   // 其他字段
 }
 
+message AddReq {
+  string group_id = 1 [ (google.api.field_behavior) = REQUIRED ];
+  repeated string members = 2 [ (google.api.field_behavior) = REQUIRED ];
+}
+
+message AddRsp {
+
+}

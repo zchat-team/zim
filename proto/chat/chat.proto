@@ -22,6 +22,7 @@ message SendReq {
   string content = 6;
   string client_uuid = 7;
   repeated string at_user_list = 8;
+  bool is_transparent = 9;
 }
 
 message SendRsp {

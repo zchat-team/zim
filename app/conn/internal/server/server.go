@@ -73,28 +73,28 @@ func (s *Server) registerCmdFunc() {
 	s.mapCmdFunc[protocol.CmdId_Cmd_Sync] = s.handleSync
 	s.mapCmdFunc[protocol.CmdId_Cmd_MsgAck] = s.handleMsgAck
 
-	s.mapCmdFunc[protocol.CmdId_Cmd_GetRecentConversation] = s.handleGetRecentConversation
-	s.mapCmdFunc[protocol.CmdId_Cmd_GetConversationMsg] = s.handleGetConversationMsg
-	s.mapCmdFunc[protocol.CmdId_Cmd_DeleteConversation] = s.handleDeleteConversation
-	s.mapCmdFunc[protocol.CmdId_Cmd_GetConversation] = s.handleGetConversation
-	s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationTop] = s.handleSetConversationTop
-	s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationMute] = s.handleSetConversationMute
-	s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversation] = s.handleSyncConversation
-	s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversationMsg] = s.handleSyncConversationMsg
-	s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationRead] = s.handleSetConversationRead
-
-	s.mapCmdFunc[protocol.CmdId_Cmd_SyncGroup] = s.handleSyncGroup
-	s.mapCmdFunc[protocol.CmdId_Cmd_CreateGroup] = s.handleCreateGroup
-	s.mapCmdFunc[protocol.CmdId_Cmd_GetJoinedGroupList] = s.handleGetJoinedGroupList
-	s.mapCmdFunc[protocol.CmdId_Cmd_JoinGroup] = s.handleJoinGroup
-	s.mapCmdFunc[protocol.CmdId_Cmd_InviteUserToGroup] = s.handleInviteUserToGroup
-	s.mapCmdFunc[protocol.CmdId_Cmd_QuitGroup] = s.handleQuitGroup
-	s.mapCmdFunc[protocol.CmdId_Cmd_KickGroupMember] = s.handleKickGroupMember
-	s.mapCmdFunc[protocol.CmdId_Cmd_DismissGroup] = s.handleDismissGroup
-
-	s.mapCmdFunc[protocol.CmdId_Cmd_GetGroupMemberList] = s.handleGetGroupMemberList
-	s.mapCmdFunc[protocol.CmdId_Cmd_GetGroupMemberInfo] = s.handleGetGroupMemberInfo
-	s.mapCmdFunc[protocol.CmdId_Cmd_SetGroupMemberInfo] = s.handleSetGroupMemberInfo
+	//s.mapCmdFunc[protocol.CmdId_Cmd_GetRecentConversation] = s.handleGetRecentConversation
+	//s.mapCmdFunc[protocol.CmdId_Cmd_GetConversationMsg] = s.handleGetConversationMsg
+	//s.mapCmdFunc[protocol.CmdId_Cmd_DeleteConversation] = s.handleDeleteConversation
+	//s.mapCmdFunc[protocol.CmdId_Cmd_GetConversation] = s.handleGetConversation
+	//s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationTop] = s.handleSetConversationTop
+	//s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationMute] = s.handleSetConversationMute
+	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversation] = s.handleSyncConversation
+	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversationMsg] = s.handleSyncConversationMsg
+	//s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationRead] = s.handleSetConversationRead
+	//
+	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncGroup] = s.handleSyncGroup
+	//s.mapCmdFunc[protocol.CmdId_Cmd_CreateGroup] = s.handleCreateGroup
+	//s.mapCmdFunc[protocol.CmdId_Cmd_GetJoinedGroupList] = s.handleGetJoinedGroupList
+	//s.mapCmdFunc[protocol.CmdId_Cmd_JoinGroup] = s.handleJoinGroup
+	//s.mapCmdFunc[protocol.CmdId_Cmd_InviteUserToGroup] = s.handleInviteUserToGroup
+	//s.mapCmdFunc[protocol.CmdId_Cmd_QuitGroup] = s.handleQuitGroup
+	//s.mapCmdFunc[protocol.CmdId_Cmd_KickGroupMember] = s.handleKickGroupMember
+	//s.mapCmdFunc[protocol.CmdId_Cmd_DismissGroup] = s.handleDismissGroup
+	//
+	//s.mapCmdFunc[protocol.CmdId_Cmd_GetGroupMemberList] = s.handleGetGroupMemberList
+	//s.mapCmdFunc[protocol.CmdId_Cmd_GetGroupMemberInfo] = s.handleGetGroupMemberInfo
+	//s.mapCmdFunc[protocol.CmdId_Cmd_SetGroupMemberInfo] = s.handleSetGroupMemberInfo
 }
 
 func (s *Server) GetClientManager() *ClientManager {

@@ -80,9 +80,8 @@ message JoinGroupRsp {
 }
 
 message InviteUserToGroupReq {
-  string uin = 1;
+  string group_id = 1;
   repeated string user_list = 2;
-  string device_id = 3;
 }
 
 message InviteUserToGroupRsp {

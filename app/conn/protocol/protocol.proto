@@ -45,24 +45,6 @@ enum CmdId {
   Cmd_Recall = 1105;
   Cmd_Delete = 1106;
 
-  // conv
-  Cmd_SetConversationTop = 1201;
-  Cmd_SetConversationMute = 1202;
-  Cmd_GetConversationTop = 1203;
-  Cmd_GetConversationMute = 1204;
-  Cmd_GetConversation = 1205;
-  Cmd_GetConversationMsg = 1206;      // 获取会话历史消息，从mysql数据库中获取
-  Cmd_GetRecentConversation = 1207;
-  Cmd_DeleteConversation = 1208;
-  Cmd_SyncConversation = 1209;        // 同步会话，从redis缓存中获取
-  Cmd_SyncConversationMsg = 1210;     // 同步会话消息，从redis缓存中获取
-  Cmd_SetConversationRead = 1211;     // 设置会话已读
-
-  // user
-  Cmd_BlackAdd = 1301;
-  Cmd_BlackDel = 1302;
-  Cmd_BlackList = 1303;
-
   // group
   // 群组管理
   Cmd_SyncGroup = 1401; // 同步群
@@ -73,20 +55,6 @@ enum CmdId {
   Cmd_KickGroupMember = 1406;
   Cmd_GetJoinedGroupList = 1407;
   Cmd_DismissGroup = 1408;
-  // 群资料管理
-  Cmd_GetGroupInfo = 1411; // 查询用户在群的资料
-  Cmd_SetGroupInfo = 1412; // 设置群资料
-  // 群成员管理
-  Cmd_GetGroupMemberList = 1421; // 获取群成员列表
-  Cmd_GetGroupMemberInfo = 1422; // 查询群内某个群成员信息
-  Cmd_SetGroupMemberInfo = 1423; // 设置群成员资料
-  Cmd_SetGroupMemberRole = 1424;
-  Cmd_TransferGroup = 1425;
-  // 群属性管理
-  Cmd_SetGroupAttributes = 1431;
-  Cmd_GetGroupAttributes = 1432;
-  Cmd_DeleteGroupAttributes = 1433;
-  // TODO: 更多
 }
 
 enum ErrorCode {
@@ -149,6 +117,7 @@ message Msg {
   string client_uuid = 8;
   repeated string at_user_list = 9;
   string owner = 10;
+  bool is_transparent = 11;
 }
 
 // 同步消息，该接口从redis中同步消息
@@ -184,6 +153,7 @@ message SendReq {
   ];
   string client_uuid = 6;
   repeated string at_user_list = 7;
+  bool is_transparent = 8;
 }
 
 message SendRsp {
@@ -229,107 +199,6 @@ message GetMergerMsgRsp {
   repeated MergerMsgItem list = 1;
 }
 
-// 以下为会话接口
-
-message Conversation {
-  int32 type = 1;
-  string target = 2;
-  bool is_top = 3;
-  bool is_mute = 4;
-  string remark = 5;
-  int64 peer_last_read = 6;
-  int64 peer_last_recv = 7;
-  int64 updated_at = 8;
-  int64 unread_count = 9;
-  Msg last_msg = 10;
-}
-
-// 该接口从MySQL中同步最近的会话列表
-message GetRecentConversationReq {
-
-}
-
-message GetRecentConversationRsp {
-  repeated Conversation list = 1;
-}
-
-// 该接口从MySQL中同步消息，可以获取历史消息
-message GetConversationMsgReq {
-  string conv_id = 1;
-  int64 offset = 2; // 前翻取本地最小ID，后翻取本地最大ID
-  int64 limit = 3;
-  int32 direction = 4; // 1: 前翻 2: 后翻
-}
-
-message GetConversationMsgRsp {
-  repeated Msg list = 1;
-}
-
-message DeleteConversationReq {
-  repeated string conv_ids = 1;
-}
-
-message DeleteConversationRsp {
-
-}
-
-message GetConversationReq {
-  string conv_id = 1;
-}
-
-message GetConversationRsp {
-  int32 type = 1;
-  string target = 2;
-  int32 unread_count = 3;
-  bool is_top = 4;
-  bool is_mute = 5;
-  string remark = 6;
-}
-
-message SetConversationTopReq {
-  string conv_id = 1;
-  bool is_top = 2;
-}
-
-message SetConversationTopRsp {
-
-}
-
-message SetConversationMuteReq {
-  string conv_id = 1;
-  bool is_mute = 2;
-}
-
-message SetConversationMuteRsp {
-
-}
-
-message SyncConversationReq {
-  int64 offset = 1; // 最近一个会话更新时间(updated_at)
-  int64 limit = 2;
-}
-
-message SyncConversationRsp {
-  repeated Conversation list = 1;
-}
-
-message SyncConversationMsgReq {
-  int64 offset = 1;   // 会话最后一条消息时间
-  int64 limit = 2;
-  string conv_id = 3;
-}
-
-message SyncConversationMsgRsp {
-  repeated Msg list = 1;
-}
-
-message SetConversationReadReq {
-  string conv_id = 1;
-}
-
-message SetConversationReadRsp {
-
-}
 
 // 以下为群接口
 
@@ -418,99 +287,5 @@ message DismissGroupReq {
 }
 
 message DismissGroupRsp {
-
-}
-
-message GroupMemberInfo {
-  string group_id = 1;
-  string member = 2;
-  string nickname = 3;
-  int64 created_at = 4;
-  int64 updated_at = 5;
-}
-
-message GetGroupInfoReq {
-  string group_id = 1;
-  string member = 2;
-}
-
-message GetGroupInfoRsp {
-  string group_id = 1;
-  string member = 2;
-  string nickname = 3;
-  int64 created_at = 4;
-  int64 updated_at = 5;
-}
-
-message GetGroupMemberListReq {
-  string group_id = 1;
-  int64 offset = 2;
-  int64 limit = 3;
-}
-
-message GetGroupMemberListRsp {
-  repeated GroupMemberInfo list = 1;
-}
-
-message GetGroupMemberInfoReq {
-  string group_id = 1;
-  string member = 2;
-}
-
-message GetGroupMemberInfoRsp {
-  string group_id = 1;
-  string member = 2;
-  string nickname = 3;
-  int64 created_at = 4;
-  int64 updated_at = 5;
-}
-
-message SetGroupMemberInfoReq {
-  string group_id = 1;
-  string member = 2;
-  string nickname = 3;
-}
-
-message SetGroupMemberInfoRsp {
-
-}
-
-message SetGroupMemberRoleReq {
-
-}
-
-message SetGroupMemberRoleRsp {
-
-}
-
-message TransferGroupReq {
-
-}
-
-message TransferGroupRsp {
-
-}
-
-message SetGroupAttributesReq {
-
-}
-
-message SetGroupAttributesRsp {
-
-}
-
-message GetGroupAttributesReq {
-
-}
-
-message GetGroupAttributesRsp {
-
-}
-
-message DeleteGroupAttributesReq {
-
-}
-
-message DeleteGroupAttributesRsp {
 
 }

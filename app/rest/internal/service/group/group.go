@@ -47,3 +47,15 @@ func (s *Service) Create(ctx context.Context, req *group.CreateReq, rsp *group.C
 	rsp.GroupId = rspL.GroupId
 	return
 }
+
+func (s *Service) Add(ctx context.Context, req *group.AddReq, rsp *group.AddRsp) (err error) {
+	reqL := pb.InviteUserToGroupReq{
+		GroupId:  req.GroupId,
+		UserList: req.Members,
+	}
+
+	cli := client.GetGroupClient()
+	_, err = cli.InviteUserToGroup(ctx, &reqL)
+
+	return
+}

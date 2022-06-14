@@ -31,9 +31,9 @@ func GetChatService() *Chat {
 }
 
 func (l *Chat) SendMsg(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
-	if req.ConvType == 1 {
+	if req.ConvType == constant.ConvTypeC2C {
 		err = l.sendC2C(ctx, req, rsp)
-	} else if req.ConvType == 2 {
+	} else if req.ConvType == constant.ConvTypeGroup {
 		err = l.sendC2G(ctx, req, rsp)
 	}
 	return
@@ -153,6 +153,7 @@ func (l *Chat) removeDirty(ctx context.Context, req *chat.SyncMsgReq) (err error
 }
 
 func (l *Chat) MsgAck(ctx context.Context, req *chat.MsgAckReq, rsp *chat.MsgAckRsp) (err error) {
+	// TODO: 优化
 	db := runtime.GetDB()
 	msg := model.Msg{Id: req.Id}
 	err = db.Take(&msg).Error
@@ -178,15 +179,16 @@ func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 	now := time.Now().UnixNano() / 1e6
 	id := idgen.Next()
 	p := common.Msg{
-		Id:         id,
-		ConvType:   req.ConvType,
-		Type:       req.MsgType,
-		Content:    req.Content,
-		Sender:     req.Sender,
-		Target:     req.Target,
-		SendTime:   now,
-		ClientUuid: req.ClientUuid,
-		AtUserList: req.AtUserList,
+		Id:            id,
+		ConvType:      req.ConvType,
+		Type:          req.MsgType,
+		Content:       req.Content,
+		Sender:        req.Sender,
+		Target:        req.Target,
+		SendTime:      now,
+		ClientUuid:    req.ClientUuid,
+		AtUserList:    req.AtUserList,
+		IsTransparent: req.IsTransparent,
 	}
 
 	if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeC2C, &p); err != nil {
@@ -236,15 +238,16 @@ func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 
 	id := idgen.Next()
 	p := common.Msg{
-		Id:         id,
-		ConvType:   req.ConvType,
-		Type:       req.MsgType,
-		Content:    req.Content,
-		Sender:     req.Sender,
-		Target:     req.Target,
-		SendTime:   now,
-		ClientUuid: req.ClientUuid,
-		AtUserList: req.AtUserList,
+		Id:            id,
+		ConvType:      req.ConvType,
+		Type:          req.MsgType,
+		Content:       req.Content,
+		Sender:        req.Sender,
+		Target:        req.Target,
+		SendTime:      now,
+		ClientUuid:    req.ClientUuid,
+		AtUserList:    req.AtUserList,
+		IsTransparent: req.IsTransparent,
 	}
 
 	db := runtime.GetDB()
@@ -267,12 +270,14 @@ func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 			Data:    b,
 			Sub:     nil,
 		}
+		l.createConversation(ctx, v.Member, req.Target, constant.ConvTypeGroup, &p)
+
 		js.PublishMsg(m)
 	}
 
-	if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeGroup, &p); err != nil {
-		return
-	}
+	//if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeGroup, &p); err != nil {
+	//	return
+	//}
 
 	*rsp = chat.SendRsp{
 		Code:       0,

@@ -15,9 +15,9 @@ type Group struct {
 	CreatedAt time.Time             `json:"created_at" gorm:"column:created_at;type:datetime(3)"`
 	UpdatedAt time.Time             `json:"updated_at" gorm:"column:updated_at;type:datetime(3)"`
 	DeletedAt soft_delete.DeletedAt `json:"deleted_at" gorm:"column:deleted_at;type:bigint(20);not null;default:0"`
-	Notice    string                `json:"notice" gorm:"column:notice;type:varchar(200);not null"`
-	Intro     string                `json:"intro" gorm:"column:intro;type:varchar(200);not null"`
-	Avatar    string                `json:"avatar" gorm:"column:avatar;type:varchar(200);not null"`
+	//Notice    string                `json:"notice" gorm:"column:notice;type:varchar(200);not null"`
+	//Intro     string                `json:"intro" gorm:"column:intro;type:varchar(200);not null"`
+	//Avatar    string                `json:"avatar" gorm:"column:avatar;type:varchar(200);not null"`
 }
 
 func (_ *Group) TableName() string {
