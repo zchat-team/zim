@@ -47,9 +47,8 @@ func (s *Server) handleMsgAck(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	reqL := chat.MsgAckReq{
-		Uin:      c.Uin,
-		DeviceId: c.DeviceId,
-		Id:       req.Id,
+		Uin: c.Uin,
+		Id:  req.Id,
 	}
 
 	_, err = client.GetChatClient().MsgAck(context.Background(), &reqL)
@@ -98,10 +97,9 @@ func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	reqL := chat.SyncMsgReq{
-		Uin:      c.Uin,
-		DeviceId: c.DeviceId,
-		Offset:   req.Offset,
-		Limit:    req.Limit,
+		Uin:    c.Uin,
+		Offset: req.Offset,
+		Limit:  req.Limit,
 	}
 
 	rspL, err := client.GetChatClient().SyncMsg(context.Background(), &reqL)
@@ -168,7 +166,6 @@ func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	r := chat.SendReq{
-		DeviceId:      c.DeviceId,
 		ConvType:      req.ConvType,
 		MsgType:       req.MsgType,
 		Sender:        req.Sender,

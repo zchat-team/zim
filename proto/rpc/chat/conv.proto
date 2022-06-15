@@ -19,7 +19,6 @@ service Conv {
 
 message GetRecentConversationReq {
   string uin = 1;
-  string device_id = 2;
 }
 
 message GetRecentConversationRsp {
@@ -28,11 +27,10 @@ message GetRecentConversationRsp {
 
 message GetConversationMsgReq {
   string uin = 1;
-  string device_id = 2;
-  string conv_id = 3;
-  int64 offset = 4;
-  int64 limit = 5;
-  int32 direction = 6; // 1: 前翻 2: 后翻
+  string conv_id = 2;
+  int64 offset = 3;
+  int64 limit = 4;
+  int32 direction = 5; // 1: 前翻 2: 后翻
 }
 
 message GetConversationMsgRsp {
@@ -41,8 +39,7 @@ message GetConversationMsgRsp {
 
 message DeleteConversationReq {
   string uin = 1;
-  string device_id = 2;
-  repeated string conv_ids = 3;
+  repeated string conv_ids = 2;
 }
 
 message DeleteConversationRsp {
@@ -50,15 +47,13 @@ message DeleteConversationRsp {
 
 message GetConversationReq {
   string uin = 1;
-  string device_id = 2;
-  string conv_id = 3;
+  string conv_id = 2;
 }
 
 message SetConversationTopReq {
   string uin = 1;
-  string device_id = 2;
-  string conv_id = 3;
-  bool is_top = 4;
+  string conv_id = 2;
+  bool is_top = 3;
 }
 
 message SetConversationTopRsp {
@@ -66,9 +61,8 @@ message SetConversationTopRsp {
 
 message SetConversationMuteReq {
   string uin = 1;
-  string device_id = 2;
-  string conv_id = 3;
-  bool is_mute = 4;
+  string conv_id = 2;
+  bool is_mute = 3;
 }
 
 message SetConversationMuteRsp {
@@ -77,8 +71,7 @@ message SetConversationMuteRsp {
 
 message SetConversationReadReq {
   string uin = 1;
-  string device_id = 2;
-  string conv_id = 3;
+  string conv_id = 2;
 }
 
 message SetConversationReadRsp {
@@ -86,9 +79,8 @@ message SetConversationReadRsp {
 
 message SyncConversationReq {
   string uin = 1;
-  string device_id = 2;
-  int64 offset = 3;
-  int64 limit = 4;
+  int64 offset = 2;
+  int64 limit = 3;
 }
 
 message SyncConversationRsp {
@@ -97,10 +89,9 @@ message SyncConversationRsp {
 
 message SyncConversationMsgReq {
   string uin = 1;
-  string device_id = 2;
-  int64 offset = 3;
-  int64 limit = 4;
-  string conv_id = 5;
+  int64 offset = 2;
+  int64 limit = 3;
+  string conv_id = 4;
 }
 
 message SyncConversationMsgRsp {

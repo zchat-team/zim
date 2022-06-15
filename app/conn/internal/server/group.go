@@ -169,10 +169,9 @@ func (s *Server) handleSyncGroup(c *Client, p *protocol.Packet) (err error) {
 	}
 
 	reqL := group.SyncReq{
-		Uin:      c.Uin,
-		DeviceId: c.DeviceId,
-		Offset:   req.Offset,
-		Limit:    req.Limit,
+		Uin:    c.Uin,
+		Offset: req.Offset,
+		Limit:  req.Limit,
 	}
 
 	rspL, err := client.GetGroupClient().Sync(context.Background(), &reqL)

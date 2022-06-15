@@ -63,7 +63,6 @@ message SyncReq {
   string uin = 1;
   int64 offset = 2;
   int64 limit = 3;
-  string device_id = 4;
 }
 
 message SyncRsp {
@@ -73,7 +72,6 @@ message SyncRsp {
 message JoinGroupReq {
   string uin = 1;
   string group_id = 2;
-  string device_id = 3;
 }
 
 message JoinGroupRsp {
@@ -92,7 +90,6 @@ message InviteUserToGroupRsp {
 message QuitGroupReq {
   string uin = 1;
   string group_id = 2;
-  string device_id = 3;
 }
 
 message QuitGroupRsp {
@@ -102,7 +99,6 @@ message KickGroupMemberReq {
   string uin = 1;
   string group_id = 2;
   repeated string user_list = 3;
-  string device_id = 4;
 }
 
 message KickGroupMemberRsp {
@@ -112,7 +108,6 @@ message KickGroupMemberRsp {
 message DismissGroupReq {
   string uin = 1;
   string group_id = 2;
-  string device_id = 3;
 }
 
 message DismissGroupRsp {
@@ -131,7 +126,6 @@ message GetGroupMemberListReq {
   string group_id = 2;
   int64 offset = 3;
   int64 limit = 4;
-  string device_id = 5;
 }
 
 message GetGroupMemberListRsp {

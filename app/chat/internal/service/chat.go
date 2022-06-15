@@ -350,7 +350,6 @@ func (l *Chat) Recall(ctx context.Context, req *chat.RecallReq, rsp *chat.Recall
 	}
 	b, _ := json.Marshal(m)
 	reqL := chat.SendReq{
-		DeviceId: "",
 		ConvType: constant.ConvTypeC2C,
 		MsgType:  constant.MsgRecall,
 		Sender:   v.Sender,

@@ -25,7 +25,6 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type GetRecentConversationReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -67,13 +66,6 @@ var xxx_messageInfo_GetRecentConversationReq proto.InternalMessageInfo
 func (m *GetRecentConversationReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *GetRecentConversationReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -127,11 +119,10 @@ func (m *GetRecentConversationRsp) GetList() []*common.Conversation {
 
 type GetConversationMsgReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	ConvId               string   `protobuf:"bytes,3,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
-	Offset               int64    `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"varint,5,opt,name=limit,proto3" json:"limit,omitempty"`
-	Direction            int32    `protobuf:"varint,6,opt,name=direction,proto3" json:"direction,omitempty"`
+	ConvId               string   `protobuf:"bytes,2,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
+	Offset               int64    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit                int64    `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
+	Direction            int32    `protobuf:"varint,5,opt,name=direction,proto3" json:"direction,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -173,13 +164,6 @@ var xxx_messageInfo_GetConversationMsgReq proto.InternalMessageInfo
 func (m *GetConversationMsgReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *GetConversationMsgReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -261,8 +245,7 @@ func (m *GetConversationMsgRsp) GetList() []*common.Msg {
 
 type DeleteConversationReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	ConvIds              []string `protobuf:"bytes,3,rep,name=conv_ids,json=convIds,proto3" json:"conv_ids,omitempty"`
+	ConvIds              []string `protobuf:"bytes,2,rep,name=conv_ids,json=convIds,proto3" json:"conv_ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -304,13 +287,6 @@ var xxx_messageInfo_DeleteConversationReq proto.InternalMessageInfo
 func (m *DeleteConversationReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *DeleteConversationReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -363,8 +339,7 @@ var xxx_messageInfo_DeleteConversationRsp proto.InternalMessageInfo
 
 type GetConversationReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	ConvId               string   `protobuf:"bytes,3,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
+	ConvId               string   `protobuf:"bytes,2,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -410,13 +385,6 @@ func (m *GetConversationReq) GetUin() string {
 	return ""
 }
 
-func (m *GetConversationReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
-	}
-	return ""
-}
-
 func (m *GetConversationReq) GetConvId() string {
 	if m != nil {
 		return m.ConvId
@@ -426,9 +394,8 @@ func (m *GetConversationReq) GetConvId() string {
 
 type SetConversationTopReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	ConvId               string   `protobuf:"bytes,3,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
-	IsTop                bool     `protobuf:"varint,4,opt,name=is_top,json=isTop,proto3" json:"is_top,omitempty"`
+	ConvId               string   `protobuf:"bytes,2,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
+	IsTop                bool     `protobuf:"varint,3,opt,name=is_top,json=isTop,proto3" json:"is_top,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -470,13 +437,6 @@ var xxx_messageInfo_SetConversationTopReq proto.InternalMessageInfo
 func (m *SetConversationTopReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *SetConversationTopReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -536,9 +496,8 @@ var xxx_messageInfo_SetConversationTopRsp proto.InternalMessageInfo
 
 type SetConversationMuteReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	ConvId               string   `protobuf:"bytes,3,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
-	IsMute               bool     `protobuf:"varint,4,opt,name=is_mute,json=isMute,proto3" json:"is_mute,omitempty"`
+	ConvId               string   `protobuf:"bytes,2,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
+	IsMute               bool     `protobuf:"varint,3,opt,name=is_mute,json=isMute,proto3" json:"is_mute,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -580,13 +539,6 @@ var xxx_messageInfo_SetConversationMuteReq proto.InternalMessageInfo
 func (m *SetConversationMuteReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *SetConversationMuteReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -646,8 +598,7 @@ var xxx_messageInfo_SetConversationMuteRsp proto.InternalMessageInfo
 
 type SetConversationReadReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	ConvId               string   `protobuf:"bytes,3,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
+	ConvId               string   `protobuf:"bytes,2,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -689,13 +640,6 @@ var xxx_messageInfo_SetConversationReadReq proto.InternalMessageInfo
 func (m *SetConversationReadReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *SetConversationReadReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -748,9 +692,8 @@ var xxx_messageInfo_SetConversationReadRsp proto.InternalMessageInfo
 
 type SyncConversationReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	Offset               int64    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
+	Offset               int64    `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit                int64    `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -792,13 +735,6 @@ var xxx_messageInfo_SyncConversationReq proto.InternalMessageInfo
 func (m *SyncConversationReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *SyncConversationReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -866,10 +802,9 @@ func (m *SyncConversationRsp) GetList() []*common.Conversation {
 
 type SyncConversationMsgReq struct {
 	Uin                  string   `protobuf:"bytes,1,opt,name=uin,proto3" json:"uin,omitempty"`
-	DeviceId             string   `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	Offset               int64    `protobuf:"varint,3,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit                int64    `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
-	ConvId               string   `protobuf:"bytes,5,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
+	Offset               int64    `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit                int64    `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	ConvId               string   `protobuf:"bytes,4,opt,name=conv_id,json=convId,proto3" json:"conv_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -911,13 +846,6 @@ var xxx_messageInfo_SyncConversationMsgReq proto.InternalMessageInfo
 func (m *SyncConversationMsgReq) GetUin() string {
 	if m != nil {
 		return m.Uin
-	}
-	return ""
-}
-
-func (m *SyncConversationMsgReq) GetDeviceId() string {
-	if m != nil {
-		return m.DeviceId
 	}
 	return ""
 }
@@ -1013,49 +941,47 @@ func init() {
 func init() { proto.RegisterFile("proto/rpc/chat/conv.proto", fileDescriptor_0dfab6f649d6f3d3) }
 
 var fileDescriptor_0dfab6f649d6f3d3 = []byte{
-	// 657 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x56, 0x41, 0x4f, 0xd4, 0x40,
-	0x14, 0x66, 0xec, 0xee, 0xc2, 0x3e, 0x0e, 0x92, 0xc1, 0x85, 0x52, 0xcd, 0x66, 0x33, 0xa7, 0x5e,
-	0x6c, 0x13, 0xbc, 0x18, 0xa3, 0xd1, 0x80, 0x09, 0x21, 0x91, 0x4b, 0xe1, 0x64, 0x30, 0xb8, 0xb4,
-	0x03, 0x4c, 0x42, 0x3b, 0x63, 0x67, 0x76, 0x13, 0xf8, 0x0b, 0x26, 0x1e, 0x3c, 0x91, 0x78, 0xf2,
-	0xec, 0x1f, 0xf1, 0xe8, 0x4f, 0x30, 0xf8, 0x27, 0x3c, 0x9a, 0x69, 0x1b, 0xa1, 0xdb, 0x21, 0xa1,
-	0xdb, 0xde, 0x76, 0xde, 0xdb, 0xfd, 0xde, 0x37, 0xdf, 0xdb, 0xf7, 0xbd, 0x81, 0x0d, 0x91, 0x72,
-	0xc5, 0xfd, 0x54, 0x84, 0x7e, 0x78, 0x36, 0x56, 0x7e, 0xc8, 0x93, 0xa9, 0x97, 0xc5, 0xb0, 0x7b,
-	0xca, 0xd4, 0xd9, 0xe4, 0xd8, 0x0b, 0x79, 0xec, 0x5d, 0xea, 0xa4, 0xa7, 0xe8, 0x38, 0xf6, 0x2e,
-	0x59, 0x9c, 0x7f, 0xc1, 0x4b, 0x45, 0xe8, 0xe9, 0xb8, 0xb3, 0x4c, 0x13, 0x95, 0x5e, 0xe4, 0x51,
-	0xb2, 0x0b, 0xf6, 0x0e, 0x55, 0x01, 0x0d, 0x69, 0xa2, 0xb6, 0x79, 0x32, 0xa5, 0xa9, 0x1c, 0x2b,
-	0xc6, 0x93, 0x80, 0x7e, 0xc2, 0x2b, 0x60, 0x4d, 0x58, 0x62, 0xa3, 0x11, 0x72, 0xfb, 0x81, 0xfe,
-	0x88, 0x1f, 0x43, 0x3f, 0xa2, 0x53, 0x16, 0xd2, 0x23, 0x16, 0xd9, 0x0f, 0xb2, 0xf8, 0x52, 0x1e,
-	0xd8, 0x8d, 0xc8, 0xd9, 0x5d, 0x50, 0x52, 0xe0, 0x77, 0xd0, 0x39, 0x67, 0x52, 0xd9, 0x68, 0x64,
-	0xb9, 0xcb, 0x9b, 0xcf, 0xbd, 0x7b, 0x91, 0xe5, 0x71, 0xcc, 0x13, 0xaf, 0x04, 0x95, 0xa1, 0x90,
-	0x1f, 0x08, 0x06, 0x3b, 0xb4, 0x54, 0x64, 0x4f, 0x9e, 0xd6, 0xa7, 0x8c, 0xd7, 0x61, 0x51, 0x4b,
-	0xa8, 0x53, 0x56, 0x96, 0xea, 0xe9, 0xe3, 0x6e, 0x84, 0xd7, 0xa0, 0xc7, 0x4f, 0x4e, 0x24, 0x55,
-	0x76, 0x67, 0x84, 0x5c, 0x2b, 0x28, 0x4e, 0xf8, 0x11, 0x74, 0xcf, 0x59, 0xcc, 0x94, 0xdd, 0xcd,
-	0xc2, 0xf9, 0x01, 0x3f, 0x81, 0x7e, 0xc4, 0x52, 0x1a, 0x6a, 0x22, 0x76, 0x6f, 0x84, 0xdc, 0x6e,
-	0x70, 0x13, 0x20, 0x87, 0x46, 0xb2, 0x52, 0xe0, 0xed, 0x92, 0x28, 0x7e, 0x1d, 0x51, 0x34, 0x42,
-	0xae, 0xc5, 0x18, 0x06, 0x6f, 0xe9, 0x39, 0x55, 0xb4, 0x59, 0xf7, 0xf0, 0x06, 0x2c, 0x15, 0x52,
-	0x48, 0xdb, 0x1a, 0x59, 0x6e, 0x3f, 0x58, 0xcc, 0xb5, 0x90, 0x64, 0xdd, 0x58, 0x42, 0x0a, 0x72,
-	0x08, 0x78, 0xe6, 0x66, 0x2d, 0xf6, 0x80, 0x4c, 0x61, 0xb0, 0x5f, 0x46, 0x3f, 0xe0, 0xa2, 0xcd,
-	0x26, 0x0f, 0xa0, 0xc7, 0xe4, 0x91, 0xe2, 0x22, 0x6b, 0xf2, 0x52, 0xd0, 0x65, 0xf2, 0x80, 0x0b,
-	0x7d, 0x5d, 0x43, 0x5d, 0x29, 0xc8, 0x05, 0xac, 0xcd, 0x24, 0xf6, 0x26, 0x8a, 0xb6, 0xc9, 0x68,
-	0x1d, 0x16, 0x99, 0x3c, 0x8a, 0x27, 0x8a, 0x16, 0x94, 0x7a, 0x4c, 0xea, 0x1a, 0xc4, 0x36, 0x97,
-	0x96, 0x82, 0x7c, 0xac, 0x64, 0x02, 0x3a, 0x8e, 0xda, 0xec, 0x83, 0x6d, 0xae, 0x20, 0x05, 0x49,
-	0x61, 0x75, 0xff, 0x22, 0x09, 0x1b, 0xfe, 0x01, 0x6e, 0x66, 0xcd, 0x32, 0xcf, 0x5a, 0xe7, 0xd6,
-	0xac, 0x91, 0xd0, 0x50, 0xb3, 0x75, 0x83, 0xf9, 0x82, 0x60, 0x6d, 0xb6, 0xca, 0x7c, 0x0e, 0x53,
-	0xeb, 0x72, 0xb7, 0x7b, 0xd0, 0x2d, 0xf5, 0xe0, 0x83, 0x99, 0x4f, 0x4b, 0x26, 0xb2, 0xf9, 0x17,
-	0xa0, 0xa3, 0xb1, 0xf1, 0xf7, 0xdc, 0x59, 0xab, 0x26, 0x8e, 0xb7, 0xbc, 0xfb, 0x2e, 0x18, 0xef,
-	0xae, 0x85, 0xe2, 0x34, 0xc6, 0x90, 0x82, 0x2c, 0xe0, 0x2b, 0x54, 0xb1, 0x9d, 0x3d, 0x79, 0x8a,
-	0x5f, 0xd7, 0x02, 0xaf, 0x76, 0xd6, 0x69, 0x06, 0xf0, 0x9f, 0x5a, 0xd5, 0x2a, 0xeb, 0x50, 0x33,
-	0x7a, 0xb9, 0xd3, 0x0c, 0x20, 0xa3, 0xf6, 0x19, 0xc1, 0xc3, 0x19, 0xda, 0xf8, 0xe5, 0xdc, 0x37,
-	0xd6, 0xa4, 0xe6, 0x1e, 0xb2, 0x42, 0xa8, 0xaa, 0xc9, 0xd6, 0x11, 0xca, 0xb8, 0x1a, 0x9c, 0x66,
-	0x00, 0x99, 0x50, 0xdf, 0x10, 0xac, 0x1a, 0xbc, 0x16, 0xbf, 0x99, 0x1b, 0xba, 0xd8, 0x12, 0x4e,
-	0x43, 0x84, 0xbb, 0xd8, 0x69, 0x37, 0x6e, 0xc0, 0xae, 0x58, 0x17, 0x4e, 0x43, 0x84, 0x8c, 0xdd,
-	0x57, 0x04, 0x2b, 0xb3, 0x3e, 0x85, 0x5f, 0xd5, 0x00, 0xae, 0x6e, 0x13, 0xa7, 0xc9, 0xcf, 0x6f,
-	0x24, 0xab, 0x9a, 0x67, 0x2d, 0xc9, 0x8c, 0xbb, 0xc0, 0x69, 0x88, 0xa0, 0xd9, 0x6d, 0xbd, 0xf8,
-	0x79, 0x3d, 0x44, 0xbf, 0xae, 0x87, 0xe8, 0xf7, 0xf5, 0x10, 0x5d, 0xfd, 0x19, 0x2e, 0xbc, 0xbf,
-	0xf5, 0x92, 0xf7, 0x33, 0xd0, 0xa7, 0x1a, 0xd4, 0xbf, 0x64, 0xb1, 0x5f, 0x7e, 0xfe, 0x1f, 0xf7,
-	0xb2, 0xf3, 0xb3, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xb9, 0xb6, 0x8b, 0xea, 0x17, 0x0c, 0x00,
-	0x00,
+	// 639 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x96, 0x41, 0x6b, 0xdb, 0x3c,
+	0x18, 0xc7, 0xab, 0x3a, 0x49, 0x5b, 0xf5, 0xf0, 0x16, 0xf5, 0x4d, 0xe2, 0x9a, 0x11, 0x82, 0x4e,
+	0x3e, 0x6c, 0x36, 0x74, 0x97, 0x31, 0x36, 0x3a, 0x9a, 0x42, 0x19, 0x2c, 0x17, 0xb7, 0x3b, 0x6c,
+	0x74, 0x84, 0xd4, 0x51, 0x13, 0x41, 0x6c, 0xa9, 0x96, 0x52, 0x68, 0xbe, 0xc2, 0x60, 0x87, 0x9d,
+	0x0a, 0x3b, 0xed, 0xdb, 0xec, 0xb8, 0x8f, 0x30, 0xb2, 0x2f, 0xb1, 0xe3, 0x90, 0x6d, 0x96, 0x38,
+	0x56, 0x68, 0x1d, 0xf7, 0x16, 0x3d, 0x72, 0x7e, 0xcf, 0xff, 0x79, 0xa4, 0xe7, 0x6f, 0xc3, 0x03,
+	0x1e, 0x31, 0xc9, 0xdc, 0x88, 0xfb, 0xae, 0x3f, 0xea, 0x4b, 0xd7, 0x67, 0xe1, 0x8d, 0x13, 0xc7,
+	0x90, 0x3d, 0xa4, 0x72, 0x34, 0xb9, 0x74, 0x7c, 0x16, 0x38, 0x53, 0xb5, 0xe9, 0x48, 0xd2, 0x0f,
+	0x9c, 0x29, 0x0d, 0x92, 0x07, 0x9c, 0x88, 0xfb, 0x8e, 0x8a, 0x5b, 0xbb, 0x24, 0x94, 0xd1, 0x6d,
+	0x12, 0xc5, 0x4f, 0xa1, 0x79, 0x4a, 0xa4, 0x47, 0x7c, 0x12, 0xca, 0x0e, 0x0b, 0x6f, 0x48, 0x24,
+	0xfa, 0x92, 0xb2, 0xd0, 0x23, 0xd7, 0x68, 0x0f, 0x1a, 0x13, 0x1a, 0x9a, 0xa0, 0x0d, 0xec, 0x1d,
+	0x4f, 0xfd, 0xc4, 0xa3, 0x55, 0x4f, 0x0b, 0x8e, 0xde, 0xc1, 0xca, 0x98, 0x0a, 0x69, 0x82, 0xb6,
+	0x61, 0xef, 0x1e, 0xbe, 0x70, 0x1e, 0xa4, 0x87, 0x05, 0x01, 0x0b, 0x9d, 0x0c, 0x2a, 0xa6, 0xe0,
+	0x2f, 0x00, 0xd6, 0x4f, 0x49, 0x26, 0x49, 0x57, 0x0c, 0xb5, 0xaa, 0x50, 0x13, 0x6e, 0xa9, 0x46,
+	0xf4, 0xe8, 0xc0, 0xdc, 0x8c, 0xa3, 0x35, 0xb5, 0x7c, 0x3b, 0x40, 0x0d, 0x58, 0x63, 0x57, 0x57,
+	0x82, 0x48, 0xd3, 0x68, 0x03, 0xdb, 0xf0, 0xd2, 0x15, 0xfa, 0x1f, 0x56, 0xc7, 0x34, 0xa0, 0xd2,
+	0xac, 0xc4, 0xe1, 0x64, 0x81, 0x9e, 0xc0, 0x9d, 0x01, 0x8d, 0x88, 0xaf, 0x72, 0x99, 0xd5, 0x36,
+	0xb0, 0xab, 0xde, 0x3c, 0x80, 0x2f, 0xb4, 0x7a, 0x04, 0x47, 0x9d, 0x4c, 0xdd, 0x6e, 0x91, 0xba,
+	0x15, 0x21, 0x29, 0xf7, 0x04, 0xd6, 0x4f, 0xc8, 0x98, 0x48, 0x72, 0xef, 0x19, 0xa0, 0x03, 0xb8,
+	0x9d, 0x56, 0x2b, 0xcc, 0xcd, 0xb6, 0x61, 0xef, 0x78, 0x5b, 0x49, 0xb9, 0x02, 0x37, 0xb5, 0x14,
+	0xc1, 0xf1, 0x11, 0x44, 0x4b, 0xe2, 0x8b, 0x75, 0x12, 0x7f, 0x80, 0xf5, 0xb3, 0x2c, 0xe0, 0x9c,
+	0xf1, 0x82, 0xa7, 0x51, 0x87, 0x35, 0x2a, 0x7a, 0x92, 0xf1, 0xf8, 0x34, 0xb6, 0xbd, 0x2a, 0x15,
+	0xe7, 0x8c, 0x2b, 0xd1, 0x1a, 0xb4, 0xe0, 0xf8, 0x02, 0x36, 0x96, 0x36, 0xba, 0x13, 0x49, 0x0a,
+	0x26, 0x6d, 0xc2, 0x2d, 0x2a, 0x7a, 0xc1, 0x44, 0x92, 0x34, 0x6b, 0x8d, 0x0a, 0x85, 0xc1, 0xa6,
+	0x9e, 0x2e, 0x38, 0xee, 0xe4, 0x76, 0x3c, 0xd2, 0x1f, 0x14, 0x6c, 0x98, 0xa9, 0x87, 0x08, 0x8e,
+	0xdf, 0xc3, 0xfd, 0xb3, 0xdb, 0xd0, 0xbf, 0xff, 0x30, 0xe6, 0xb7, 0x77, 0x53, 0x7f, 0x7b, 0x8d,
+	0x85, 0xdb, 0x8b, 0x7d, 0x0d, 0xf6, 0xd1, 0xa7, 0xf2, 0x1a, 0x36, 0x96, 0x93, 0xac, 0x9c, 0xca,
+	0x42, 0xf2, 0x17, 0x1b, 0x59, 0xc9, 0x34, 0xf2, 0x93, 0x3e, 0xe5, 0x23, 0x0d, 0xde, 0xe1, 0x1f,
+	0x08, 0x2b, 0x8a, 0x8d, 0xbe, 0x27, 0x86, 0x93, 0xf7, 0x36, 0x74, 0xec, 0x3c, 0xd4, 0x5a, 0x9d,
+	0x55, 0x56, 0x6a, 0x95, 0x66, 0x08, 0x8e, 0x37, 0xd0, 0x1d, 0xc8, 0xcd, 0x71, 0x57, 0x0c, 0xd1,
+	0x51, 0x21, 0x78, 0xfe, 0xf0, 0xac, 0x72, 0x80, 0x7f, 0xd2, 0xf2, 0xde, 0x53, 0x44, 0x9a, 0xd6,
+	0xff, 0xac, 0x72, 0x80, 0x58, 0xda, 0x67, 0x00, 0xff, 0x5b, 0x92, 0x8d, 0x5e, 0xad, 0x5d, 0xb1,
+	0x12, 0xb5, 0xf6, 0x18, 0xa5, 0x8d, 0xca, 0xfb, 0x5d, 0x91, 0x46, 0x69, 0x8d, 0xd8, 0x2a, 0x07,
+	0x88, 0x1b, 0xf5, 0x0d, 0xc0, 0x7d, 0x8d, 0x27, 0xa2, 0x37, 0x6b, 0xa3, 0x53, 0xc3, 0xb6, 0x4a,
+	0x12, 0x56, 0xa9, 0x53, 0x96, 0x5a, 0x42, 0x5d, 0x6a, 0xeb, 0x56, 0x49, 0x42, 0xac, 0xee, 0x2b,
+	0x80, 0x7b, 0xcb, 0x3e, 0x85, 0x5e, 0x17, 0x00, 0xe7, 0x5f, 0x09, 0x56, 0x99, 0xbf, 0xcf, 0x5b,
+	0x96, 0x37, 0xcf, 0x42, 0x2d, 0xd3, 0xda, 0xbd, 0x55, 0x92, 0xa0, 0xd4, 0x1d, 0xbf, 0xfc, 0x31,
+	0x6b, 0x81, 0x9f, 0xb3, 0x16, 0xf8, 0x35, 0x6b, 0x81, 0xbb, 0xdf, 0xad, 0x8d, 0x8f, 0x0b, 0xdf,
+	0xb0, 0x6e, 0x0c, 0x7d, 0xa6, 0xa0, 0xee, 0x94, 0x06, 0x6e, 0xf6, 0xc3, 0xf7, 0xb2, 0x16, 0xaf,
+	0x9f, 0xff, 0x0d, 0x00, 0x00, 0xff, 0xff, 0xf6, 0x11, 0xb8, 0x50, 0x11, 0x0b, 0x00, 0x00,
 }
 
 func (m *GetRecentConversationReq) Marshal() (dAtA []byte, err error) {
@@ -1081,13 +1007,6 @@ func (m *GetRecentConversationReq) MarshalToSizedBuffer(dAtA []byte) (int, error
 	if m.XXX_unrecognized != nil {
 		i -= len(m.XXX_unrecognized)
 		copy(dAtA[i:], m.XXX_unrecognized)
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
-		i--
-		dAtA[i] = 0x12
 	}
 	if len(m.Uin) > 0 {
 		i -= len(m.Uin)
@@ -1167,29 +1086,22 @@ func (m *GetConversationMsgReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.Direction != 0 {
 		i = encodeVarintConv(dAtA, i, uint64(m.Direction))
 		i--
-		dAtA[i] = 0x30
+		dAtA[i] = 0x28
 	}
 	if m.Limit != 0 {
 		i = encodeVarintConv(dAtA, i, uint64(m.Limit))
 		i--
-		dAtA[i] = 0x28
+		dAtA[i] = 0x20
 	}
 	if m.Offset != 0 {
 		i = encodeVarintConv(dAtA, i, uint64(m.Offset))
 		i--
-		dAtA[i] = 0x20
+		dAtA[i] = 0x18
 	}
 	if len(m.ConvId) > 0 {
 		i -= len(m.ConvId)
 		copy(dAtA[i:], m.ConvId)
 		i = encodeVarintConv(dAtA, i, uint64(len(m.ConvId)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1274,15 +1186,8 @@ func (m *DeleteConversationReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			copy(dAtA[i:], m.ConvIds[iNdEx])
 			i = encodeVarintConv(dAtA, i, uint64(len(m.ConvIds[iNdEx])))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x12
 		}
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
-		i--
-		dAtA[i] = 0x12
 	}
 	if len(m.Uin) > 0 {
 		i -= len(m.Uin)
@@ -1350,13 +1255,6 @@ func (m *GetConversationReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		copy(dAtA[i:], m.ConvId)
 		i = encodeVarintConv(dAtA, i, uint64(len(m.ConvId)))
 		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
-		i--
 		dAtA[i] = 0x12
 	}
 	if len(m.Uin) > 0 {
@@ -1401,19 +1299,12 @@ func (m *SetConversationTopReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i--
-		dAtA[i] = 0x20
+		dAtA[i] = 0x18
 	}
 	if len(m.ConvId) > 0 {
 		i -= len(m.ConvId)
 		copy(dAtA[i:], m.ConvId)
 		i = encodeVarintConv(dAtA, i, uint64(len(m.ConvId)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1486,19 +1377,12 @@ func (m *SetConversationMuteReq) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 			dAtA[i] = 0
 		}
 		i--
-		dAtA[i] = 0x20
+		dAtA[i] = 0x18
 	}
 	if len(m.ConvId) > 0 {
 		i -= len(m.ConvId)
 		copy(dAtA[i:], m.ConvId)
 		i = encodeVarintConv(dAtA, i, uint64(len(m.ConvId)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1568,13 +1452,6 @@ func (m *SetConversationReadReq) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 		copy(dAtA[i:], m.ConvId)
 		i = encodeVarintConv(dAtA, i, uint64(len(m.ConvId)))
 		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
-		i--
 		dAtA[i] = 0x12
 	}
 	if len(m.Uin) > 0 {
@@ -1641,19 +1518,12 @@ func (m *SyncConversationReq) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	if m.Limit != 0 {
 		i = encodeVarintConv(dAtA, i, uint64(m.Limit))
 		i--
-		dAtA[i] = 0x20
+		dAtA[i] = 0x18
 	}
 	if m.Offset != 0 {
 		i = encodeVarintConv(dAtA, i, uint64(m.Offset))
 		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
-		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x10
 	}
 	if len(m.Uin) > 0 {
 		i -= len(m.Uin)
@@ -1735,24 +1605,17 @@ func (m *SyncConversationMsgReq) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 		copy(dAtA[i:], m.ConvId)
 		i = encodeVarintConv(dAtA, i, uint64(len(m.ConvId)))
 		i--
-		dAtA[i] = 0x2a
+		dAtA[i] = 0x22
 	}
 	if m.Limit != 0 {
 		i = encodeVarintConv(dAtA, i, uint64(m.Limit))
 		i--
-		dAtA[i] = 0x20
+		dAtA[i] = 0x18
 	}
 	if m.Offset != 0 {
 		i = encodeVarintConv(dAtA, i, uint64(m.Offset))
 		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.DeviceId) > 0 {
-		i -= len(m.DeviceId)
-		copy(dAtA[i:], m.DeviceId)
-		i = encodeVarintConv(dAtA, i, uint64(len(m.DeviceId)))
-		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x10
 	}
 	if len(m.Uin) > 0 {
 		i -= len(m.Uin)
@@ -1826,10 +1689,6 @@ func (m *GetRecentConversationReq) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
-	l = len(m.DeviceId)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
 	}
@@ -1861,10 +1720,6 @@ func (m *GetConversationMsgReq) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Uin)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
-	l = len(m.DeviceId)
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
@@ -1915,10 +1770,6 @@ func (m *DeleteConversationReq) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
-	l = len(m.DeviceId)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
 	if len(m.ConvIds) > 0 {
 		for _, s := range m.ConvIds {
 			l = len(s)
@@ -1953,10 +1804,6 @@ func (m *GetConversationReq) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
-	l = len(m.DeviceId)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
 	l = len(m.ConvId)
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
@@ -1974,10 +1821,6 @@ func (m *SetConversationTopReq) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Uin)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
-	l = len(m.DeviceId)
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
@@ -2016,10 +1859,6 @@ func (m *SetConversationMuteReq) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
-	l = len(m.DeviceId)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
 	l = len(m.ConvId)
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
@@ -2055,10 +1894,6 @@ func (m *SetConversationReadReq) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
-	l = len(m.DeviceId)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
 	l = len(m.ConvId)
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
@@ -2088,10 +1923,6 @@ func (m *SyncConversationReq) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Uin)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
-	l = len(m.DeviceId)
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
@@ -2132,10 +1963,6 @@ func (m *SyncConversationMsgReq) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Uin)
-	if l > 0 {
-		n += 1 + l + sovConv(uint64(l))
-	}
-	l = len(m.DeviceId)
 	if l > 0 {
 		n += 1 + l + sovConv(uint64(l))
 	}
@@ -2239,38 +2066,6 @@ func (m *GetRecentConversationReq) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Uin = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2442,38 +2237,6 @@ func (m *GetConversationMsgReq) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ConvId", wireType)
 			}
 			var stringLen uint64
@@ -2504,7 +2267,7 @@ func (m *GetConversationMsgReq) Unmarshal(dAtA []byte) error {
 			}
 			m.ConvId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
 			}
@@ -2523,7 +2286,7 @@ func (m *GetConversationMsgReq) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 5:
+		case 4:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
 			}
@@ -2542,7 +2305,7 @@ func (m *GetConversationMsgReq) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 6:
+		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Direction", wireType)
 			}
@@ -2731,38 +2494,6 @@ func (m *DeleteConversationReq) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ConvIds", wireType)
 			}
 			var stringLen uint64
@@ -2929,38 +2660,6 @@ func (m *GetConversationReq) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ConvId", wireType)
 			}
 			var stringLen uint64
@@ -3076,38 +2775,6 @@ func (m *SetConversationTopReq) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ConvId", wireType)
 			}
 			var stringLen uint64
@@ -3138,7 +2805,7 @@ func (m *SetConversationTopReq) Unmarshal(dAtA []byte) error {
 			}
 			m.ConvId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field IsTop", wireType)
 			}
@@ -3294,38 +2961,6 @@ func (m *SetConversationMuteReq) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ConvId", wireType)
 			}
 			var stringLen uint64
@@ -3356,7 +2991,7 @@ func (m *SetConversationMuteReq) Unmarshal(dAtA []byte) error {
 			}
 			m.ConvId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field IsMute", wireType)
 			}
@@ -3511,38 +3146,6 @@ func (m *SetConversationReadReq) Unmarshal(dAtA []byte) error {
 			m.Uin = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ConvId", wireType)
 			}
@@ -3709,38 +3312,6 @@ func (m *SyncConversationReq) Unmarshal(dAtA []byte) error {
 			m.Uin = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
 			}
@@ -3759,7 +3330,7 @@ func (m *SyncConversationReq) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 4:
+		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
 			}
@@ -3947,38 +3518,6 @@ func (m *SyncConversationMsgReq) Unmarshal(dAtA []byte) error {
 			m.Uin = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DeviceId", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowConv
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthConv
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthConv
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.DeviceId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Offset", wireType)
 			}
@@ -3997,7 +3536,7 @@ func (m *SyncConversationMsgReq) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 4:
+		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Limit", wireType)
 			}
@@ -4016,7 +3555,7 @@ func (m *SyncConversationMsgReq) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
-		case 5:
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ConvId", wireType)
 			}
