@@ -5,7 +5,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/zchat-team/zim/app/conn/internal/client"
 	"github.com/zchat-team/zim/app/conn/protocol"
-	"github.com/zchat-team/zim/proto/group"
+	"github.com/zchat-team/zim/proto/rpc/group"
 	zerrors "github.com/zmicro-team/zmicro/core/errors"
 	"github.com/zmicro-team/zmicro/core/log"
 )

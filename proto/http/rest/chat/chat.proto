@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zim/proto/http/rest/chat";
+package github.com.zchat.team.zim.proto.http.rest.chat;
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service Im {
+  rpc Send(SendReq) returns (SendRsp) {
+    option (google.api.http) = {
+      post: "/zim/send",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "发送消息";
+      tags: "消息";
+    };
+  }
+}
+
+message SendReq {
+  int32 conv_type = 1;
+  int32 msg_type = 2;
+  string sender = 3;
+  string target = 4;
+  string content = 5;
+  bool is_transparent = 6;
+}
+
+message SendRsp {
+  int64 id = 1;
+  int64 send_time = 2;
+}

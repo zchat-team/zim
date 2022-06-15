@@ -3,11 +3,11 @@ package group
 import (
 	"context"
 	"github.com/zchat-team/zim/app/rest/internal/client"
-	pb "github.com/zchat-team/zim/proto/group"
+	"github.com/zchat-team/zim/proto/http/rest/group"
+	pb "github.com/zchat-team/zim/proto/rpc/group"
 
 	"sync"
 
-	"github.com/zchat-team/zim/api/rest/group"
 	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 )
 

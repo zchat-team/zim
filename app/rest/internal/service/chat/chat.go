@@ -2,11 +2,11 @@ package im
 
 import (
 	"context"
+	"github.com/zchat-team/zim/proto/http/rest/chat"
+	pb "github.com/zchat-team/zim/proto/rpc/chat"
 	"sync"
 
-	"github.com/zchat-team/zim/api/rest/chat"
 	"github.com/zchat-team/zim/app/rest/internal/client"
-	pb "github.com/zchat-team/zim/proto/chat"
 	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 )
 

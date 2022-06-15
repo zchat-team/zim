@@ -4,12 +4,12 @@ echo 'Generating protocol'
 protoc -I. -I./third_party --gofast_out=. --gofast_opt paths=source_relative ./app/conn/protocol/protocol.proto
 
 echo 'Generating rpc api'
-PROTOS=$(find ./proto -type f -name '*.proto')
+PROTOS=$(find ./proto/rpc -type f -name '*.proto')
 
 for PROTO in $PROTOS; do
   echo $PROTO
   protoc \
-    -I. -I./proto/common -I$(dirname $PROTO) \
+    -I. -I./proto/rpc/common -I$(dirname $PROTO) \
     --gofast_out=. \
     --gofast_opt paths=source_relative \
     --rpcx_out=. \
@@ -18,7 +18,7 @@ for PROTO in $PROTOS; do
 done
 
 echo 'Generating http api'
-PROTOS=$(find ./api -type f -name '*.proto')
+PROTOS=$(find ./proto/http -type f -name '*.proto')
 
 for PROTO in $PROTOS; do
   echo $PROTO

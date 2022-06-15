@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/zchat-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/proto/rpc/chat"
+	"github.com/zchat-team/zim/proto/rpc/common"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -19,8 +21,6 @@ import (
 	"github.com/zchat-team/zim/pkg/constant"
 	"github.com/zchat-team/zim/pkg/idgen"
 	"github.com/zchat-team/zim/pkg/util"
-	"github.com/zchat-team/zim/proto/chat"
-	"github.com/zchat-team/zim/proto/common"
 )
 
 type Chat struct {

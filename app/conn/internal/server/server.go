@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"github.com/zchat-team/zim/errno"
 	"github.com/zchat-team/zim/pkg/runtime"
-	"github.com/zchat-team/zim/proto/common"
+	"github.com/zchat-team/zim/proto/rpc/common"
+	"github.com/zchat-team/zim/proto/rpc/sess"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -15,7 +16,6 @@ import (
 	"github.com/panjf2000/gnet/pool/goroutine"
 	"github.com/zchat-team/zim/app/conn/internal/client"
 	"github.com/zchat-team/zim/app/conn/protocol"
-	"github.com/zchat-team/zim/proto/sess"
 	zerrors "github.com/zmicro-team/zmicro/core/errors"
 	"github.com/zmicro-team/zmicro/core/log"
 )

@@ -6,6 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/zchat-team/zim/pkg/util"
+	"github.com/zchat-team/zim/proto/rpc/common"
+	"github.com/zchat-team/zim/proto/rpc/sess"
 	"gorm.io/gorm"
 	"time"
 
@@ -16,8 +18,6 @@ import (
 	"github.com/zchat-team/zim/app/task/internal/model"
 	"github.com/zchat-team/zim/pkg/constant"
 	"github.com/zchat-team/zim/pkg/runtime"
-	"github.com/zchat-team/zim/proto/common"
-	"github.com/zchat-team/zim/proto/sess"
 	"github.com/zmicro-team/zmicro/core/log"
 )
 

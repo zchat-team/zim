@@ -2,11 +2,10 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-
-	"github.com/zchat-team/zim/api/rest/chat"
-	"github.com/zchat-team/zim/api/rest/conv"
-	"github.com/zchat-team/zim/api/rest/group"
-	"github.com/zchat-team/zim/api/rest/user"
+	"github.com/zchat-team/zim/proto/http/rest/chat"
+	"github.com/zchat-team/zim/proto/http/rest/conv"
+	"github.com/zchat-team/zim/proto/http/rest/group"
+	"github.com/zchat-team/zim/proto/http/rest/user"
 
 	sChat "github.com/zchat-team/zim/app/rest/internal/service/chat"
 	sConv "github.com/zchat-team/zim/app/rest/internal/service/conv"

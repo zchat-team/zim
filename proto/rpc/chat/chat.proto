@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zim/proto/rpc/chat";
+package github.com.zchat.team.zim.proto.rpc.chat;
+
+import "entry.proto";
+
+service Chat {
+  rpc SendMsg(SendReq) returns (SendRsp) {}
+  rpc SyncMsg(SyncMsgReq) returns (SyncMsgRsp) {}
+  rpc MsgAck(MsgAckReq) returns (MsgAckRsp) {}
+  rpc Recall(RecallReq) returns (RecallRsp) {}
+  rpc DeleteMsg(DeleteMsgReq) returns (DeleteMsgRsp) {}
+}
+
+message SendReq {
+  string device_id = 1;
+  int32 conv_type = 2;
+  int32 msg_type = 3;
+  string sender = 4;
+  string target = 5;
+  string content = 6;
+  string client_uuid = 7;
+  repeated string at_user_list = 8;
+  bool is_transparent = 9;
+}
+
+message SendRsp {
+  int32 code = 1;
+  string message = 2;
+  int64 id = 3;
+  int64 send_time = 4;
+  string client_uuid = 5;
+}
+
+message SyncMsgReq {
+  string uin = 1;
+  string device_id = 2;
+  int64 offset = 3;
+  int64 limit = 4;
+}
+
+message SyncMsgRsp {
+  repeated common.Msg list = 1;
+}
+
+message MsgAckReq {
+  string uin = 1;
+  string device_id = 2;
+  int64 id = 3;
+}
+
+message MsgAckRsp {
+}
+
+message RecallReq {
+  string uin = 1;
+  string device_id = 2;
+  int64 id = 3;
+}
+
+message RecallRsp {
+}
+
+message DeleteMsgReq {
+  string uin = 1;
+  string device_id = 2;
+  repeated int64 ids = 3;
+}
+
+message DeleteMsgRsp {
+}

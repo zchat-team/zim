@@ -1,0 +1,343 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zim/proto/http/rest/conv";
+
+package github.com.zchat.team.zim.proto.http.rest.conv;
+
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/field_behavior.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service Conv {
+  rpc Create(CreateReq) returns (CreateRsp) {
+    option (google.api.http) = {
+      post: "/zim/conversations",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "创建会话";
+      tags: "聊天";
+    };
+  }
+  rpc Query(QueryReq) returns (QueryRsp) {
+    option (google.api.http) = {
+      get: "/zim/conversations",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "查询会话列表";
+      tags: "聊天";
+    };
+  }
+  rpc Update(UpdateReq) returns (UpdateRsp) {
+    option (google.api.http) = {
+      put: "/zim/conversations/{conv_id}",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "更新会话";
+      tags: "聊天";
+    };
+  }
+  rpc Delete(DeleteReq) returns (DeleteRsp) {
+    option (google.api.http) = {
+      delete: "/zim/conversations/{conv_id}",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "删除会话";
+      tags: "聊天";
+    };
+  }
+  rpc AddMember(AddMemberReq) returns (AddMemberRsp) {
+    option (google.api.http) = {
+      post: "/zim/conversations/{conv_id}/members",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "增加成员";
+      tags: "聊天";
+    };
+  }
+  rpc DeleteMember(DeleteMemberReq) returns (DeleteMemberRsp) {
+    option (google.api.http) = {
+      delete: "/zim/conversations/{conv_id}/members",
+      body: ""
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "移除成员";
+      tags: "聊天";
+    };
+  }
+  rpc QueryMember(QueryMemberReq) returns (QueryMemberRsp) {
+    option (google.api.http) = {
+      get: "/zim/conversations/{conv_id}/members",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "查询成员";
+      tags: "聊天";
+    };
+  }
+  rpc AddMuteClient(AddMuteClientReq) returns (AddMuteClientRsp) {
+    option (google.api.http) = {
+      post: "/zim/conversations/{conv_id}/mutes",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "增加静音用户";
+      tags: "聊天";
+    };
+  }
+  rpc DeleteMuteClient(DeleteMuteClientReq) returns (DeleteMuteClientRsp) {
+    option (google.api.http) = {
+      delete: "/zim/conversations/{conv_id}/mutes",
+      body: ""
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "移除静音用户";
+      tags: "聊天";
+    };
+  }
+  rpc QueryMuteClient(QueryMuteClientReq) returns (QueryMuteClientRsp) {
+    option (google.api.http) = {
+      get: "/zim/conversations/{conv_id}/mutes",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "查询静音用户";
+      tags: "聊天";
+    };
+  }
+  rpc Send(SendReq) returns (SendRsp) {
+    option (google.api.http) = {
+      post: "/zim/conversations/{conv_id}/messages",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "发送消息";
+      tags: "聊天";
+    };
+  }
+  rpc QueryMsg(QueryMsgReq) returns (QueryMsgMsgRsp) {
+    option (google.api.http) = {
+      get: "/zim/conversations/{conv_id}/messages",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "查询历史消息";
+      tags: "聊天";
+    };
+  }
+  rpc UpdateMsg(UpdateMsgReq) returns (UpdateMsgRsp) {
+    option (google.api.http) = {
+      put: "/zim/conversations/{conv_id}/messages/{msg_id}",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "修改消息";
+      tags: "聊天";
+    };
+  }
+  rpc Recall(RecallReq) returns (RecallRsp) {
+    option (google.api.http) = {
+      put: "/zim/conversations/{conv_id}/messages/{msg_id}/recall",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "修改消息";
+      tags: "聊天";
+    };
+  }
+  rpc DeleteMsg(DeleteMsgReq) returns (DeleteMsgRsp) {
+    option (google.api.http) = {
+      delete: "/zim/conversations/{conv_id}/messages/{msg_id}",
+      body: ""
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "删除消息";
+      tags: "聊天";
+    };
+  }
+}
+
+message CreateReq {
+  // 成员
+  repeated string members = 1 [ (google.api.field_behavior) = REQUIRED ];
+  // 会话名称
+  string name = 2;
+  // 属性
+  map<string, string> attrs = 3;
+  // 唯一性标识
+  bool unique = 4;
+  // 会话类型，私聊，群聊，聊天室，临时会话（如客服），系统会话（智能机器人、公从号、服务号）
+  int32 type = 5;
+}
+
+message CreateRsp {
+  // 会话ID
+  int64 conv_id = 1;
+  // 其他字段
+}
+
+message QueryReq {
+}
+
+message QueryRsp {
+}
+
+message UpdateReq {
+  // 会话ID
+  int64 conv_id = 1;
+  // 其他字段
+  string other = 2;
+}
+
+message UpdateRsp {
+}
+
+message DeleteReq {
+  // 会话ID
+  int64 conv_id = 1;
+}
+
+message DeleteRsp {
+}
+
+message AddMemberReq {
+  // 会话ID
+  int64 conv_id = 1;
+  string other = 2;
+}
+
+message AddMemberRsp {
+}
+
+message DeleteMemberReq {
+  // 会话ID
+  int64 conv_id = 1;
+  repeated string client_ids = 2;
+}
+
+message DeleteMemberRsp {
+}
+
+message QueryMemberReq {
+  // 会话ID
+  int64 conv_id = 1;
+}
+
+message QueryMemberRsp {
+}
+
+message AddMuteClientReq {
+  // 会话ID
+  int64 conv_id = 1;
+  repeated string client_ids = 2;
+}
+
+message AddMuteClientRsp {
+}
+
+message DeleteMuteClientReq {
+  // 会话ID
+  int64 conv_id = 1;
+  repeated string client_ids = 2;
+}
+
+message DeleteMuteClientRsp {
+}
+
+message QueryMuteClientReq {
+  // 会话ID
+  int64 conv_id = 1;
+}
+
+message QueryMuteClientRsp {
+}
+
+message SendReq {
+  // 会话ID
+  int64 conv_id = 1;
+  string other = 2;
+}
+
+message SendRsp {
+}
+
+message QueryMsgReq {
+  // 会话ID
+  int64 conv_id = 1;
+}
+
+message QueryMsgMsgRsp {
+}
+
+message UpdateMsgReq {
+  // 会话ID
+  int64 conv_id = 1;
+  int64 msg_id = 2;
+  string other = 3;
+}
+
+message UpdateMsgRsp {
+}
+
+message RecallReq {
+  // 会话ID
+  int64 conv_id = 1;
+  int64 msg_id = 2;
+  string sender = 3;
+}
+
+message RecallRsp {
+}
+
+message DeleteMsgReq {
+  // 会话ID
+  int64 conv_id = 1;
+  int64 msg_id = 2;
+}
+
+message DeleteMsgRsp {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

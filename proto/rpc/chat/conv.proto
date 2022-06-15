@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zim/proto/rpc/chat";
+package github.com.zchat.team.zim.proto.rpc.chat;
+
+import "entry.proto";
+
+service Conv {
+  rpc GetRecentConversation(GetRecentConversationReq) returns (GetRecentConversationRsp) {}
+  rpc GetConversationMsg(GetConversationMsgReq) returns (GetConversationMsgRsp) {}
+  rpc DeleteConversation(DeleteConversationReq) returns (DeleteConversationRsp) {}
+  rpc GetConversation(GetConversationReq) returns (common.Conversation) {}
+  rpc SetConversationTop(SetConversationTopReq) returns (SetConversationTopRsp) {}
+  rpc SetConversationMute(SetConversationMuteReq) returns (SetConversationMuteRsp) {}
+  rpc SetConversationRead(SetConversationReadReq) returns (SetConversationReadRsp) {}
+  rpc SyncConversation(SyncConversationReq) returns (SyncConversationRsp) {}
+  rpc SyncConversationMsg(SyncConversationMsgReq) returns (SyncConversationMsgRsp) {}
+}
+
+message GetRecentConversationReq {
+  string uin = 1;
+  string device_id = 2;
+}
+
+message GetRecentConversationRsp {
+  repeated common.Conversation list = 1;
+}
+
+message GetConversationMsgReq {
+  string uin = 1;
+  string device_id = 2;
+  string conv_id = 3;
+  int64 offset = 4;
+  int64 limit = 5;
+  int32 direction = 6; // 1: 前翻 2: 后翻
+}
+
+message GetConversationMsgRsp {
+  repeated common.Msg list = 1;
+}
+
+message DeleteConversationReq {
+  string uin = 1;
+  string device_id = 2;
+  repeated string conv_ids = 3;
+}
+
+message DeleteConversationRsp {
+}
+
+message GetConversationReq {
+  string uin = 1;
+  string device_id = 2;
+  string conv_id = 3;
+}
+
+message SetConversationTopReq {
+  string uin = 1;
+  string device_id = 2;
+  string conv_id = 3;
+  bool is_top = 4;
+}
+
+message SetConversationTopRsp {
+}
+
+message SetConversationMuteReq {
+  string uin = 1;
+  string device_id = 2;
+  string conv_id = 3;
+  bool is_mute = 4;
+}
+
+message SetConversationMuteRsp {
+}
+
+
+message SetConversationReadReq {
+  string uin = 1;
+  string device_id = 2;
+  string conv_id = 3;
+}
+
+message SetConversationReadRsp {
+}
+
+message SyncConversationReq {
+  string uin = 1;
+  string device_id = 2;
+  int64 offset = 3;
+  int64 limit = 4;
+}
+
+message SyncConversationRsp {
+  repeated common.Conversation list = 1;
+}
+
+message SyncConversationMsgReq {
+  string uin = 1;
+  string device_id = 2;
+  int64 offset = 3;
+  int64 limit = 4;
+  string conv_id = 5;
+}
+
+message SyncConversationMsgRsp {
+  repeated common.Msg list = 1;
+}

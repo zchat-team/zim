@@ -2,7 +2,7 @@ package user
 
 import (
 	"context"
-	"github.com/zchat-team/zim/api/rest/user"
+	"github.com/zchat-team/zim/proto/http/rest/user"
 	"sync"
 
 	zgin "github.com/zmicro-team/zmicro/core/transport/http"
