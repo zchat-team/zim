@@ -26,9 +26,6 @@ func (g *Group) Create(ctx context.Context, req *group.CreateReq, rsp *group.Cre
 		Type:      0,
 		Name:      req.Name,
 		DeletedAt: 0,
-		//Notice:    req.Notice,
-		//Intro:     req.Intro,
-		//Avatar:    req.Avatar,
 	}
 
 	if req.GroupId != "" {
@@ -85,21 +82,15 @@ func (g *Group) GetJoinedGroupList(ctx context.Context, req *group.GetJoinedGrou
 			"group.name",
 			"group.created_at",
 			"group.updated_at",
-			//"group.notice",
-			//"group.intro",
-			//"group.avatar",
 		}).
 		Joins("INNER JOIN `group` on group_member.group_id=group.group_id").
 		Find(&rows).Error
 
 	for _, v := range rows {
 		groupInfo := group.GroupInfo{
-			Owner:   v.Owner,
-			Name:    v.Name,
-			GroupId: v.GroupId,
-			//Notice:    v.Notice,
-			//Intro:     v.Intro,
-			//Avatar:    v.Avatar,
+			Owner:     v.Owner,
+			Name:      v.Name,
+			GroupId:   v.GroupId,
 			CreatedAt: v.CreatedAt.Unix(),
 			UpdatedAt: v.UpdatedAt.Unix(),
 			Type:      int32(v.Type),
@@ -126,9 +117,6 @@ func (g *Group) Sync(ctx context.Context, req *group.SyncReq, rsp *group.SyncRsp
 			"group.name",
 			"UNIX_TIMESTAMP(group.created_at) AS created_at",
 			"UNIX_TIMESTAMP(group.updated_at) AS updated_at",
-			//"group.notice",
-			//"group.intro",
-			//"group.avatar",
 		}).
 		Scopes(func(db *gorm.DB) *gorm.DB {
 			if req.Offset > 0 {

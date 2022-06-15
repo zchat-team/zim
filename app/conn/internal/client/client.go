@@ -1,7 +1,7 @@
 package client
 
 import (
-	chat2 "github.com/zchat-team/zim/proto/rpc/chat"
+	"github.com/zchat-team/zim/proto/rpc/chat"
 	"github.com/zchat-team/zim/proto/rpc/group"
 	"github.com/zchat-team/zim/proto/rpc/sess"
 	"github.com/zmicro-team/zmicro/core/config"
@@ -10,8 +10,8 @@ import (
 )
 
 var (
-	chatClient  *chat2.ChatClient
-	convClient  *chat2.ConvClient
+	chatClient  *chat.ChatClient
+	convClient  *chat.ConvClient
 	groupClient *group.GroupClient
 	sessClient  *sess.SessClient
 )
@@ -43,7 +43,7 @@ func GetSessClient() *sess.SessClient {
 	return sessClient
 }
 
-func GetChatClient() *chat2.ChatClient {
+func GetChatClient() *chat.ChatClient {
 	if chatClient == nil {
 		r := &Registry{}
 		if err := config.Scan("registry", &r); err != nil {
@@ -60,12 +60,12 @@ func GetChatClient() *chat2.ChatClient {
 			return nil
 		}
 		cli := cc.GetXClient()
-		chatClient = chat2.NewChatClient(cli)
+		chatClient = chat.NewChatClient(cli)
 	}
 	return chatClient
 }
 
-func GetConvClient() *chat2.ConvClient {
+func GetConvClient() *chat.ConvClient {
 	if convClient == nil {
 		r := &Registry{}
 		if err := config.Scan("registry", &r); err != nil {
@@ -82,7 +82,7 @@ func GetConvClient() *chat2.ConvClient {
 			return nil
 		}
 		cli := cc.GetXClient()
-		convClient = chat2.NewConvClient(cli)
+		convClient = chat.NewConvClient(cli)
 	}
 	return convClient
 }
