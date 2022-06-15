@@ -25,7 +25,7 @@ func before() error {
 		if !errors.Is(err, nats.ErrStreamNotFound) {
 			return err
 		}
-		//nats stream add MSGS --subjects "MSGS.*" --ack --max-msgs=-1 --max-bytes=-1 --max-age=-1 --storage file --retention work --max-msg-size=-1 --discard=old
+		// nats stream add MSGS --subjects "MSGS.*" --ack --max-msgs=-1 --max-bytes=-1 --max-age=-1 --storage file --retention work --max-msg-size=-1 --discard=old
 		js.AddStream(&nats.StreamConfig{
 			Name:      "MSGS",
 			Subjects:  []string{"MSGS.*"},
@@ -34,15 +34,30 @@ func before() error {
 		})
 	}
 
-	if _, err := js.ConsumerInfo("MSGS", "TASK"); err != nil {
+	if _, err := js.ConsumerInfo("MSGS", "TASK_NEW"); err != nil {
 		if !errors.Is(err, nats.ErrConsumerNotFound) {
 			return err
 		}
-		//nats consumer add MSGS TASK --filter MSGS.received --ack explicit --pull --deliver all --max-deliver=-1
+		// nats consumer add MSGS TASK.new --filter MSGS.received --ack explicit --pull --deliver all --max-deliver=-1
 		if _, err := js.AddConsumer("MSGS", &nats.ConsumerConfig{
-			Durable:       "TASK",
+			Durable:       "TASK_NEW",
 			AckPolicy:     nats.AckExplicitPolicy,
-			FilterSubject: "MSGS.received",
+			FilterSubject: "MSGS.new",
+		}); err != nil {
+			log.Error(err)
+			return err
+		}
+	}
+
+	if _, err := js.ConsumerInfo("MSGS", "TASK_TODO"); err != nil {
+		if !errors.Is(err, nats.ErrConsumerNotFound) {
+			return err
+		}
+		// nats consumer add MSGS TASK.todo --filter MSGS.todo --ack explicit --pull --deliver all --max-deliver=-1
+		if _, err := js.AddConsumer("MSGS", &nats.ConsumerConfig{
+			Durable:       "TASK_TODO",
+			AckPolicy:     nats.AckExplicitPolicy,
+			FilterSubject: "MSGS.todo",
 		}); err != nil {
 			log.Error(err)
 			return err

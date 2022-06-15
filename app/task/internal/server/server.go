@@ -8,7 +8,6 @@ import (
 	"github.com/zchat-team/zim/pkg/util"
 	"github.com/zchat-team/zim/proto/rpc/common"
 	"github.com/zchat-team/zim/proto/rpc/sess"
-	"gorm.io/gorm"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -29,7 +28,8 @@ func NewServer() *Server {
 }
 
 func (s *Server) Start() error {
-	go s.consumeMsg()
+	go s.consumeTodo()
+	go s.consumeNew()
 
 	log.Info("Dispatch Server Started")
 
@@ -40,9 +40,9 @@ func (s *Server) Stop() error {
 	return nil
 }
 
-func (s *Server) consumeMsg() {
+func (s *Server) consumeTodo() {
 	js := runtime.GetJS()
-	sub, err := js.PullSubscribe("MSGS.received", "TASK")
+	sub, err := js.PullSubscribe("MSGS.todo", "TASK_TODO")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,7 +62,7 @@ func (s *Server) consumeMsg() {
 					continue
 				}
 
-				if err := s.onMsg(&msg); err == nil {
+				if err := s.onTodo(&msg); err == nil {
 					m.Ack()
 				}
 			}
@@ -70,13 +70,12 @@ func (s *Server) consumeMsg() {
 	}
 }
 
-func (s *Server) onMsg(m *common.Msg) error {
+func (s *Server) onTodo(m *common.Msg) error {
 	if err := s.storeRedis(m); err != nil {
 		return err
 	}
 
 	s.push(m)
-	s.storeMysql(m)
 
 	return nil
 }
@@ -195,10 +194,6 @@ func (s *Server) push(m *common.Msg) {
 }
 
 func (s *Server) storeMysql(m *common.Msg) {
-	if m.IsTransparent {
-		return
-	}
-
 	var atUserList string
 	if len(m.AtUserList) > 0 {
 		b, _ := json.Marshal(m.AtUserList)
@@ -220,16 +215,106 @@ func (s *Server) storeMysql(m *common.Msg) {
 		ClientUuid: m.ClientUuid,
 	}
 
-	if err := db.Take(&model.Msg{Id: m.Id}).Error; err != nil {
-		if !errors.Is(err, gorm.ErrRecordNotFound) {
-			log.Error(err)
-			return
-		}
-	} else {
-		return
-	}
-
 	if err := db.Create(&msg).Error; err != nil {
 		log.Error(err)
 	}
+}
+
+func (s *Server) consumeNew() {
+	js := runtime.GetJS()
+	sub, err := js.PullSubscribe("MSGS.new", "TASK_NEW")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for {
+		msgs, err := sub.Fetch(10)
+		if err != nil {
+			if errors.Is(err, nats.ErrTimeout) {
+				continue
+			}
+			log.Error(err.Error())
+		} else {
+			for _, m := range msgs {
+				msg := common.Msg{}
+				if err := proto.Unmarshal(m.Data, &msg); err != nil {
+					m.Ack()
+					continue
+				}
+
+				if err := s.onNew(&msg); err == nil {
+					m.Ack()
+				}
+			}
+		}
+	}
+}
+
+func (s *Server) onNew(m *common.Msg) (err error) {
+	if m.Type == constant.ConvTypeC2C {
+		err = s.onC2CMsg(m)
+	} else if m.Type == constant.ConvTypeGroup {
+		err = s.onGroupMsg(m)
+	}
+
+	// 持久化，可以考虑生成一条 MSGS.persist，由独立进程做持久化
+	go func() {
+		s.storeMysql(m)
+	}()
+
+	return
+}
+
+func (s *Server) onC2CMsg(m *common.Msg) (err error) {
+	m.Owner = m.Sender
+	b, err := proto.Marshal(m)
+	if err != nil {
+		return
+	}
+	nm := &nats.Msg{
+		Subject: "MSGS.todo",
+		Reply:   "",
+		Data:    b,
+		Sub:     nil,
+	}
+	js := runtime.GetJS()
+	js.PublishMsg(nm)
+
+	m.Owner = m.Target
+	b, err = proto.Marshal(m)
+	if err != nil {
+		return
+	}
+	nm.Data = b
+	js.PublishMsg(nm)
+
+	return
+}
+
+func (s *Server) onGroupMsg(m *common.Msg) (err error) {
+	db := runtime.GetDB()
+	var members []*model.GroupMember
+	cond := model.GroupMember{GroupId: m.Target}
+	if err = db.Where(&cond).Find(&members).Error; err != nil {
+		return
+	}
+
+	js := runtime.GetJS()
+	for _, v := range members {
+		m.Owner = v.Member
+		b, err := proto.Marshal(m)
+		if err != nil {
+			continue
+		}
+		nm := &nats.Msg{
+			Subject: "MSGS.todo",
+			Reply:   "",
+			Data:    b,
+			Sub:     nil,
+		}
+
+		js.PublishMsg(nm)
+	}
+
+	return
 }
