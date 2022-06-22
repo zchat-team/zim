@@ -106,30 +106,30 @@ func (s *Server) storeRedis(m *common.Msg) error {
 		pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
 
 		// TODO: 方案二，优化或者直接废弃
-		if m.ConvType == constant.ConvTypeC2C {
-			if m.Owner == m.Sender {
-				key = util.KeyConvMsgSync(m.Owner, m.Target)
-			} else {
-				key = util.KeyConvMsgSync(m.Owner, m.Sender)
-			}
-			pipe.ZAdd(ctx, key, &member)
-
-			pipe.Expire(ctx, key, time.Duration(constant.MsgKeepDays*24)*time.Hour)
-
-			if m.Sender < m.Target {
-				key = util.KeyConvMsg(m.Sender, m.Target, m.Id)
-			} else {
-				key = util.KeyConvMsg(m.Target, m.Sender, m.Id)
-			}
-			pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
-
-		} else {
-			key = util.KeyConvMsgSync(m.Owner, m.Target)
-			pipe.ZAdd(ctx, key, &member)
-			pipe.Expire(ctx, key, time.Duration(constant.MsgKeepDays*24)*time.Hour)
-			key = util.KeyConvMsg(m.Owner, m.Target, m.Id)
-			pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
-		}
+		//if m.ConvType == constant.ConvTypeC2C {
+		//	if m.Owner == m.Sender {
+		//		key = util.KeyConvMsgSync(m.Owner, m.Target)
+		//	} else {
+		//		key = util.KeyConvMsgSync(m.Owner, m.Sender)
+		//	}
+		//	pipe.ZAdd(ctx, key, &member)
+		//
+		//	pipe.Expire(ctx, key, time.Duration(constant.MsgKeepDays*24)*time.Hour)
+		//
+		//	if m.Sender < m.Target {
+		//		key = util.KeyConvMsg(m.Sender, m.Target, m.Id)
+		//	} else {
+		//		key = util.KeyConvMsg(m.Target, m.Sender, m.Id)
+		//	}
+		//	pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
+		//
+		//} else {
+		//	key = util.KeyConvMsgSync(m.Owner, m.Target)
+		//	pipe.ZAdd(ctx, key, &member)
+		//	pipe.Expire(ctx, key, time.Duration(constant.MsgKeepDays*24)*time.Hour)
+		//	key = util.KeyConvMsg(m.Owner, m.Target, m.Id)
+		//	pipe.SetEX(ctx, key, string(b), time.Duration(constant.MsgKeepDays*24)*time.Hour)
+		//}
 
 		return nil
 	}); err != nil {
@@ -238,6 +238,7 @@ func (s *Server) consumeNew() {
 			for _, m := range msgs {
 				msg := common.Msg{}
 				if err := proto.Unmarshal(m.Data, &msg); err != nil {
+					log.Error(err)
 					m.Ack()
 					continue
 				}
@@ -251,9 +252,9 @@ func (s *Server) consumeNew() {
 }
 
 func (s *Server) onNew(m *common.Msg) (err error) {
-	if m.Type == constant.ConvTypeC2C {
+	if m.ConvType == constant.ConvTypeC2C {
 		err = s.onC2CMsg(m)
-	} else if m.Type == constant.ConvTypeGroup {
+	} else if m.ConvType == constant.ConvTypeGroup {
 		err = s.onGroupMsg(m)
 	}
 
@@ -265,30 +266,39 @@ func (s *Server) onNew(m *common.Msg) (err error) {
 	return
 }
 
-func (s *Server) onC2CMsg(m *common.Msg) (err error) {
-	m.Owner = m.Sender
-	b, err := proto.Marshal(m)
-	if err != nil {
-		return
-	}
-	nm := &nats.Msg{
-		Subject: "MSGS.todo",
-		Reply:   "",
-		Data:    b,
-		Sub:     nil,
-	}
+func (s *Server) onC2CMsg(m *common.Msg) error {
 	js := runtime.GetJS()
-	js.PublishMsg(nm)
-
-	m.Owner = m.Target
-	b, err = proto.Marshal(m)
-	if err != nil {
-		return
+	if m.Sender != "" {
+		m.Owner = m.Sender
+		b, err := proto.Marshal(m)
+		if err != nil {
+			return err
+		}
+		nm := &nats.Msg{
+			Subject: "MSGS.todo",
+			Reply:   "",
+			Data:    b,
+			Sub:     nil,
+		}
+		js.PublishMsg(nm)
 	}
-	nm.Data = b
-	js.PublishMsg(nm)
 
-	return
+	if m.Target != "" {
+		m.Owner = m.Target
+		b, err := proto.Marshal(m)
+		if err != nil {
+			return err
+		}
+		nm := &nats.Msg{
+			Subject: "MSGS.todo",
+			Reply:   "",
+			Data:    b,
+			Sub:     nil,
+		}
+		js.PublishMsg(nm)
+	}
+
+	return nil
 }
 
 func (s *Server) onGroupMsg(m *common.Msg) (err error) {
@@ -301,6 +311,9 @@ func (s *Server) onGroupMsg(m *common.Msg) (err error) {
 
 	js := runtime.GetJS()
 	for _, v := range members {
+		if v.Member == "" {
+			continue
+		}
 		m.Owner = v.Member
 		b, err := proto.Marshal(m)
 		if err != nil {

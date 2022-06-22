@@ -45,6 +45,9 @@ enum CmdId {
   Cmd_Recall = 1105;
   Cmd_Delete = 1106;
 
+  // conv
+  Cmd_ClearConversationUnreadCount = 1201;
+
   // group
   // 群组管理
   Cmd_SyncGroup = 1401; // 同步群
@@ -199,6 +202,13 @@ message GetMergerMsgRsp {
   repeated MergerMsgItem list = 1;
 }
 
+message ClearConversationUnreadReq {
+  string conv_id = 1;
+}
+
+message ClearConversationUnreadRsp {
+
+}
 
 // 以下为群接口
 

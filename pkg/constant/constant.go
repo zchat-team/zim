@@ -15,7 +15,7 @@ const (
 	// 以下为透传消息
 	MsgTyping          = 3000 // 正在输入
 	MsgDeliveryReceipt = 3001 // 送达回执
-	MsgReadReceipt     = 3002 // 已读回执
+	MsgReadReceipt     = 101  // 已读回执
 )
 
 const (

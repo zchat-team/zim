@@ -1,5 +1,17 @@
 package service
 
+import (
+	"context"
+	"encoding/json"
+	"errors"
+	"github.com/zchat-team/zim/app/chat/internal/typ"
+	"github.com/zchat-team/zim/pkg/constant"
+	"github.com/zchat-team/zim/proto/rpc/chat"
+	"github.com/zmicro-team/zmicro/core/log"
+	"strings"
+	"time"
+)
+
 type Conv struct {
 }
 
@@ -214,83 +226,78 @@ func GetConvService() *Conv {
 //	return
 //}
 
-//func (l *Conv) SetConversationRead(ctx context.Context, req *chat.SetConversationReadReq, rsp *chat.SetConversationReadRsp) (err error) {
-//	arr := strings.Split(req.ConvId, "#")
-//	if len(arr) != 2 {
-//		err = errors.New("参数错误")
-//		return
-//	}
-//	convType := constant.ConvTypeC2C
-//	if arr[0] == "GROUP" {
-//		convType = constant.ConvTypeGroup
-//	}
-//	now := time.Now().Unix() / 1e6
-//	if convType == constant.ConvTypeC2C {
-//		key := util.KeyConv(req.Uin, arr[1])
-//		conv, err := l.getConversation(ctx, key)
-//		if err != nil {
-//			log.Error(err.Error())
-//			return err
-//		}
-//
-//		conv.PeerLastRead = now
-//		conv.UpdatedAt = now
-//		b, err := json.Marshal(conv)
-//		if err != nil {
-//			return err
-//		}
-//
-//		rc := runtime.GetRedisClient()
-//		if err = rc.SetEX(ctx, key, string(b),
-//			time.Duration(constant.ConvKeepDays*24)*time.Hour).Err(); err != nil {
-//			return err
-//		}
-//	}
-//
-//	// 推送已送达回执
-//	go func() {
-//		defer func() {
-//			if err := recover(); err != nil {
-//				log.Errorf("err=%v", err)
-//			}
-//		}()
-//
-//		mdr := typ.MsgReadReceipt{
-//			Uin:         req.Uin,
-//			ReceiptTime: now,
-//		}
-//		b, e := json.Marshal(mdr)
-//		if e != nil {
-//			return
-//		}
-//
-//		p := common.Msg{
-//			Id:       0,
-//			ConvType: 0,
-//			Type:     constant.MsgReadReceipt,
-//			Content:  string(b),
-//			Sender:   "",
-//			Target:   "",
-//			SendTime: now,
-//		}
-//
-//		b, e = proto.Marshal(&p)
-//		if e != nil {
-//			return
-//		}
-//
-//		m := &nats.Msg{
-//			Subject: "MSGS.received",
-//			Reply:   "",
-//			Data:    b,
-//			Sub:     nil,
-//		}
-//		js := runtime.GetJS()
-//		js.PublishMsg(m)
-//	}()
-//
-//	return
-//}
+func (l *Conv) ClearConversationUnreadCount(ctx context.Context, req *chat.ClearConversationUnreadCountReq, rsp *chat.ClearConversationUnreadCountRsp) (err error) {
+	arr := strings.Split(req.ConvId, "#")
+	if len(arr) != 2 {
+		err = errors.New("参数错误")
+		return
+	}
+
+	now := time.Now().UnixMilli()
+
+	var convType int
+	if arr[0] == "C2C" {
+		convType = constant.ConvTypeC2C
+	} else if arr[0] == "GROUP" {
+		convType = constant.ConvTypeGroup
+	}
+
+	// 推送已送达回执
+	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				log.Errorf("err=%v", err)
+			}
+		}()
+
+		mdr := typ.MsgReadReceipt{
+			Uin:         req.Uin,
+			ReceiptTime: now,
+		}
+		b, e := json.Marshal(mdr)
+		if e != nil {
+			return
+		}
+
+		//p := common.Msg{
+		//	Id:       0,
+		//	ConvType: 0,
+		//	Type:     constant.MsgReadReceipt,
+		//	Content:  string(b),
+		//	Sender:   "",
+		//	Target:   "",
+		//	SendTime: now,
+		//}
+
+		rspL := chat.SendRsp{}
+		GetChatService().SendMsg(ctx, &chat.SendReq{
+			ConvType:      int32(convType),
+			MsgType:       constant.MsgReadReceipt,
+			Sender:        req.Uin,
+			Target:        arr[1],
+			Content:       string(b),
+			ClientUuid:    "",
+			AtUserList:    nil,
+			IsTransparent: false,
+		}, &rspL)
+
+		//b, e = proto.Marshal(&p)
+		//if e != nil {
+		//	return
+		//}
+		//
+		//m := &nats.Msg{
+		//	Subject: "MSGS.new",
+		//	Reply:   "",
+		//	Data:    b,
+		//	Sub:     nil,
+		//}
+		//js := runtime.GetJS()
+		//js.PublishMsg(m)
+	}()
+
+	return
+}
 
 //func (l *Conv) SyncConversation(ctx context.Context, req *chat.SyncConversationReq, rsp *chat.SyncConversationRsp) (err error) {
 //	log.Infof("SyncConversation=%v", req)

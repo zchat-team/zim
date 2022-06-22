@@ -3,97 +3,15 @@ syntax = "proto3";
 option go_package = "github.com/zchat-team/zim/proto/rpc/chat";
 package github.com.zchat.team.zim.proto.rpc.chat;
 
-import "entry.proto";
 
 service Conv {
-  rpc GetRecentConversation(GetRecentConversationReq) returns (GetRecentConversationRsp) {}
-  rpc GetConversationMsg(GetConversationMsgReq) returns (GetConversationMsgRsp) {}
-  rpc DeleteConversation(DeleteConversationReq) returns (DeleteConversationRsp) {}
-  rpc GetConversation(GetConversationReq) returns (common.Conversation) {}
-  rpc SetConversationTop(SetConversationTopReq) returns (SetConversationTopRsp) {}
-  rpc SetConversationMute(SetConversationMuteReq) returns (SetConversationMuteRsp) {}
-  rpc SetConversationRead(SetConversationReadReq) returns (SetConversationReadRsp) {}
-  rpc SyncConversation(SyncConversationReq) returns (SyncConversationRsp) {}
-  rpc SyncConversationMsg(SyncConversationMsgReq) returns (SyncConversationMsgRsp) {}
+  rpc ClearConversationUnreadCount(ClearConversationUnreadCountReq) returns (ClearConversationUnreadCountRsp) {}
 }
 
-message GetRecentConversationReq {
-  string uin = 1;
-}
-
-message GetRecentConversationRsp {
-  repeated common.Conversation list = 1;
-}
-
-message GetConversationMsgReq {
-  string uin = 1;
-  string conv_id = 2;
-  int64 offset = 3;
-  int64 limit = 4;
-  int32 direction = 5; // 1: 前翻 2: 后翻
-}
-
-message GetConversationMsgRsp {
-  repeated common.Msg list = 1;
-}
-
-message DeleteConversationReq {
-  string uin = 1;
-  repeated string conv_ids = 2;
-}
-
-message DeleteConversationRsp {
-}
-
-message GetConversationReq {
+message ClearConversationUnreadCountReq {
   string uin = 1;
   string conv_id = 2;
 }
 
-message SetConversationTopReq {
-  string uin = 1;
-  string conv_id = 2;
-  bool is_top = 3;
-}
-
-message SetConversationTopRsp {
-}
-
-message SetConversationMuteReq {
-  string uin = 1;
-  string conv_id = 2;
-  bool is_mute = 3;
-}
-
-message SetConversationMuteRsp {
-}
-
-
-message SetConversationReadReq {
-  string uin = 1;
-  string conv_id = 2;
-}
-
-message SetConversationReadRsp {
-}
-
-message SyncConversationReq {
-  string uin = 1;
-  int64 offset = 2;
-  int64 limit = 3;
-}
-
-message SyncConversationRsp {
-  repeated common.Conversation list = 1;
-}
-
-message SyncConversationMsgReq {
-  string uin = 1;
-  int64 offset = 2;
-  int64 limit = 3;
-  string conv_id = 4;
-}
-
-message SyncConversationMsgRsp {
-  repeated common.Msg list = 1;
+message ClearConversationUnreadCountRsp {
 }

@@ -1,5 +1,14 @@
 package server
 
+import (
+	"context"
+	"github.com/golang/protobuf/proto"
+	"github.com/zchat-team/zim/app/conn/internal/client"
+	"github.com/zchat-team/zim/app/conn/protocol"
+	"github.com/zchat-team/zim/proto/rpc/chat"
+	"github.com/zmicro-team/zmicro/core/log"
+)
+
 //
 //func (s *Server) handleGetRecentConversation(c *Client, p *protocol.Packet) (err error) {
 //	req := &protocol.GetRecentConversationReq{}
@@ -489,36 +498,35 @@ package server
 //	return
 //}
 //
-//func (s *Server) handleSetConversationRead(c *Client, p *protocol.Packet) (err error) {
-//	req := &protocol.SetConversationReadReq{}
-//	rsp := &protocol.SetConversationReadRsp{}
-//
-//	defer func() {
-//		b, err := proto.Marshal(rsp)
-//		if err != nil {
-//			return
-//		}
-//
-//		p.BodyLen = uint32(len(b))
-//		p.Body = b
-//		c.WritePacket(p)
-//	}()
-//
-//	if err = proto.Unmarshal(p.Body, req); err != nil {
-//		return
-//	}
-//
-//	reqL := chat.SetConversationReadReq{
-//		Uin:      c.Uin,
-//		DeviceId: c.DeviceId,
-//		ConvId:   req.ConvId,
-//	}
-//
-//	_, err = client.GetConvClient().SetConversationRead(context.Background(), &reqL)
-//	if err != nil {
-//		log.Error(err)
-//		return
-//	}
-//
-//	return
-//}
+func (s *Server) handleClearConversationUnreadCount(c *Client, p *protocol.Packet) (err error) {
+	req := &protocol.ClearConversationUnreadReq{}
+	rsp := &protocol.ClearConversationUnreadRsp{}
+
+	defer func() {
+		b, err := proto.Marshal(rsp)
+		if err != nil {
+			return
+		}
+
+		p.BodyLen = uint32(len(b))
+		p.Body = b
+		c.WritePacket(p)
+	}()
+
+	if err = proto.Unmarshal(p.Body, req); err != nil {
+		return
+	}
+
+	reqL := chat.ClearConversationUnreadCountReq{
+		Uin:    c.Uin,
+		ConvId: req.ConvId,
+	}
+
+	_, err = client.GetConvClient().ClearConversationUnreadCount(context.Background(), &reqL)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
+	return
+}

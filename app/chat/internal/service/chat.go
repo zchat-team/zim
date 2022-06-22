@@ -4,23 +4,22 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/zchat-team/zim/pkg/runtime"
-	"github.com/zchat-team/zim/proto/rpc/chat"
-	"github.com/zchat-team/zim/proto/rpc/common"
 	"time"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/golang/protobuf/proto"
 	"github.com/nats-io/nats.go"
 	"github.com/spf13/cast"
-	"github.com/zmicro-team/zmicro/core/log"
-	"gorm.io/gorm"
-
 	"github.com/zchat-team/zim/app/chat/internal/model"
 	"github.com/zchat-team/zim/app/chat/internal/typ"
 	"github.com/zchat-team/zim/pkg/constant"
 	"github.com/zchat-team/zim/pkg/idgen"
+	"github.com/zchat-team/zim/pkg/runtime"
 	"github.com/zchat-team/zim/pkg/util"
+	"github.com/zchat-team/zim/proto/rpc/chat"
+	"github.com/zchat-team/zim/proto/rpc/common"
+	"github.com/zmicro-team/zmicro/core/log"
+	"gorm.io/gorm"
 )
 
 type Chat struct {
@@ -31,15 +30,49 @@ func GetChatService() *Chat {
 }
 
 func (l *Chat) SendMsg(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
-	if req.ConvType == constant.ConvTypeC2C {
-		err = l.sendC2C(ctx, req, rsp)
-	} else if req.ConvType == constant.ConvTypeGroup {
-		err = l.sendC2G(ctx, req, rsp)
+	log.Infof("Chat SendMsg ConvType=%d Type=%d Content=%s", req.ConvType, req.MsgType, req.Content)
+	now := time.Now().UnixMilli()
+	m := common.Msg{
+		Id:            idgen.Next(),
+		ConvType:      req.ConvType,
+		Type:          req.MsgType,
+		Content:       req.Content,
+		Sender:        req.Sender,
+		Target:        req.Target,
+		SendTime:      now,
+		ClientUuid:    req.ClientUuid,
+		AtUserList:    req.AtUserList,
+		Owner:         "",
+		IsTransparent: req.IsTransparent,
 	}
+
+	b, err := proto.Marshal(&m)
+	if err != nil {
+		return
+	}
+	nm := &nats.Msg{
+		Subject: "MSGS.new",
+		Reply:   "",
+		Data:    b,
+		Sub:     nil,
+	}
+	js := runtime.GetJS()
+	if _, err = js.PublishMsg(nm); err != nil {
+		return
+	}
+
+	rsp.Id = m.Id
+	rsp.SendTime = m.SendTime
+	rsp.ClientUuid = m.ClientUuid
+	//if req.ConvType == constant.ConvTypeC2C {
+	//	err = l.sendC2C(ctx, req, rsp)
+	//} else if req.ConvType == constant.ConvTypeGroup {
+	//	err = l.sendC2G(ctx, req, rsp)
+	//}
 	return
 }
 
-// 同步离线消息，从redis缓存中读取，只同步最近30天的消息
+// SyncMsg 同步离线消息，从redis缓存中读取，只同步最近30天的消息
 func (l *Chat) SyncMsg(ctx context.Context, req *chat.SyncMsgReq, rsp *chat.SyncMsgRsp) (err error) {
 	// 保证消息库 与 同步库 数据一致
 	if err = l.removeDirty(ctx, req); err != nil {
@@ -169,14 +202,14 @@ func (l *Chat) MsgAck(ctx context.Context, req *chat.MsgAckReq, rsp *chat.MsgAck
 	key := util.KeyMsgSync(req.Uin)
 	rc.ZRemRangeByScore(ctx, key, "-inf", cast.ToString(msg.SendTime))
 
-	key = util.KeyConvMsgSync(req.Uin, msg.Target)
-	rc.ZRemRangeByScore(ctx, key, "-inf", cast.ToString(msg.SendTime))
+	//key = util.KeyConvMsgSync(req.Uin, msg.Target)
+	//rc.ZRemRangeByScore(ctx, key, "-inf", cast.ToString(msg.SendTime))
 
 	return
 }
 
 func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
-	now := time.Now().UnixNano() / 1e6
+	now := time.Now().UnixMilli()
 	id := idgen.Next()
 	p := common.Msg{
 		Id:            id,
@@ -206,7 +239,7 @@ func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 		return
 	}
 	m := &nats.Msg{
-		Subject: "MSGS.received",
+		Subject: "MSGS.new",
 		Reply:   "",
 		Data:    b,
 		Sub:     nil,
@@ -234,7 +267,7 @@ func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 }
 
 func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
-	now := time.Now().UnixNano() / 1e6
+	now := time.Now().UnixMilli()
 
 	id := idgen.Next()
 	p := common.Msg{
@@ -265,7 +298,7 @@ func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 			continue
 		}
 		m := &nats.Msg{
-			Subject: "MSGS.received",
+			Subject: "MSGS.new",
 			Reply:   "",
 			Data:    b,
 			Sub:     nil,
@@ -293,7 +326,7 @@ func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 func (l *Chat) createConversation(ctx context.Context, owner, target string, convType int, m *common.Msg) (err error) {
 	rc := runtime.GetRedisClient()
 	rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
-		now := time.Now().UnixNano() / 1e6
+		now := time.Now().UnixMilli()
 		member := redis.Z{
 			Score:  float64(now),
 			Member: target,
@@ -344,42 +377,25 @@ func (l *Chat) Recall(ctx context.Context, req *chat.RecallReq, rsp *chat.Recall
 		return
 	}
 
-	m := typ.MsgRecall{
-		Operator: req.Uin,
-		Id:       req.Id,
-	}
-	b, _ := json.Marshal(m)
-	reqL := chat.SendReq{
-		ConvType: constant.ConvTypeC2C,
-		MsgType:  constant.MsgRecall,
-		Sender:   v.Sender,
-		Target:   v.Target,
-		Content:  string(b),
-	}
-
 	if v.ConvType == constant.ConvTypeC2C {
 		rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
 			key1 := util.KeyMsg(v.Sender, v.Id)
 			key2 := util.KeyMsg(v.Target, v.Id)
 			pipe.Del(ctx, key1, key2)
 
-			key1 = util.KeyConvMsgSync(v.Sender, v.Target)
-			pipe.ZRem(ctx, key1, v.Id)
-			key2 = util.KeyConvMsgSync(v.Target, v.Sender)
-			pipe.ZRem(ctx, key2, v.Id)
-			var key string
-			if v.Sender < v.Target {
-				key = util.KeyConvMsg(v.Sender, v.Target, v.Id)
-			} else {
-				key = util.KeyConvMsg(v.Target, v.Sender, v.Id)
-			}
-			pipe.Del(ctx, key)
+			//key1 = util.KeyConvMsgSync(v.Sender, v.Target)
+			//pipe.ZRem(ctx, key1, v.Id)
+			//key2 = util.KeyConvMsgSync(v.Target, v.Sender)
+			//pipe.ZRem(ctx, key2, v.Id)
+			//var key string
+			//if v.Sender < v.Target {
+			//	key = util.KeyConvMsg(v.Sender, v.Target, v.Id)
+			//} else {
+			//	key = util.KeyConvMsg(v.Target, v.Sender, v.Id)
+			//}
+			//pipe.Del(ctx, key)
 			return nil
 		})
-		// 模拟一条C2C消息
-		// 用模拟消息方式实现的好处是，即使对方离线，待对方重新上线后也能同步到该消息
-		reqL.ConvType = constant.ConvTypeC2C
-		//l.sendC2C(ctx, &reqL)  // TODO ==================
 	} else if v.ConvType == constant.ConvTypeGroup {
 		var members []*model.GroupMember
 		cond := model.GroupMember{
@@ -398,24 +414,34 @@ func (l *Chat) Recall(ctx context.Context, req *chat.RecallReq, rsp *chat.Recall
 		}
 		rc.Del(ctx, keys...)
 
-		for _, m := range members {
-			rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
-				key := util.KeyConvMsgSync(m.Member, v.Target)
-				pipe.ZRem(ctx, key, v.Id)
-				key = util.KeyConvMsg(m.Member, v.Target, v.Id)
-				pipe.Del(ctx, key)
-				return nil
-			})
-		}
-
-		// 模拟一条C2G消息
-		reqL.ConvType = constant.ConvTypeGroup
-		//l.sendC2G(ctx, &reqL)		// TODO =================
+		//for _, m := range members {
+		//	rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
+		//		key := util.KeyConvMsgSync(m.Member, v.Target)
+		//		pipe.ZRem(ctx, key, v.Id)
+		//		key = util.KeyConvMsg(m.Member, v.Target, v.Id)
+		//		pipe.Del(ctx, key)
+		//		return nil
+		//	})
+		//}
 
 	}
 
-	//rsp = &api.RecallRsp{}
 	db.Delete(&v)
+
+	m := typ.MsgRecall{
+		Operator: req.Uin,
+		Id:       req.Id,
+	}
+	b, _ := json.Marshal(m)
+	reqL := chat.SendReq{
+		ConvType: int32(v.ConvType),
+		MsgType:  constant.MsgRecall,
+		Sender:   v.Sender,
+		Target:   v.Target,
+		Content:  string(b),
+	}
+	rspL := chat.SendRsp{}
+	l.SendMsg(ctx, &reqL, &rspL)
 
 	return
 }
