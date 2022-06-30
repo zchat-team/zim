@@ -11,7 +11,6 @@ const (
 	MsgTip       = 8  // 提示消息
 	MsgMerger    = 9  // 合并消息
 	MsgRecall    = 10 // 撤回消息
-
 	// 以下为透传消息
 	MsgTyping          = 3000 // 正在输入
 	MsgDeliveryReceipt = 3001 // 送达回执

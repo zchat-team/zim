@@ -9,6 +9,7 @@ import (
 )
 
 type Client struct {
+	ID        string
 	Status    int
 	TimerTask *ztimer.TimerTask
 	DeviceId  string

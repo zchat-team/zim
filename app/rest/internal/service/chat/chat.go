@@ -33,13 +33,14 @@ type Registry struct {
 
 func (s *Service) Send(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
 	reqL := pb.SendReq{
-		ConvType:   req.ConvType,
-		MsgType:    req.MsgType,
-		Sender:     req.Sender,
-		Target:     req.Target,
-		Content:    req.Content,
-		AtUserList: nil,
-		ClientUuid: "",
+		ConvType:      req.ConvType,
+		MsgType:       req.MsgType,
+		Sender:        req.Sender,
+		Target:        req.Target,
+		Content:       req.Content,
+		AtUserList:    nil,
+		ClientUuid:    "",
+		IsTransparent: req.IsTransparent,
 	}
 
 	cli := client.GetChatClient()

@@ -37,12 +37,13 @@ const (
 	CmdId_Cmd_Logout CmdId = 1002
 	CmdId_Cmd_Kick   CmdId = 1003
 	// msg
-	CmdId_Cmd_Msg                          CmdId = 1101
-	CmdId_Cmd_Sync                         CmdId = 1102
-	CmdId_Cmd_Send                         CmdId = 1103
-	CmdId_Cmd_MsgAck                       CmdId = 1104
-	CmdId_Cmd_Recall                       CmdId = 1105
-	CmdId_Cmd_Delete                       CmdId = 1106
+	CmdId_Cmd_Msg    CmdId = 1101
+	CmdId_Cmd_Sync   CmdId = 1102
+	CmdId_Cmd_Send   CmdId = 1103
+	CmdId_Cmd_MsgAck CmdId = 1104
+	CmdId_Cmd_Recall CmdId = 1105
+	CmdId_Cmd_Delete CmdId = 1106
+	// conv
 	CmdId_Cmd_ClearConversationUnreadCount CmdId = 1201
 	// group
 	// 群组管理

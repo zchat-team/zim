@@ -16,7 +16,6 @@ import (
 	"github.com/panjf2000/gnet/pool/goroutine"
 	"github.com/zchat-team/zim/app/conn/internal/client"
 	"github.com/zchat-team/zim/app/conn/protocol"
-	zerrors "github.com/zmicro-team/zmicro/core/errors"
 	"github.com/zmicro-team/zmicro/core/log"
 )
 
@@ -188,7 +187,7 @@ func (s *Server) consumePush() error {
 						BodyLen:   uint32(len(pushMsg.Msg)),
 						Body:      pushMsg.Msg,
 					}
-					c.WritePacket(&p)
+					_ = c.WritePacket(&p)
 				}
 			}
 		}
@@ -209,27 +208,25 @@ func (s *Server) OnOpen(client *Client) {
 func (s *Server) OnClose(c *Client) {
 	log.Infof("client=%s close", c.Uin)
 
-	if c.DeviceId != "" {
-		s.GetClientManager().Remove(c)
-	}
-
-	if c.Status != Authed {
+	if c.DeviceId == "" {
 		return
 	}
 
-	s.workerPool.Submit(func() {
+	_ = s.workerPool.Submit(func() {
 		if c != nil {
 			req := sess.LogoutReq{
 				Uin:      c.Uin,
 				DeviceId: c.DeviceId,
 			}
-			client.GetSessClient().Logout(context.Background(), &req)
+			_, _ = client.GetSessClient().Logout(context.Background(), &req)
 		}
 	})
+
+	s.GetClientManager().Remove(c)
 }
 
 func (s *Server) OnMessage(data []byte, client *Client) {
-	s.workerPool.Submit(func() {
+	_ = s.workerPool.Submit(func() {
 		p := &protocol.Packet{}
 		if err := p.Read(data); err != nil {
 			log.Error(err)
@@ -266,31 +263,37 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 		c.TimerTask.Cancel()
 		c.TimerTask = nil
 
-		var b []byte
-		var errr error
-
 		if err != nil {
-			rspErr := &protocol.Error{}
-			ze := zerrors.FromError(err)
-			rspErr.Code = ze.Code
-			rspErr.Message = ze.Message
-			if ze.Message == "" {
-				rspErr.Message = ze.Detail
-			}
-			b, errr = proto.Marshal(rspErr)
+			s.responseError(c, p, err)
 		} else {
-			b, errr = proto.Marshal(rsp)
+			s.responseMessage(c, p, rsp)
 		}
 
-		if errr != nil {
-			log.Error(err)
-		} else {
-			p.BodyLen = uint32(len(b))
-			p.Body = b
-			if err := c.WritePacket(p); err != nil {
-				log.Error(err)
-			}
-		}
+		//var b []byte
+		//var errr error
+		//
+		//if err != nil {
+		//	rspErr := &protocol.Error{}
+		//	ze := zerrors.FromError(err)
+		//	rspErr.Code = ze.Code
+		//	rspErr.Message = ze.Message
+		//	if ze.Message == "" {
+		//		rspErr.Message = ze.Detail
+		//	}
+		//	b, errr = proto.Marshal(rspErr)
+		//} else {
+		//	b, errr = proto.Marshal(rsp)
+		//}
+		//
+		//if errr != nil {
+		//	log.Error(err)
+		//} else {
+		//	p.BodyLen = uint32(len(b))
+		//	p.Body = b
+		//	if err := c.WritePacket(p); err != nil {
+		//		log.Error(err)
+		//	}
+		//}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -298,12 +301,16 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 		return
 	}
 
+	// TODO: validate
+
 	if req.Uin == "" {
 		err = errors.New("账号不能为空")
 		return
 	}
 
 	// TODO: DeviceId -> ConnId，服务端来生成
+	//connID := uuid.New().String()
+
 	log.Infof("handleLogin uin=%s platform=%s token=%s device_id=%s device_name=%s",
 		req.Uin, req.Platform, req.Token, req.DeviceId, req.DeviceName)
 
