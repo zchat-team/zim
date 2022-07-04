@@ -59,9 +59,7 @@ message HeartbeatRsp {
 message DeviceInfo {
   string device_id = 1;
   string server = 2;
-  int32 status = 3 [
-    (gogoproto.casttype) = "int"
-  ];
+  int32 status = 3;
 }
 
 message GetOnlineReq {

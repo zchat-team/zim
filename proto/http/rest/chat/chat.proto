@@ -37,12 +37,10 @@ service Im {
 
 message SendReq {
   int32 conv_type = 1 [
-    (gogoproto.casttype) = "int",
     (gogoproto.moretags) = 'binding:"required"',
     (google.api.field_behavior) = REQUIRED
   ];
   int32 msg_type = 2 [
-    (gogoproto.casttype) = "int",
     (gogoproto.moretags) = 'binding:"required"',
     (google.api.field_behavior) = REQUIRED
   ];

@@ -185,7 +185,6 @@ message CreateReq {
   bool unique = 4;
   // 会话类型，私聊，群聊，聊天室，临时会话（如客服），系统会话（智能机器人、公从号、服务号）
   int32 type = 5 [
-    (gogoproto.casttype) = "int",
     (gogoproto.moretags) = 'binding:"required"',
     (google.api.field_behavior) = REQUIRED
   ];

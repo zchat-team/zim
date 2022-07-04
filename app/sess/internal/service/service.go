@@ -120,7 +120,7 @@ func (s *Service) GetOnline(ctx context.Context, req *sess.GetOnlineReq, rsp *se
 			item := sess.DeviceInfo{
 				DeviceId: d.DeviceId,
 				Server:   server,
-				Status:   d.GetRealStatus(),
+				Status:   int32(d.GetRealStatus()),
 			}
 			rsp.Devices = append(rsp.Devices, &item)
 		}

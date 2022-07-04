@@ -16,11 +16,9 @@ service Chat {
 
 message SendReq {
   int32 conv_type = 1 [
-    (gogoproto.casttype) = "int",
     (gogoproto.moretags) = 'binding:"required"'
   ];
   int32 msg_type = 2 [
-    (gogoproto.casttype) = "int",
     (gogoproto.moretags) = 'binding:"required"'
   ];
   string sender = 3;
@@ -32,9 +30,7 @@ message SendReq {
 }
 
 message SendRsp {
-  int32 code = 1 [
-    (gogoproto.casttype) = "int"
-  ];
+  int32 code = 1;
   string message = 2;
   int64 id = 3;
   int64 send_time = 4;
