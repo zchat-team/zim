@@ -159,16 +159,16 @@ func (s *Server) push(m *common.Msg) {
 		}
 
 		nc := runtime.GetNC()
-		for _, v := range rsp.Devices {
+		for _, v := range rsp.Conns {
 			// online
 			if v.Status == 1 {
 				// 在线推送
-				var onlineDevices []string
-				onlineDevices = append(onlineDevices, v.DeviceId)
+				var onlines []string
+				onlines = append(onlines, v.ConnId)
 				pushMsg := common.PushMsg{
-					Server:  v.Server,
-					Devices: onlineDevices,
-					Msg:     b,
+					Server: v.Server,
+					Conns:  onlines,
+					Msg:    b,
 				}
 				bb, err := proto.Marshal(&pushMsg)
 				if err != nil {

@@ -28,7 +28,8 @@ import (
 // 云端主动推送方案
 // 客户端从云端拉取方案，用户登录上线后，计算出用户离线期间产生的未读消息的对话列表及对应的未读消息数，以未读消息更新事件通知到客户端
 
-type DeviceInfo struct {
+type ConnInfo struct {
+	ConnID         string `json:"conn_id"`
 	DeviceId       string `json:"device_id"`
 	DeviceName     string `json:"device_name"`
 	Tag            string `json:"tag"`
@@ -39,7 +40,7 @@ type DeviceInfo struct {
 	Status         int    `json:"status"` // 获取状态，请调用GetStatus()方法
 }
 
-func (d *DeviceInfo) GetRealStatus() int {
+func (d *ConnInfo) GetRealStatus() int {
 	status := d.Status
 	if d.DisconnectTime != 0 && d.Status == constant.PushOnline {
 		if time.Since(time.Unix(d.DisconnectTime, 0)) > time.Duration(constant.PushOnlineKeepDays*24)*time.Hour {
@@ -49,45 +50,51 @@ func (d *DeviceInfo) GetRealStatus() int {
 	return status
 }
 
-func (s *Service) addConn(ctx context.Context, uin string, info *DeviceInfo) (err error) {
+func (s *Service) addConn(ctx context.Context, uin string, info *ConnInfo) (err error) {
 	b, err := json.Marshal(info)
 	if err != nil {
 		return
 	}
 	rc := runtime.GetRedisClient()
 	_, err = rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
-		key := util.KeyOnline(uin, info.DeviceId)
-		pipe.Set(ctx, key, string(b), time.Minute*30)
+		//key := util.KeyOnline(uin, info.DeviceId)
+		key := util.KeyOnline(uin, info.ConnID)
+		pipe.Set(ctx, key, string(b), time.Minute*2)
 		key = util.KeyDevice(uin)
-		pipe.HSet(ctx, key, info.DeviceId, string(b))
+		//pipe.HSet(ctx, key, info.DeviceId, string(b))
+		pipe.HSet(ctx, key, info.ConnID, string(b))
 		return nil
 	})
 	return
 }
 
-func (s *Service) delConn(ctx context.Context, uin string, info *DeviceInfo) (err error) {
-	b, err := json.Marshal(info)
-	if err != nil {
-		return
-	}
+func (s *Service) delConn(ctx context.Context, uin string, info *ConnInfo) (err error) {
+	//b, err := json.Marshal(info)
+	//if err != nil {
+	//	return
+	//}
 	rc := runtime.GetRedisClient()
 	_, err = rc.Pipelined(ctx, func(pipe redis.Pipeliner) error {
-		pipe.Del(ctx, util.KeyOnline(uin, info.DeviceId))
-		pipe.HSet(ctx, util.KeyDevice(uin), info.DeviceId, string(b))
+		//pipe.Del(ctx, util.KeyOnline(uin, info.DeviceId))
+		//pipe.HSet(ctx, util.KeyDevice(uin), info.DeviceId, string(b))
+
+		pipe.Del(ctx, util.KeyOnline(uin, info.ConnID))
+		//pipe.HSet(ctx, util.KeyDevice(uin), info.ConnID, string(b))
+
 		return nil
 	})
 
 	return
 }
 
-func (s *Service) getDevice(ctx context.Context, uin, deviceId string) *DeviceInfo {
+func (s *Service) getConn(ctx context.Context, uin, id string) *ConnInfo {
 	key := util.KeyDevice(uin)
 
 	rc := runtime.GetRedisClient()
-	if b, err := rc.HGet(ctx, key, deviceId).Bytes(); err != nil {
+	if b, err := rc.HGet(ctx, key, id).Bytes(); err != nil {
 		return nil
 	} else {
-		info := &DeviceInfo{}
+		info := &ConnInfo{}
 		if err := json.Unmarshal(b, info); err != nil {
 			return nil
 		}
@@ -133,8 +140,8 @@ func (s *Service) getDevice(ctx context.Context, uin, deviceId string) *DeviceIn
 //	return
 //}
 
-func (s *Service) getOnline(ctx context.Context, uin string) (devices map[string][]*DeviceInfo, err error) {
-	devices = make(map[string][]*DeviceInfo)
+func (s *Service) getOnline(ctx context.Context, uin string) (onlines map[string][]*ConnInfo, err error) {
+	onlines = make(map[string][]*ConnInfo)
 	rc := runtime.GetRedisClient()
 	keys, err := rc.Keys(ctx, fmt.Sprintf("online:%s:*", uin)).Result()
 	if err != nil {
@@ -150,18 +157,18 @@ func (s *Service) getOnline(ctx context.Context, uin string) (devices map[string
 	}
 
 	for _, v := range result {
-		info := DeviceInfo{}
+		info := ConnInfo{}
 		if err := json.Unmarshal([]byte(v.(string)), &info); err != nil {
 			continue
 		}
-		devices[info.Server] = append(devices[info.Server], &info)
+		onlines[info.Server] = append(onlines[info.Server], &info)
 	}
 
 	return
 }
 
-func (s *Service) getOnlineOfTag(ctx context.Context, uin string, tag string) (devices []*DeviceInfo, err error) {
-	devices = make([]*DeviceInfo, 0)
+func (s *Service) getOnlineOfTag(ctx context.Context, uin string, tag string) (onlines []*ConnInfo, err error) {
+	onlines = make([]*ConnInfo, 0)
 	rc := runtime.GetRedisClient()
 	keys, err := rc.Keys(ctx, fmt.Sprintf("online:%s:*", uin)).Result()
 	if err != nil {
@@ -177,7 +184,7 @@ func (s *Service) getOnlineOfTag(ctx context.Context, uin string, tag string) (d
 		return
 	}
 	for _, v := range result {
-		info := DeviceInfo{}
+		info := ConnInfo{}
 		if err := json.Unmarshal([]byte(v.(string)), &info); err != nil {
 			continue
 		}
@@ -186,13 +193,13 @@ func (s *Service) getOnlineOfTag(ctx context.Context, uin string, tag string) (d
 			continue
 		}
 		if info.Tag == tag {
-			devices = append(devices, &info)
+			onlines = append(onlines, &info)
 			return
 		}
 	}
 
-	if len(devices) > 1 {
-		sort.Slice(devices, func(i, j int) bool { return devices[i].LoginTime < devices[j].LoginTime })
+	if len(onlines) > 1 {
+		sort.Slice(onlines, func(i, j int) bool { return onlines[i].LoginTime < onlines[j].LoginTime })
 	}
 	return
 }

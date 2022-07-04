@@ -48,7 +48,7 @@ message Member {
 
 message PushMsg {
   string server = 1;
-  repeated string devices = 2;
+  repeated string conns = 2;
   bytes msg = 3;
 }
 

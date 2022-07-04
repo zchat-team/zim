@@ -75,27 +75,6 @@ func (s *Server) registerCmdFunc() {
 	s.mapCmdFunc[protocol.CmdId_Cmd_Recall] = s.handleRecall
 
 	s.mapCmdFunc[protocol.CmdId_Cmd_ClearConversationUnreadCount] = s.handleClearConversationUnreadCount // TODO：不在这里实现
-	//s.mapCmdFunc[protocol.CmdId_Cmd_GetRecentConversation] = s.handleGetRecentConversation
-	//s.mapCmdFunc[protocol.CmdId_Cmd_GetConversationMsg] = s.handleGetConversationMsg
-	//s.mapCmdFunc[protocol.CmdId_Cmd_DeleteConversation] = s.handleDeleteConversation
-	//s.mapCmdFunc[protocol.CmdId_Cmd_GetConversation] = s.handleGetConversation
-	//s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationTop] = s.handleSetConversationTop
-	//s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationMute] = s.handleSetConversationMute
-	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversation] = s.handleSyncConversation
-	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversationMsg] = s.handleSyncConversationMsg
-	//
-	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncGroup] = s.handleSyncGroup
-	//s.mapCmdFunc[protocol.CmdId_Cmd_CreateGroup] = s.handleCreateGroup
-	//s.mapCmdFunc[protocol.CmdId_Cmd_GetJoinedGroupList] = s.handleGetJoinedGroupList
-	//s.mapCmdFunc[protocol.CmdId_Cmd_JoinGroup] = s.handleJoinGroup
-	//s.mapCmdFunc[protocol.CmdId_Cmd_InviteUserToGroup] = s.handleInviteUserToGroup
-	//s.mapCmdFunc[protocol.CmdId_Cmd_QuitGroup] = s.handleQuitGroup
-	//s.mapCmdFunc[protocol.CmdId_Cmd_KickGroupMember] = s.handleKickGroupMember
-	//s.mapCmdFunc[protocol.CmdId_Cmd_DismissGroup] = s.handleDismissGroup
-	//
-	//s.mapCmdFunc[protocol.CmdId_Cmd_GetGroupMemberList] = s.handleGetGroupMemberList
-	//s.mapCmdFunc[protocol.CmdId_Cmd_GetGroupMemberInfo] = s.handleGetGroupMemberInfo
-	//s.mapCmdFunc[protocol.CmdId_Cmd_SetGroupMemberInfo] = s.handleSetGroupMemberInfo
 }
 
 func (s *Server) GetConnManager() *ConnManager {
@@ -177,8 +156,8 @@ func (s *Server) consumePush() error {
 		}
 
 		log.Infof("recv a msg=%v", pushMsg)
-		for _, deviceId := range pushMsg.Devices {
-			if c := s.GetConnManager().Get(deviceId); c != nil {
+		for _, id := range pushMsg.Conns {
+			if c := s.GetConnManager().Get(id); c != nil {
 				if c.Conn != nil {
 					p := protocol.Packet{
 						HeaderLen: 20,
@@ -209,17 +188,17 @@ func (s *Server) OnOpen(c *Connection) {
 func (s *Server) OnClose(c *Connection) {
 	log.Infof("client=%s close", c.Uin)
 
-	if c.DeviceId == "" {
+	if c.ID == "" {
 		return
 	}
 
 	_ = s.workerPool.Submit(func() {
 		if c != nil {
-			req := sess.LogoutReq{
-				Uin:      c.Uin,
-				DeviceId: c.DeviceId,
+			req := sess.DisconnectReq{
+				Uin:    c.Uin,
+				ConnId: c.ID,
 			}
-			_, _ = client.GetSessClient().Logout(context.Background(), &req)
+			_, _ = client.GetSessClient().Disconnect(context.Background(), &req)
 		}
 	})
 
@@ -329,12 +308,13 @@ func (s *Server) handleLogin(c *Connection, p *protocol.Packet) (err error) {
 
 				oldConn.WritePacket(&pp)
 			}
-			log.Infof("踢掉客户端 uin=%s device_id=%s", oldConn.Uin, oldConn.DeviceId)
+			log.Infof("踢掉客户端 uin=%s conn_id=%s device_id=%s", oldConn.Uin, oldConn.ID, oldConn.DeviceId)
 			oldConn.Close()
 			s.GetConnManager().Remove(oldConn)
 		}
 	}
 
+	c.ID = rspL.ConnId
 	c.DeviceId = req.DeviceId
 	c.Uin = reqL.Uin
 	c.Platform = req.Platform
@@ -350,8 +330,8 @@ func (s *Server) handleLogout(c *Connection, p *protocol.Packet) (err error) {
 	log.Infof("client %s noop", c.Uin)
 	c.WritePacket(p)
 	req := sess.LogoutReq{
-		Uin:      c.Uin,
-		DeviceId: c.DeviceId,
+		Uin:    c.Uin,
+		ConnId: c.ID,
 	}
 	client.GetSessClient().Logout(context.Background(), &req)
 
@@ -373,9 +353,9 @@ func (s *Server) handleNoop(c *Connection, p *protocol.Packet) (err error) {
 	log.Infof("client %s noop", c.Uin)
 	c.WritePacket(p)
 	req := sess.HeartbeatReq{
-		Uin:      c.Uin,
-		DeviceId: c.DeviceId,
-		Server:   c.Server,
+		Uin:    c.Uin,
+		ConnId: c.ID,
+		Server: c.Server,
 	}
 	client.GetSessClient().Heartbeat(context.Background(), &req)
 

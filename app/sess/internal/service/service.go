@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"github.com/google/uuid"
 	"sync"
 	"time"
 
@@ -26,30 +27,31 @@ func GetService() *Service {
 
 func (s *Service) Login(ctx context.Context, req *sess.LoginReq, rsp *sess.LoginRsp) (err error) {
 	// TODO: token验证
-	var devices []*DeviceInfo
+	var onlines []*ConnInfo
 	if req.Tag != "" {
 		v, e := s.getOnlineOfTag(ctx, req.Uin, req.Tag)
 		if e != nil {
 			err = e
 			return
 		}
-		devices = append(devices, v...)
+		onlines = append(onlines, v...)
 	}
 
-	if len(devices) > 0 {
+	if len(onlines) > 0 {
 		if req.Reconnect {
-			rsp.ConflictDeviceId = devices[len(devices)-1].DeviceId
-			rsp.ConflictDeviceName = devices[len(devices)-1].DeviceName
+			rsp.ConflictDeviceId = onlines[len(onlines)-1].DeviceId
+			rsp.ConflictDeviceName = onlines[len(onlines)-1].DeviceName
 			return
 		}
 
-		rsp.ConflictDeviceId = devices[0].DeviceId
-		rsp.ConflictDeviceName = devices[0].DeviceName
-		devices[0].DisconnectTime = time.Now().Unix()
-		s.delConn(ctx, req.Uin, devices[0])
+		rsp.ConflictDeviceId = onlines[0].DeviceId
+		rsp.ConflictDeviceName = onlines[0].DeviceName
+		onlines[0].DisconnectTime = time.Now().Unix()
+		s.delConn(ctx, req.Uin, onlines[0])
 	}
 
-	info := &DeviceInfo{
+	info := &ConnInfo{
+		ConnID:         uuid.New().String(),
 		DeviceId:       req.DeviceId,
 		DeviceName:     req.DeviceName,
 		Tag:            req.Tag,
@@ -63,11 +65,13 @@ func (s *Service) Login(ctx context.Context, req *sess.LoginReq, rsp *sess.Login
 		return
 	}
 
+	rsp.ConnId = info.ConnID
+
 	return
 }
 
 func (s *Service) Logout(ctx context.Context, req *sess.LogoutReq, rsp *sess.LogoutRsp) (err error) {
-	info := s.getDevice(ctx, req.Uin, req.DeviceId)
+	info := s.getConn(ctx, req.Uin, req.ConnId)
 	if info == nil {
 		return
 	}
@@ -83,7 +87,7 @@ func (s *Service) Logout(ctx context.Context, req *sess.LogoutReq, rsp *sess.Log
 }
 
 func (s *Service) Disconnect(ctx context.Context, req *sess.DisconnectReq, rsp *sess.DisconnectRsp) (err error) {
-	info := s.getDevice(ctx, req.Uin, req.DeviceId)
+	info := s.getConn(ctx, req.Uin, req.ConnId)
 	if info == nil {
 		return
 	}
@@ -99,7 +103,7 @@ func (s *Service) Disconnect(ctx context.Context, req *sess.DisconnectReq, rsp *
 }
 
 func (s *Service) Heartbeat(ctx context.Context, req *sess.HeartbeatReq, rsp *sess.HeartbeatRsp) (err error) {
-	info := s.getDevice(ctx, req.Uin, req.DeviceId)
+	info := s.getConn(ctx, req.Uin, req.ConnId)
 	if info == nil {
 		return
 	}
@@ -115,15 +119,16 @@ func (s *Service) Heartbeat(ctx context.Context, req *sess.HeartbeatReq, rsp *se
 }
 
 func (s *Service) GetOnline(ctx context.Context, req *sess.GetOnlineReq, rsp *sess.GetOnlineRsp) (err error) {
-	receivers, _ := s.getOnline(ctx, req.Uin)
-	for server, devices := range receivers {
-		for _, d := range devices {
-			item := sess.DeviceInfo{
+	onlines, _ := s.getOnline(ctx, req.Uin)
+	for server, conns := range onlines {
+		for _, d := range conns {
+			item := sess.ConnInfo{
+				ConnId:   d.ConnID,
 				DeviceId: d.DeviceId,
 				Server:   server,
 				Status:   int32(d.GetRealStatus()),
 			}
-			rsp.Devices = append(rsp.Devices, &item)
+			rsp.Conns = append(rsp.Conns, &item)
 		}
 	}
 	return

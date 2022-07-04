@@ -26,13 +26,14 @@ message LoginReq {
 }
 
 message LoginRsp {
-  string conflict_device_id = 1;
-  string conflict_device_name = 2;
+  string conn_id = 1;
+  string conflict_device_id = 2;
+  string conflict_device_name = 3;
 }
 
 message LogoutReq {
   string uin = 1;
-  string device_id = 2;
+  string conn_id = 2;
 }
 
 message LogoutRsp {
@@ -41,7 +42,7 @@ message LogoutRsp {
 
 message DisconnectReq {
   string uin = 1;
-  string device_id = 2;
+  string conn_id = 2;
 }
 
 message DisconnectRsp {
@@ -49,17 +50,18 @@ message DisconnectRsp {
 
 message HeartbeatReq {
   string uin = 1;
-  string device_id = 2;
+  string conn_id = 2;
   string server = 3;
 }
 
 message HeartbeatRsp {
 }
 
-message DeviceInfo {
-  string device_id = 1;
-  string server = 2;
-  int32 status = 3;
+message ConnInfo {
+  string conn_id = 1;
+  string device_id = 2;
+  string server = 3;
+  int32 status = 4;
 }
 
 message GetOnlineReq {
@@ -67,5 +69,5 @@ message GetOnlineReq {
 }
 
 message GetOnlineRsp {
-  repeated DeviceInfo devices = 1;
+  repeated ConnInfo conns = 1;
 }
