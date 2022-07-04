@@ -11,7 +11,6 @@ import (
 	"github.com/nats-io/nats.go"
 	"github.com/spf13/cast"
 	"github.com/zchat-team/zim/app/chat/internal/model"
-	"github.com/zchat-team/zim/app/chat/internal/typ"
 	"github.com/zchat-team/zim/pkg/constant"
 	"github.com/zchat-team/zim/pkg/idgen"
 	"github.com/zchat-team/zim/pkg/runtime"
@@ -363,6 +362,11 @@ func (l *Chat) createConversation(ctx context.Context, owner, target string, con
 	return
 }
 
+type MsgRecall struct {
+	Operator string `json:"operator"`
+	Id       int64  `json:"id"`
+}
+
 func (l *Chat) Recall(ctx context.Context, req *chat.RecallReq, rsp *chat.RecallRsp) (err error) {
 	rc := runtime.GetRedisClient()
 
@@ -428,7 +432,7 @@ func (l *Chat) Recall(ctx context.Context, req *chat.RecallReq, rsp *chat.Recall
 
 	db.Delete(&v)
 
-	m := typ.MsgRecall{
+	m := MsgRecall{
 		Operator: req.Uin,
 		Id:       req.Id,
 	}

@@ -1,16 +1,17 @@
 package constant
 
 const (
-	MsgText      = 1  // 文本消息
-	MsgImage     = 2  // 图片消息
-	MsgAudio     = 3  // 语音消息
-	MsgVideo     = 4  // 视频消息
-	MsgFile      = 5  // 文件消息
-	MsgLocation  = 6  // 地理位置消息
-	MsgReference = 7  // 引用消息
-	MsgTip       = 8  // 提示消息
-	MsgMerger    = 9  // 合并消息
-	MsgRecall    = 10 // 撤回消息
+	MsgNone     = 0
+	MsgText     = 1
+	MsgImage    = 2
+	MsgAudio    = 3
+	MsgVideo    = 4
+	MsgFile     = 5
+	MsgLocation = 6
+	MsgQuote    = 7  // 引用消息
+	MsgMerger   = 8  // 合并消息
+	MsgTip      = 9  // 提示消息
+	MsgRecall   = 10 // 撤回消息
 	// 以下为透传消息
 	MsgTyping          = 3000 // 正在输入
 	MsgDeliveryReceipt = 3001 // 送达回执

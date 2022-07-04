@@ -150,6 +150,7 @@ func (s *Server) push(m *common.Msg) {
 			return
 		}
 
+		m.Owner = ""
 		b, err := proto.Marshal(m)
 		if err != nil {
 			log.Error(err)
@@ -206,7 +207,6 @@ func (s *Server) storeMysql(m *common.Msg) {
 		ConvType:   int(m.ConvType),
 		Content:    m.Content,
 		Type:       int(m.Type),
-		DeletedAt:  0,
 		Sender:     m.Sender,
 		Target:     m.Target,
 		AtUserList: atUserList,

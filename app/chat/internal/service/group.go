@@ -20,12 +20,11 @@ func GetGroupService() *Group {
 
 func (g *Group) Create(ctx context.Context, req *group.CreateReq, rsp *group.CreateRsp) (err error) {
 	grp := model.Group{
-		Id:        idgen.Next(),
-		Owner:     req.Owner,
-		GroupId:   "",
-		Type:      0,
-		Name:      req.Name,
-		DeletedAt: 0,
+		Id:      idgen.Next(),
+		Owner:   req.Owner,
+		GroupId: "",
+		Type:    0,
+		Name:    req.Name,
 	}
 
 	if req.GroupId != "" {

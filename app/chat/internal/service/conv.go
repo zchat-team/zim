@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/zchat-team/zim/app/chat/internal/typ"
 	"github.com/zchat-team/zim/pkg/constant"
 	"github.com/zchat-team/zim/proto/rpc/chat"
 	"github.com/zmicro-team/zmicro/core/log"
@@ -226,6 +225,11 @@ func GetConvService() *Conv {
 //	return
 //}
 
+type MsgReadReceipt struct {
+	Uin         string `json:"uin"`
+	ReceiptTime int64  `json:"receipt_time"`
+}
+
 func (l *Conv) ClearConversationUnreadCount(ctx context.Context, req *chat.ClearConversationUnreadCountReq, rsp *chat.ClearConversationUnreadCountRsp) (err error) {
 	arr := strings.Split(req.ConvId, "#")
 	if len(arr) != 2 {
@@ -250,7 +254,7 @@ func (l *Conv) ClearConversationUnreadCount(ctx context.Context, req *chat.Clear
 			}
 		}()
 
-		mdr := typ.MsgReadReceipt{
+		mdr := MsgReadReceipt{
 			Uin:         req.Uin,
 			ReceiptTime: now,
 		}

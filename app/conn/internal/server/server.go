@@ -73,6 +73,7 @@ func (s *Server) registerCmdFunc() {
 	s.mapCmdFunc[protocol.CmdId_Cmd_MsgAck] = s.handleMsgAck
 	s.mapCmdFunc[protocol.CmdId_Cmd_Recall] = s.handleRecall
 
+	s.mapCmdFunc[protocol.CmdId_Cmd_ClearConversationUnreadCount] = s.handleClearConversationUnreadCount // TODO：不在这里实现
 	//s.mapCmdFunc[protocol.CmdId_Cmd_GetRecentConversation] = s.handleGetRecentConversation
 	//s.mapCmdFunc[protocol.CmdId_Cmd_GetConversationMsg] = s.handleGetConversationMsg
 	//s.mapCmdFunc[protocol.CmdId_Cmd_DeleteConversation] = s.handleDeleteConversation
@@ -81,7 +82,6 @@ func (s *Server) registerCmdFunc() {
 	//s.mapCmdFunc[protocol.CmdId_Cmd_SetConversationMute] = s.handleSetConversationMute
 	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversation] = s.handleSyncConversation
 	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncConversationMsg] = s.handleSyncConversationMsg
-	s.mapCmdFunc[protocol.CmdId_Cmd_ClearConversationUnreadCount] = s.handleClearConversationUnreadCount
 	//
 	//s.mapCmdFunc[protocol.CmdId_Cmd_SyncGroup] = s.handleSyncGroup
 	//s.mapCmdFunc[protocol.CmdId_Cmd_CreateGroup] = s.handleCreateGroup
