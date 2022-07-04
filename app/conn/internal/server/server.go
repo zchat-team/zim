@@ -25,7 +25,7 @@ const (
 	Authed      = 2
 )
 
-type CmdFunc func(client *Client, p *protocol.Packet) (err error)
+type CmdFunc func(c *Connection, p *protocol.Packet) (err error)
 
 type Server struct {
 	opts      Options
@@ -33,9 +33,9 @@ type Server struct {
 	wsServer  *WsServer
 	timer     *ztimer.Timer
 	// TODO: 分桶
-	clientManager *ClientManager
-	workerPool    *goroutine.Pool
-	mapCmdFunc    map[protocol.CmdId]CmdFunc
+	connManager *ConnManager
+	workerPool  *goroutine.Pool
+	mapCmdFunc  map[protocol.CmdId]CmdFunc
 }
 
 type Registry struct {
@@ -46,7 +46,7 @@ type Registry struct {
 func NewServer(opts ...Option) *Server {
 	s := new(Server)
 	s.opts = NewOptions(opts...)
-	s.clientManager = NewClientManager()
+	s.connManager = NewConnManager()
 	s.workerPool = goroutine.Default()
 
 	if s.opts.TcpAddr != "" {
@@ -97,8 +97,8 @@ func (s *Server) registerCmdFunc() {
 	//s.mapCmdFunc[protocol.CmdId_Cmd_SetGroupMemberInfo] = s.handleSetGroupMemberInfo
 }
 
-func (s *Server) GetClientManager() *ClientManager {
-	return s.clientManager
+func (s *Server) GetConnManager() *ConnManager {
+	return s.connManager
 }
 
 func (s *Server) GetServerId() string {
@@ -177,7 +177,7 @@ func (s *Server) consumePush() error {
 
 		log.Infof("recv a msg=%v", pushMsg)
 		for _, deviceId := range pushMsg.Devices {
-			if c := s.GetClientManager().Get(deviceId); c != nil {
+			if c := s.GetConnManager().Get(deviceId); c != nil {
 				if c.Conn != nil {
 					p := protocol.Packet{
 						HeaderLen: 20,
@@ -197,15 +197,15 @@ func (s *Server) consumePush() error {
 	return nil
 }
 
-func (s *Server) OnOpen(client *Client) {
+func (s *Server) OnOpen(c *Connection) {
 	// 10秒钟之内没有认证成功，关闭连接
-	client.TimerTask = s.GetTimer().AfterFunc(time.Second*10, func() {
+	c.TimerTask = s.GetTimer().AfterFunc(time.Second*10, func() {
 		log.Info("auth timeout...")
-		client.Close()
+		c.Close()
 	})
 }
 
-func (s *Server) OnClose(c *Client) {
+func (s *Server) OnClose(c *Connection) {
 	log.Infof("client=%s close", c.Uin)
 
 	if c.DeviceId == "" {
@@ -222,39 +222,39 @@ func (s *Server) OnClose(c *Client) {
 		}
 	})
 
-	s.GetClientManager().Remove(c)
+	s.GetConnManager().Remove(c)
 }
 
-func (s *Server) OnMessage(data []byte, client *Client) {
+func (s *Server) OnMessage(data []byte, c *Connection) {
 	_ = s.workerPool.Submit(func() {
 		p := &protocol.Packet{}
 		if err := p.Read(data); err != nil {
 			log.Error(err)
-			client.Close()
+			c.Close()
 			return
 		}
 
-		if client.Status == AuthPending {
+		if c.Status == AuthPending {
 			cmd := protocol.CmdId(p.Cmd)
 			if cmd != protocol.CmdId_Cmd_Login {
 				log.Error("first packet must be cmd_login")
-				client.Close()
+				c.Close()
 				return
 			}
-			if err := s.handleLogin(client, p); err != nil {
-				client.Close()
+			if err := s.handleLogin(c, p); err != nil {
+				c.Close()
 				log.Info("AUTH FAILED")
 			} else {
-				client.Status = Authed
+				c.Status = Authed
 			}
 		} else {
-			s.handleProto(client, p)
+			s.handleProto(c, p)
 		}
 	})
 
 }
 
-func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleLogin(c *Connection, p *protocol.Packet) (err error) {
 	req := &protocol.LoginReq{}
 	rsp := &protocol.LoginRsp{}
 
@@ -268,32 +268,6 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 		} else {
 			s.responseMessage(c, p, rsp)
 		}
-
-		//var b []byte
-		//var errr error
-		//
-		//if err != nil {
-		//	rspErr := &protocol.Error{}
-		//	ze := zerrors.FromError(err)
-		//	rspErr.Code = ze.Code
-		//	rspErr.Message = ze.Message
-		//	if ze.Message == "" {
-		//		rspErr.Message = ze.Detail
-		//	}
-		//	b, errr = proto.Marshal(rspErr)
-		//} else {
-		//	b, errr = proto.Marshal(rsp)
-		//}
-		//
-		//if errr != nil {
-		//	log.Error(err)
-		//} else {
-		//	p.BodyLen = uint32(len(b))
-		//	p.Body = b
-		//	if err := c.WritePacket(p); err != nil {
-		//		log.Error(err)
-		//	}
-		//}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -338,8 +312,8 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 	// 踢掉旧的连接
 	if rspL.ConflictDeviceId != "" {
 		log.Infof("conflict device id=%s", rspL.ConflictDeviceId)
-		oldClient := s.GetClientManager().Get(rspL.ConflictDeviceId)
-		if oldClient != nil && oldClient.Conn != nil {
+		oldConn := s.GetConnManager().Get(rspL.ConflictDeviceId)
+		if oldConn != nil && oldConn.Conn != nil {
 			reason := fmt.Sprintf("您的账号在设备%s上登录，如果不是本人操作，您的账号可能被盗", req.DeviceName)
 			kick := &protocol.Kick{Reason: reason}
 			if b, err := proto.Marshal(kick); err == nil {
@@ -352,11 +326,11 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 					Body:      b,
 				}
 
-				oldClient.WritePacket(&pp)
+				oldConn.WritePacket(&pp)
 			}
-			log.Infof("踢掉客户端 uin=%s device_id=%s", oldClient.Uin, oldClient.DeviceId)
-			oldClient.Close()
-			s.GetClientManager().Remove(oldClient)
+			log.Infof("踢掉客户端 uin=%s device_id=%s", oldConn.Uin, oldConn.DeviceId)
+			oldConn.Close()
+			s.GetConnManager().Remove(oldConn)
 		}
 	}
 
@@ -365,13 +339,13 @@ func (s *Server) handleLogin(c *Client, p *protocol.Packet) (err error) {
 	c.Platform = req.Platform
 	c.Server = s.GetServerId()
 	c.Version = int(p.Version)
-	s.GetClientManager().Add(c)
+	s.GetConnManager().Add(c)
 
 	log.Infof("AUTH SUCC uin=%s", req.Uin)
 	return
 }
 
-func (s *Server) handleLogout(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleLogout(c *Connection, p *protocol.Packet) (err error) {
 	log.Infof("client %s noop", c.Uin)
 	c.WritePacket(p)
 	req := sess.LogoutReq{
@@ -383,7 +357,7 @@ func (s *Server) handleLogout(c *Client, p *protocol.Packet) (err error) {
 	return
 }
 
-func (s *Server) handleProto(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleProto(c *Connection, p *protocol.Packet) (err error) {
 	log.Infof("cmd=%d", p.Cmd)
 	cmd := protocol.CmdId(p.Cmd)
 
@@ -394,7 +368,7 @@ func (s *Server) handleProto(c *Client, p *protocol.Packet) (err error) {
 	return
 }
 
-func (s *Server) handleNoop(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleNoop(c *Connection, p *protocol.Packet) (err error) {
 	log.Infof("client %s noop", c.Uin)
 	c.WritePacket(p)
 	req := sess.HeartbeatReq{

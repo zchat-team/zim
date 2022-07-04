@@ -498,7 +498,7 @@ import (
 //	return
 //}
 //
-func (s *Server) handleClearConversationUnreadCount(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleClearConversationUnreadCount(c *Connection, p *protocol.Packet) (err error) {
 	req := &protocol.ClearConversationUnreadReq{}
 	rsp := &protocol.ClearConversationUnreadRsp{}
 

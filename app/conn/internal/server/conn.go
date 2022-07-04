@@ -8,7 +8,7 @@ import (
 	"github.com/zchat-team/zim/app/conn/protocol"
 )
 
-type Client struct {
+type Connection struct {
 	ID        string
 	Status    int
 	TimerTask *ztimer.TimerTask
@@ -20,11 +20,11 @@ type Client struct {
 	Server    string
 }
 
-func (c *Client) Write(data []byte) error {
+func (c *Connection) Write(data []byte) error {
 	return c.Conn.AsyncWrite(data)
 }
 
-func (c *Client) WritePacket(p *protocol.Packet) error {
+func (c *Connection) WritePacket(p *protocol.Packet) error {
 	buf := &bytes.Buffer{}
 	if err := p.Write(buf); err != nil {
 		return err
@@ -32,7 +32,7 @@ func (c *Client) WritePacket(p *protocol.Packet) error {
 	return c.Conn.AsyncWrite(buf.Bytes())
 }
 
-func (c *Client) Close() {
+func (c *Connection) Close() {
 	if c.Conn != nil {
 		c.Conn.Close()
 	}

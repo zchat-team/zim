@@ -43,13 +43,13 @@ func (s *TcpServer) OnInitComplete(srv gnet.Server) (action gnet.Action) {
 
 func (s *TcpServer) OnOpened(c gnet.Conn) (out []byte, action gnet.Action) {
 	log.Info("TCP OnOpened ...")
-	client := &Client{
+	conn := &Connection{
 		Status: AuthPending,
 		Conn:   c,
 	}
-	c.SetContext(client)
+	c.SetContext(conn)
 
-	s.srv.OnOpen(client)
+	s.srv.OnOpen(conn)
 
 	return
 }
@@ -57,22 +57,22 @@ func (s *TcpServer) OnOpened(c gnet.Conn) (out []byte, action gnet.Action) {
 func (s *TcpServer) OnClosed(c gnet.Conn, err error) (action gnet.Action) {
 	log.Info("TCP OnClose ...")
 
-	client, ok := c.Context().(*Client)
+	conn, ok := c.Context().(*Connection)
 	if !ok {
 		return
 	}
 
-	s.srv.OnClose(client)
+	s.srv.OnClose(conn)
 	return
 }
 
 func (s *TcpServer) React(data []byte, c gnet.Conn) (out []byte, action gnet.Action) {
-	client, ok := c.Context().(*Client)
+	conn, ok := c.Context().(*Connection)
 	if !ok {
 		return
 	}
 
-	s.srv.OnMessage(data, client)
+	s.srv.OnMessage(data, conn)
 
 	return
 }

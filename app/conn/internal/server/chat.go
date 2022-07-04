@@ -10,7 +10,7 @@ import (
 	"github.com/zmicro-team/zmicro/core/log"
 )
 
-func (s *Server) handleMsgAck(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleMsgAck(c *Connection, p *protocol.Packet) (err error) {
 	req := &protocol.MsgAckReq{}
 	rsp := &protocol.MsgAckRsp{}
 
@@ -40,7 +40,7 @@ func (s *Server) handleMsgAck(c *Client, p *protocol.Packet) (err error) {
 	return
 }
 
-func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleSync(c *Connection, p *protocol.Packet) (err error) {
 	req := &protocol.SyncMsgReq{}
 	rsp := &protocol.SyncMsgRsp{}
 
@@ -86,7 +86,7 @@ func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
 	return
 }
 
-func (s *Server) responseError(c *Client, p *protocol.Packet, err error) {
+func (s *Server) responseError(c *Connection, p *protocol.Packet, err error) {
 	rsp := &protocol.Error{}
 	zerr := zerrors.FromError(err)
 	rsp.Code = zerr.Code
@@ -100,14 +100,14 @@ func (s *Server) responseError(c *Client, p *protocol.Packet, err error) {
 	_ = c.WritePacket(p)
 }
 
-func (s *Server) responseMessage(c *Client, p *protocol.Packet, m proto.Message) {
+func (s *Server) responseMessage(c *Connection, p *protocol.Packet, m proto.Message) {
 	b, _ := proto.Marshal(m)
 	p.BodyLen = uint32(len(b))
 	p.Body = b
 	_ = c.WritePacket(p)
 }
 
-func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleSend(c *Connection, p *protocol.Packet) (err error) {
 	log.Info("handleSend ...")
 	req := &protocol.SendReq{}
 	rsp := &protocol.SendRsp{}
@@ -147,7 +147,7 @@ func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 	return
 }
 
-func (s *Server) handleRecall(c *Client, p *protocol.Packet) (err error) {
+func (s *Server) handleRecall(c *Connection, p *protocol.Packet) (err error) {
 	req := &protocol.RecallReq{}
 	rsp := &protocol.RecallRsp{}
 

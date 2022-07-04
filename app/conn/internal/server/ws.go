@@ -40,35 +40,35 @@ func (ws *WsServer) OnInitComplete(srv gnet.Server) (action gnet.Action) {
 
 func (ws *WsServer) OnOpened(c gnet.Conn) (out []byte, action gnet.Action) {
 	log.Info("WS OnOpened ...")
-	client := &Client{
+	conn := &Connection{
 		Status: WsUpgrading,
 		Conn:   c,
 	}
-	c.SetContext(client)
+	c.SetContext(conn)
 
-	ws.srv.OnOpen(client)
+	ws.srv.OnOpen(conn)
 	return
 }
 
 func (ws *WsServer) OnClosed(c gnet.Conn, err error) (action gnet.Action) {
 	log.Info("WS OnClose ...")
 
-	client, ok := c.Context().(*Client)
+	conn, ok := c.Context().(*Connection)
 	if !ok {
 		return
 	}
 
-	ws.srv.OnClose(client)
+	ws.srv.OnClose(conn)
 	return
 }
 
 func (ws *WsServer) React(data []byte, c gnet.Conn) (out []byte, action gnet.Action) {
-	client, ok := c.Context().(*Client)
+	conn, ok := c.Context().(*Connection)
 	if !ok {
 		return
 	}
 
-	ws.srv.OnMessage(data, client)
+	ws.srv.OnMessage(data, conn)
 
 	return
 }
@@ -79,7 +79,7 @@ type WsCodec struct {
 }
 
 func (w *WsCodec) Encode(c gnet.Conn, buf []byte) ([]byte, error) {
-	s, ok := c.Context().(*Client)
+	s, ok := c.Context().(*Connection)
 	if !ok {
 		return nil, nil
 	}
@@ -95,12 +95,12 @@ func (w *WsCodec) Encode(c gnet.Conn, buf []byte) ([]byte, error) {
 }
 
 func (w *WsCodec) Decode(c gnet.Conn) ([]byte, error) {
-	client, ok := c.Context().(*Client)
+	conn, ok := c.Context().(*Connection)
 	if !ok {
 		return nil, nil
 	}
 
-	if client.Status == WsUpgrading {
+	if conn.Status == WsUpgrading {
 		r, out, err := websocket.ReadRequest(c)
 		if err != nil {
 			if err == websocket.ErrShortPackaet {
@@ -111,7 +111,7 @@ func (w *WsCodec) Decode(c gnet.Conn) ([]byte, error) {
 		out, err = websocket.Upgrade(c, r)
 		c.AsyncWrite(out)
 		if err == nil {
-			client.Status = AuthPending
+			conn.Status = AuthPending
 		}
 
 		return nil, err

@@ -6,5 +6,5 @@ import (
 
 type Bucket struct {
 	sync.RWMutex
-	clients map[string]*Client
+	conns map[string]*Connection
 }
