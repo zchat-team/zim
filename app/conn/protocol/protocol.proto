@@ -5,10 +5,7 @@ option java_package = "com.iobrother.zimsdk.core.proto";
 
 package github.com.zmicro.team.zim.conn.protocol;
 
-import "google/api/annotations.proto";
-import "google/api/field_behavior.proto";
 import "gogoproto/gogo.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
 
 option (gogoproto.goproto_unrecognized_all) = false;
 option (gogoproto.goproto_unkeyed_all) = false;
@@ -75,13 +72,11 @@ message Error {
 
 message LoginReq {
   string uin = 1 [
-    (gogoproto.moretags) = 'binding:"required"',
-    (google.api.field_behavior) = REQUIRED
+    (gogoproto.moretags) = 'binding:"required"'
   ];
   string tag = 2;
   string token = 3 [
-    (gogoproto.moretags) = 'binding:"required"',
-    (google.api.field_behavior) = REQUIRED
+    (gogoproto.moretags) = 'binding:"required"'
   ];
   string device_id = 4;
   string device_name = 5;
@@ -111,8 +106,12 @@ message Kick {
 
 message Msg {
   int64 id = 1;
-  int32 conv_type = 2;
-  int32 type = 3;
+  int32 conv_type = 2 [
+    (gogoproto.casttype) = "int"
+  ];
+  int32 type = 3 [
+    (gogoproto.casttype) = "int"
+  ];
   string content = 4;
   string sender = 5;
   string target = 6;
@@ -135,24 +134,21 @@ message SyncMsgRsp {
 
 message SendReq {
   int32 conv_type = 1 [
-    (gogoproto.moretags) = 'binding:"required"',
-    (google.api.field_behavior) = REQUIRED
+    (gogoproto.casttype) = "int",
+    (gogoproto.moretags) = 'binding:"required"'
   ];
   int32 msg_type = 2 [
-    (gogoproto.moretags) = 'binding:"required"',
-    (google.api.field_behavior) = REQUIRED
+    (gogoproto.casttype) = "int",
+    (gogoproto.moretags) = 'binding:"required"'
   ];
   string sender = 3 [
-    (gogoproto.moretags) = 'binding:"required"',
-    (google.api.field_behavior) = REQUIRED
+    (gogoproto.moretags) = 'binding:"required"'
   ];
   string target = 4 [
-    (gogoproto.moretags) = 'binding:"required"',
-    (google.api.field_behavior) = REQUIRED
+    (gogoproto.moretags) = 'binding:"required"'
   ];
   string content = 5 [
-    (gogoproto.moretags) = 'binding:"required"',
-    (google.api.field_behavior) = REQUIRED
+    (gogoproto.moretags) = 'binding:"required"'
   ];
   string client_uuid = 6;
   repeated string at_user_list = 7;
@@ -193,7 +189,9 @@ message GetMergerMsgReq {
 message MergerMsgItem {
   string nickname = 1;
   string avatar = 2;
-  int32 type = 3;
+  int32 type = 3 [
+    (gogoproto.casttype) = "int"
+  ];
   string content = 4;
   int64 send_time = 5;
 }
@@ -211,91 +209,91 @@ message ClearConversationUnreadRsp {
 }
 
 // 以下为群接口
-
-message GroupInfo {
-  // 群主
-  string owner = 1;
-  // 群名称
-  string name = 2;
-  string group_id = 3;
-  string notice = 4;
-  string intro = 5;
-  string avatar = 6;
-  int64 created_at = 7;
-  int64 updated_at = 8;
-  int32 type = 9;
-}
-
-message SyncGroupReq {
-  int64 offset = 1;
-  int64 limit = 2;
-}
-
-message SyncGroupRsp {
-  repeated GroupInfo list = 1;
-}
-
-message CreateGroupReq {
-  // 成员
-  repeated string members = 1;
-  // 群名称
-  string name = 2;
-  // 群ID，如果不传，zim会生成一个群ID
-  string group_id = 3;
-  string notice = 4;
-  string intro = 5;
-  string avatar = 6;
-}
-
-message CreateGroupRsp {
-  string group_id = 1;
-}
-
-message JoinGroupReq {
-  string group_id = 1;
-}
-
-message JoinGroupRsp {
-}
-
-message InviteUserToGroupReq {
-  repeated string user_list = 1;
-  string group_id = 2;
-}
-
-message InviteUserToGroupRsp {
-
-}
-
-message QuitGroupReq {
-  string group_id = 1;
-}
-
-message QuitGroupRsp {
-
-}
-
-message KickGroupMemberReq {
-  repeated string user_list = 1;
-  string group_id = 2;
-}
-
-message KickGroupMemberRsp {
-  repeated string success_list = 1;
-  repeated string fail_list = 2;
-}
-
-message GetJoinedGroupListReq {
-}
-
-message GetJoinedGroupListRsp {
-  repeated GroupInfo list = 1;
-}
-
-message DismissGroupReq {
-  string group_id = 1;
-}
-
-message DismissGroupRsp {
-
-}
+//
+//message GroupInfo {
+//  // 群主
+//  string owner = 1;
+//  // 群名称
+//  string name = 2;
+//  string group_id = 3;
+//  string notice = 4;
+//  string intro = 5;
+//  string avatar = 6;
+//  int64 created_at = 7;
+//  int64 updated_at = 8;
+//  int32 type = 9;
+//}
+//
+//message SyncGroupReq {
+//  int64 offset = 1;
+//  int64 limit = 2;
+//}
+//
+//message SyncGroupRsp {
+//  repeated GroupInfo list = 1;
+//}
+//
+//message CreateGroupReq {
+//  // 成员
+//  repeated string members = 1;
+//  // 群名称
+//  string name = 2;
+//  // 群ID，如果不传，zim会生成一个群ID
+//  string group_id = 3;
+//  string notice = 4;
+//  string intro = 5;
+//  string avatar = 6;
+//}
+//
+//message CreateGroupRsp {
+//  string group_id = 1;
+//}
+//
+//message JoinGroupReq {
+//  string group_id = 1;
+//}
+//
+//message JoinGroupRsp {
+//}
+//
+//message InviteUserToGroupReq {
+//  repeated string user_list = 1;
+//  string group_id = 2;
+//}
+//
+//message InviteUserToGroupRsp {
+//
+//}
+//
+//message QuitGroupReq {
+//  string group_id = 1;
+//}
+//
+//message QuitGroupRsp {
+//
+//}
+//
+//message KickGroupMemberReq {
+//  repeated string user_list = 1;
+//  string group_id = 2;
+//}
+//
+//message KickGroupMemberRsp {
+//  repeated string success_list = 1;
+//  repeated string fail_list = 2;
+//}
+//
+//message GetJoinedGroupListReq {
+//}
+//
+//message GetJoinedGroupListRsp {
+//  repeated GroupInfo list = 1;
+//}
+//
+//message DismissGroupReq {
+//  string group_id = 1;
+//}
+//
+//message DismissGroupRsp {
+//
+//}

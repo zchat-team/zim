@@ -336,7 +336,7 @@ func (l *Chat) createConversation(ctx context.Context, owner, target string, con
 		pipe.Expire(ctx, key, time.Duration(constant.ConvKeepDays*24)*time.Hour)
 
 		conv := &common.Conversation{
-			Type:   int32(convType),
+			Type:   convType,
 			Target: target,
 		}
 
@@ -438,7 +438,7 @@ func (l *Chat) Recall(ctx context.Context, req *chat.RecallReq, rsp *chat.Recall
 	}
 	b, _ := json.Marshal(m)
 	reqL := chat.SendReq{
-		ConvType: int32(v.ConvType),
+		ConvType: v.ConvType,
 		MsgType:  constant.MsgRecall,
 		Sender:   v.Sender,
 		Target:   v.Target,

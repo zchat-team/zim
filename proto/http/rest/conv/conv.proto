@@ -174,7 +174,9 @@ service Conv {
 
 message CreateReq {
   // 成员
-  repeated string members = 1 [ (google.api.field_behavior) = REQUIRED ];
+  repeated string members = 1 [
+    (google.api.field_behavior) = REQUIRED
+  ];
   // 会话名称
   string name = 2;
   // 属性
@@ -182,7 +184,11 @@ message CreateReq {
   // 唯一性标识
   bool unique = 4;
   // 会话类型，私聊，群聊，聊天室，临时会话（如客服），系统会话（智能机器人、公从号、服务号）
-  int32 type = 5;
+  int32 type = 5 [
+    (gogoproto.casttype) = "int",
+    (gogoproto.moretags) = 'binding:"required"',
+    (google.api.field_behavior) = REQUIRED
+  ];
 }
 
 message CreateRsp {

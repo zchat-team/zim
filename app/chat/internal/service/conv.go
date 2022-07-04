@@ -275,7 +275,7 @@ func (l *Conv) ClearConversationUnreadCount(ctx context.Context, req *chat.Clear
 
 		rspL := chat.SendRsp{}
 		GetChatService().SendMsg(ctx, &chat.SendReq{
-			ConvType:      int32(convType),
+			ConvType:      convType,
 			MsgType:       constant.MsgReadReceipt,
 			Sender:        req.Uin,
 			Target:        arr[1],

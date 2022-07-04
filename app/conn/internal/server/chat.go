@@ -20,32 +20,6 @@ func (s *Server) handleMsgAck(c *Client, p *protocol.Packet) (err error) {
 		} else {
 			s.responseMessage(c, p, rsp)
 		}
-
-		//var b []byte
-		//var errr error
-		//
-		//if err != nil {
-		//	rspErr := &protocol.Error{}
-		//	ze := zerrors.FromError(err)
-		//	rspErr.Code = ze.Code
-		//	rspErr.Message = ze.Message
-		//	if ze.Message == "" {
-		//		rspErr.Message = ze.Detail
-		//	}
-		//	b, errr = proto.Marshal(rspErr)
-		//} else {
-		//	b, errr = proto.Marshal(rsp)
-		//}
-		//
-		//if errr != nil {
-		//	log.Error(err)
-		//} else {
-		//	p.BodyLen = uint32(len(b))
-		//	p.Body = b
-		//	if err := c.WritePacket(p); err != nil {
-		//		log.Error(err)
-		//	}
-		//}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -76,32 +50,6 @@ func (s *Server) handleSync(c *Client, p *protocol.Packet) (err error) {
 		} else {
 			s.responseMessage(c, p, rsp)
 		}
-
-		//var b []byte
-		//var errr error
-		//
-		//if err != nil {
-		//	rspErr := &protocol.Error{}
-		//	ze := zerrors.FromError(err)
-		//	rspErr.Code = ze.Code
-		//	rspErr.Message = ze.Message
-		//	if ze.Message == "" {
-		//		rspErr.Message = ze.Detail
-		//	}
-		//	b, errr = proto.Marshal(rspErr)
-		//} else {
-		//	b, errr = proto.Marshal(rsp)
-		//}
-		//
-		//if errr != nil {
-		//	log.Error(err)
-		//} else {
-		//	p.BodyLen = uint32(len(b))
-		//	p.Body = b
-		//	if err := c.WritePacket(p); err != nil {
-		//		log.Error(err)
-		//	}
-		//}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
@@ -170,67 +118,12 @@ func (s *Server) handleSend(c *Client, p *protocol.Packet) (err error) {
 		} else {
 			s.responseMessage(c, p, rsp)
 		}
-		//var b []byte
-		//var errr error
-		//
-		//if err != nil {
-		//	rspErr := &protocol.Error{}
-		//	ze := zerrors.FromError(err)
-		//	rspErr.Code = ze.Code
-		//	rspErr.Message = ze.Message
-		//	if ze.Message == "" {
-		//		rspErr.Message = ze.Detail
-		//	}
-		//	b, errr = proto.Marshal(rspErr)
-		//} else {
-		//	b, errr = proto.Marshal(rsp)
-		//}
-		//
-		//if errr != nil {
-		//	log.Error(err)
-		//} else {
-		//	p.BodyLen = uint32(len(b))
-		//	p.Body = b
-		//	if err := c.WritePacket(p); err != nil {
-		//		log.Error(err)
-		//	}
-		//}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {
 		log.Error(err)
 		return
 	}
-
-	//now := time.Now().UnixNano() / 1e6
-	//m := common.Msg{
-	//	Id:            idgen.Next(),
-	//	ConvType:      req.ConvType,
-	//	Type:          req.MsgType,
-	//	Content:       req.Content,
-	//	Sender:        req.Sender,
-	//	Target:        req.Target,
-	//	SendTime:      now,
-	//	ClientUuid:    req.ClientUuid,
-	//	AtUserList:    req.AtUserList,
-	//	Owner:         "",
-	//	IsTransparent: req.IsTransparent,
-	//}
-	//
-	//b, err := proto.Marshal(&m)
-	//if err != nil {
-	//	return
-	//}
-	//nm := &nats.Msg{
-	//	Subject: "MSGS.new",
-	//	Reply:   "",
-	//	Data:    b,
-	//	Sub:     nil,
-	//}
-	//js := runtime.GetJS()
-	//if _, err = js.PublishMsg(nm); err != nil {
-	//	return
-	//}
 
 	r := chat.SendReq{
 		ConvType:      req.ConvType,
@@ -265,31 +158,6 @@ func (s *Server) handleRecall(c *Client, p *protocol.Packet) (err error) {
 			s.responseMessage(c, p, rsp)
 		}
 
-		//var b []byte
-		//var errr error
-		//
-		//if err != nil {
-		//	rspErr := &protocol.Error{}
-		//	ze := zerrors.FromError(err)
-		//	rspErr.Code = ze.Code
-		//	rspErr.Message = ze.Message
-		//	if ze.Message == "" {
-		//		rspErr.Message = ze.Detail
-		//	}
-		//	b, errr = proto.Marshal(rspErr)
-		//} else {
-		//	b, errr = proto.Marshal(rsp)
-		//}
-		//
-		//if errr != nil {
-		//	log.Error(err)
-		//} else {
-		//	p.BodyLen = uint32(len(b))
-		//	p.Body = b
-		//	if err := c.WritePacket(p); err != nil {
-		//		log.Error(err)
-		//	}
-		//}
 	}()
 
 	if err = proto.Unmarshal(p.Body, req); err != nil {

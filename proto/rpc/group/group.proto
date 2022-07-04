@@ -3,6 +3,8 @@ syntax = "proto3";
 option go_package = "github.com/zchat-team/zim/proto/rpc/group";
 package github.com.zchat.team.zim.proto.rpc.group;
 
+import "gogoproto/gogo.proto";
+
 service Group {
   rpc Sync(SyncReq) returns (SyncRsp) {}
   rpc Create(CreateReq) returns (CreateRsp) {}
@@ -29,7 +31,9 @@ message GroupInfo {
   string avatar = 6;
   int64 created_at = 7;
   int64 updated_at = 8;
-  int32 type = 9;
+  int32 type = 9 [
+    (gogoproto.casttype) = "int"
+  ];
 }
 
 message CreateReq {

@@ -1,17 +1,16 @@
 package model
 
 type Msg struct {
-	Id       int64  `json:"id" gorm:"primaryKey;column:id;type:bigint(20)"`
-	ConvType int    `json:"conv_type" gorm:"column:conv_type;type:tinyint(4);not null"`
-	Content  string `json:"content" gorm:"column:content;type:varchar(5000);not null"`
-	Type     int    `json:"type" gorm:"column:type;type:int(11);not null;default:0"`
-	//DeletedAt  soft_delete.DeletedAt `json:"deleted_at" gorm:"column:deleted_at;type:bigint(20);not null;default:0"`
-	Sender     string `json:"sender" gorm:"column:sender;type:varchar(50);not null"`
-	Target     string `json:"target" gorm:"column:target;type:varchar(50);not null"`
-	AtUserList string `json:"at_user_list" gorm:"column:at_user_list;type:varchar(5000);not null"`
-	ReadTime   int64  `json:"read_time" gorm:"column:read_time;type:bigint(20);not null;default:0"`
-	SendTime   int64  `json:"send_time" gorm:"column:send_time;type:bigint(20);not null;default:0"`
-	ClientUuid string `json:"client_uuid" gorm:"column:client_uuid;type:varchar(50);not null"`
+	Id         int64  `json:"id" gorm:"primaryKey;autoIncrement:false;comment:消息ID"`
+	Type       int    `json:"type" gorm:"size:32;not null;default:0;comment:消息类型"`
+	ConvType   int    `json:"conv_type" gorm:"size:8;not null;default:0;comment:会话类型"`
+	Content    string `json:"content" gorm:"size:5000;not null;default:'';comment:消息内容"`
+	Sender     string `json:"sender" gorm:"size:64;not null;default:'';comment:发送方"`
+	Target     string `json:"target" gorm:"size:64;not null;default:'';comment:目标"`
+	AtUserList string `json:"at_user_list" gorm:"size:1024;not null;default:'';comment:at列表"`
+	SendTime   int64  `json:"send_time" gorm:"size:64;not null;default:0;comment:发送时间"`
+	ReadTime   int64  `json:"read_time" gorm:"size:64;not null;default:0;comment:读时间"`
+	ClientUuid string `json:"client_uuid" gorm:"size:64;not null;default:'';comment:消息指纹"`
 }
 
 func (_ *Msg) TableName() string {

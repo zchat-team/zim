@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "github.com/zchat-team/zim/proto/rpc/chat";
 package github.com.zchat.team.zim.proto.rpc.chat;
 
+import "gogoproto/gogo.proto";
 import "entry.proto";
 
 service Chat {
@@ -14,8 +15,14 @@ service Chat {
 }
 
 message SendReq {
-  int32 conv_type = 1;
-  int32 msg_type = 2;
+  int32 conv_type = 1 [
+    (gogoproto.casttype) = "int",
+    (gogoproto.moretags) = 'binding:"required"'
+  ];
+  int32 msg_type = 2 [
+    (gogoproto.casttype) = "int",
+    (gogoproto.moretags) = 'binding:"required"'
+  ];
   string sender = 3;
   string target = 4;
   string content = 5;
@@ -25,7 +32,9 @@ message SendReq {
 }
 
 message SendRsp {
-  int32 code = 1;
+  int32 code = 1 [
+    (gogoproto.casttype) = "int"
+  ];
   string message = 2;
   int64 id = 3;
   int64 send_time = 4;

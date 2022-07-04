@@ -10,6 +10,7 @@ for PROTO in $PROTOS; do
   echo $PROTO
   protoc \
     -I. -I./proto/rpc/common -I$(dirname $PROTO) \
+    -I./third_party \
     --gofast_out=. \
     --gofast_opt paths=source_relative \
     --rpcx_out=. \

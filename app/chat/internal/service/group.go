@@ -92,7 +92,7 @@ func (g *Group) GetJoinedGroupList(ctx context.Context, req *group.GetJoinedGrou
 			GroupId:   v.GroupId,
 			CreatedAt: v.CreatedAt.Unix(),
 			UpdatedAt: v.UpdatedAt.Unix(),
-			Type:      int32(v.Type),
+			Type:      v.Type,
 		}
 		rsp.List = append(rsp.List, &groupInfo)
 	}

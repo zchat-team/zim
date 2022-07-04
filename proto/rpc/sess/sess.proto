@@ -3,6 +3,8 @@ syntax = "proto3";
 option go_package = "github.com/zchat-team/zim/proto/rpc/sess";
 package github.com.zchat.team.zim.proto.rpc.sess;
 
+import "gogoproto/gogo.proto";
+
 service Sess {
   rpc Login(LoginReq) returns (LoginRsp) {}
   rpc Logout(LogoutReq) returns (LogoutRsp) {}
@@ -57,7 +59,9 @@ message HeartbeatRsp {
 message DeviceInfo {
   string device_id = 1;
   string server = 2;
-  int32 status = 3;
+  int32 status = 3 [
+    (gogoproto.casttype) = "int"
+  ];
 }
 
 message GetOnlineReq {
