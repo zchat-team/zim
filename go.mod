@@ -20,11 +20,12 @@ require (
 	github.com/stretchr/testify v1.7.1
 	github.com/zmicro-team/zmicro v0.2.1
 	go.uber.org/multierr v1.7.0
+	go.uber.org/zap v1.21.0
 	google.golang.org/genproto v0.0.0-20220407144326-9054f6ed7bac
 	google.golang.org/protobuf v1.28.0
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gorm.io/driver/mysql v1.3.3
 	gorm.io/gorm v1.23.5
-	gorm.io/plugin/soft_delete v1.1.0
 )
 
 require (
@@ -130,7 +131,6 @@ require (
 	go.opentelemetry.io/otel/sdk v1.7.0 // indirect
 	go.opentelemetry.io/otel/trace v1.7.0 // indirect
 	go.uber.org/atomic v1.8.0 // indirect
-	go.uber.org/zap v1.21.0 // indirect
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220106191415-9b9b3d81d5e3 // indirect
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
@@ -141,7 +141,6 @@ require (
 	golang.org/x/xerrors v0.0.0-20220411194840-2f41105eb62f // indirect
 	google.golang.org/grpc v1.45.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
