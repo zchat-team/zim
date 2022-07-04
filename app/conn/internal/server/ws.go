@@ -1,11 +1,12 @@
 package server
 
 import (
+	"time"
+
 	"github.com/panjf2000/gnet"
-	"github.com/zchat-team/zim/app/conn/internal/server/websocket"
 	"github.com/zmicro-team/zmicro/core/log"
 
-	"time"
+	"github.com/zchat-team/zim/app/conn/internal/server/websocket"
 )
 
 type WsServer struct {

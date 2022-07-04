@@ -2,12 +2,14 @@ package server
 
 import (
 	"context"
+
 	"github.com/golang/protobuf/proto"
+	zerrors "github.com/zmicro-team/zmicro/core/errors"
+	"github.com/zmicro-team/zmicro/core/log"
+
 	"github.com/zchat-team/zim/app/conn/internal/client"
 	"github.com/zchat-team/zim/app/conn/protocol"
 	"github.com/zchat-team/zim/proto/rpc/chat"
-	zerrors "github.com/zmicro-team/zmicro/core/errors"
-	"github.com/zmicro-team/zmicro/core/log"
 )
 
 func (s *Server) handleMsgAck(c *Connection, p *protocol.Packet) (err error) {

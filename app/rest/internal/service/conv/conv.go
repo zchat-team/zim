@@ -2,13 +2,15 @@ package conv
 
 import (
 	"context"
-	"github.com/zchat-team/zim/proto/http/rest/conv"
-	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 	"sync"
+
+	zhttp "github.com/zmicro-team/zmicro/core/transport/http"
+
+	"github.com/zchat-team/zim/proto/http/rest/conv"
 )
 
 type Service struct {
-	zgin.Implemented
+	zhttp.Implemented
 }
 
 var (

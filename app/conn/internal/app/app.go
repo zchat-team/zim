@@ -7,12 +7,13 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/zchat-team/zim/app/conn/internal/server"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
 	"github.com/zmicro-team/zmicro/core/util/env"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
+
+	"github.com/zchat-team/zim/app/conn/internal/server"
 )
 
 var cfgFile string

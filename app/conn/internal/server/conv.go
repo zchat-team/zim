@@ -2,11 +2,13 @@ package server
 
 import (
 	"context"
+
 	"github.com/golang/protobuf/proto"
+	"github.com/zmicro-team/zmicro/core/log"
+
 	"github.com/zchat-team/zim/app/conn/internal/client"
 	"github.com/zchat-team/zim/app/conn/protocol"
 	"github.com/zchat-team/zim/proto/rpc/chat"
-	"github.com/zmicro-team/zmicro/core/log"
 )
 
 //

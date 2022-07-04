@@ -2,10 +2,11 @@ package main
 
 import (
 	"github.com/smallnest/rpcx/server"
-	"github.com/zchat-team/zim/app/gid/internal/service"
-	"github.com/zchat-team/zim/pkg/runtime"
 	"github.com/zmicro-team/zmicro"
 	"github.com/zmicro-team/zmicro/core/log"
+
+	"github.com/zchat-team/zim/app/gid/internal/service"
+	"github.com/zchat-team/zim/pkg/runtime"
 )
 
 func main() {

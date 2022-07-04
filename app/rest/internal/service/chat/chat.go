@@ -2,16 +2,17 @@ package chat
 
 import (
 	"context"
-	"github.com/zchat-team/zim/proto/http/rest/chat"
-	pb "github.com/zchat-team/zim/proto/rpc/chat"
 	"sync"
 
+	zhttp "github.com/zmicro-team/zmicro/core/transport/http"
+
 	"github.com/zchat-team/zim/app/rest/internal/client"
-	zgin "github.com/zmicro-team/zmicro/core/transport/http"
+	"github.com/zchat-team/zim/proto/http/rest/chat"
+	pb "github.com/zchat-team/zim/proto/rpc/chat"
 )
 
 type Service struct {
-	zgin.Implemented
+	zhttp.Implemented
 }
 
 var (

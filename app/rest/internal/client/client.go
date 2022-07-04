@@ -1,10 +1,11 @@
 package client
 
 import (
-	"github.com/zchat-team/zim/proto/rpc/chat"
-	"github.com/zchat-team/zim/proto/rpc/group"
 	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/transport/rpc/client"
+	
+	"github.com/zchat-team/zim/proto/rpc/chat"
+	"github.com/zchat-team/zim/proto/rpc/group"
 )
 
 var (

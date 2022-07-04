@@ -2,10 +2,11 @@ package service
 
 import (
 	"context"
-	"github.com/spf13/cast"
-	"github.com/zchat-team/zim/app/gid/internal/snowflake"
 	"os"
 	"sync"
+
+	"github.com/spf13/cast"
+	"github.com/zchat-team/zim/app/gid/internal/snowflake"
 
 	"github.com/zchat-team/zim/proto/rpc/gid"
 )

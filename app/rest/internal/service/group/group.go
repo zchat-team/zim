@@ -2,17 +2,17 @@ package group
 
 import (
 	"context"
+	"sync"
+
+	zhttp "github.com/zmicro-team/zmicro/core/transport/http"
+
 	"github.com/zchat-team/zim/app/rest/internal/client"
 	"github.com/zchat-team/zim/proto/http/rest/group"
 	pb "github.com/zchat-team/zim/proto/rpc/group"
-
-	"sync"
-
-	zgin "github.com/zmicro-team/zmicro/core/transport/http"
 )
 
 type Service struct {
-	zgin.Implemented
+	zhttp.Implemented
 }
 
 var (

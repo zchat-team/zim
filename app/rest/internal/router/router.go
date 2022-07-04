@@ -6,14 +6,14 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	zgin "github.com/zmicro-team/zmicro/core/transport/http"
+	zhttp "github.com/zmicro-team/zmicro/core/transport/http"
 
 	"github.com/zchat-team/zim/pkg/validate"
 )
 
 func Setup(engine *gin.Engine) {
 	gin.DisableBindValidation()
-	validate.RegisterValidation(zgin.Validator())
+	validate.RegisterValidation(zhttp.Validator())
 
 	engine.NoMethod(func(ctx *gin.Context) {
 		ctx.String(http.StatusMethodNotAllowed, http.StatusText(http.StatusMethodNotAllowed))

@@ -4,19 +4,20 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/zchat-team/zim/errno"
-	"github.com/zchat-team/zim/pkg/runtime"
-	"github.com/zchat-team/zim/proto/rpc/common"
-	"github.com/zchat-team/zim/proto/rpc/sess"
 	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/iobrother/ztimer"
 	"github.com/nats-io/nats.go"
 	"github.com/panjf2000/gnet/pool/goroutine"
+	"github.com/zmicro-team/zmicro/core/log"
+
 	"github.com/zchat-team/zim/app/conn/internal/client"
 	"github.com/zchat-team/zim/app/conn/protocol"
-	"github.com/zmicro-team/zmicro/core/log"
+	"github.com/zchat-team/zim/errno"
+	"github.com/zchat-team/zim/pkg/runtime"
+	"github.com/zchat-team/zim/proto/rpc/common"
+	"github.com/zchat-team/zim/proto/rpc/sess"
 )
 
 const (

@@ -2,14 +2,14 @@ package user
 
 import (
 	"context"
-	"github.com/zchat-team/zim/proto/http/rest/user"
 	"sync"
 
-	zgin "github.com/zmicro-team/zmicro/core/transport/http"
+	"github.com/zchat-team/zim/proto/http/rest/user"
+	zhttp "github.com/zmicro-team/zmicro/core/transport/http"
 )
 
 type Service struct {
-	zgin.Implemented
+	zhttp.Implemented
 }
 
 var (

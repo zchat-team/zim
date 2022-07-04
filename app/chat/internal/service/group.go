@@ -2,13 +2,15 @@ package service
 
 import (
 	"context"
+
 	"github.com/spf13/cast"
+	"github.com/zmicro-team/zmicro/core/log"
+	"gorm.io/gorm"
+
 	"github.com/zchat-team/zim/app/chat/internal/model"
 	"github.com/zchat-team/zim/pkg/idgen"
 	"github.com/zchat-team/zim/pkg/runtime"
 	"github.com/zchat-team/zim/proto/rpc/group"
-	"github.com/zmicro-team/zmicro/core/log"
-	"gorm.io/gorm"
 )
 
 type Group struct {

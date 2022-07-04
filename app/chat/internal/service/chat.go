@@ -10,6 +10,9 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/nats-io/nats.go"
 	"github.com/spf13/cast"
+	"github.com/zmicro-team/zmicro/core/log"
+	"gorm.io/gorm"
+
 	"github.com/zchat-team/zim/app/chat/internal/model"
 	"github.com/zchat-team/zim/pkg/constant"
 	"github.com/zchat-team/zim/pkg/idgen"
@@ -17,8 +20,6 @@ import (
 	"github.com/zchat-team/zim/pkg/util"
 	"github.com/zchat-team/zim/proto/rpc/chat"
 	"github.com/zchat-team/zim/proto/rpc/common"
-	"github.com/zmicro-team/zmicro/core/log"
-	"gorm.io/gorm"
 )
 
 type Chat struct {

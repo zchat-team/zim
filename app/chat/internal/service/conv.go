@@ -4,11 +4,13 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/zchat-team/zim/pkg/constant"
-	"github.com/zchat-team/zim/proto/rpc/chat"
-	"github.com/zmicro-team/zmicro/core/log"
 	"strings"
 	"time"
+
+	"github.com/zmicro-team/zmicro/core/log"
+
+	"github.com/zchat-team/zim/pkg/constant"
+	"github.com/zchat-team/zim/proto/rpc/chat"
 )
 
 type Conv struct {
