@@ -3,8 +3,10 @@ package router
 import (
 	"crypto/rsa"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/pem"
 	"errors"
+
 	"github.com/gin-gonic/gin"
 	"github.com/zchat-team/zim/app/demo/internal/middleware"
 	sContact "github.com/zchat-team/zim/app/demo/internal/service/contact"
@@ -15,8 +17,8 @@ import (
 	"github.com/zchat-team/zim/proto/http/demo/group"
 	"github.com/zchat-team/zim/proto/http/demo/passport"
 	"github.com/zchat-team/zim/proto/http/demo/user"
+	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/log"
-	"io/ioutil"
 )
 
 var (
@@ -61,17 +63,12 @@ func RegisterAPI(r *gin.Engine) {
 		"/api/v1/test",
 	}
 
-	key, err := ioutil.ReadFile("conf/auth_key")
-	if err != nil {
-		log.Fatalf("Unable to read private key: %v", err)
-	}
-
-	privKey, err := parseRSAPrivateKeyFromPEM(key)
+	privKey := config.GetString("auth.privKey")
+	priv, err := base64.StdEncoding.DecodeString(privKey)
+	_, err = parseRSAPrivateKeyFromPEM(priv)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	_ = privKey
 
 	g := r.Group("/api/v1",
 		middleware.CheckLogin(skipPath...),
