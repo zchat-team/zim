@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-option go_package = "github.com/zchat-team/zchat-server/api/passport";
-package github.com.zchat.team.zchat.server.api.passport;
+option go_package = "github.com/zchat-team/zim/proto/http/demo/passport";
+package github.com.zchat.team.zim.proto.http.demo.passport;
 
 import "google/api/annotations.proto";
 import "gogoproto/gogo.proto";

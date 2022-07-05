@@ -45,25 +45,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -100,25 +100,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -155,25 +155,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -200,25 +200,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -257,25 +257,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -312,25 +312,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -383,25 +383,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -438,25 +438,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -503,25 +503,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -573,25 +573,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -628,25 +628,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -698,25 +698,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -760,25 +760,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -837,25 +837,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -914,25 +914,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -969,25 +969,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -1034,25 +1034,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -1107,25 +1107,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -1164,25 +1164,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -1241,25 +1241,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -1298,25 +1298,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -1355,25 +1355,25 @@
           "401": {
             "description": "Returned when the user does not login.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "403": {
             "description": "Returned when the user does not have permission to access the resource.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "404": {
             "description": "Returned when the resource does not exist.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "599": {
             "description": "Returned when the business error happen.",
             "schema": {
-              "$ref": "#/definitions/swaggerResponseBody"
+              "$ref": ".swagger.ResponseBody"
             }
           },
           "default": {
@@ -1625,27 +1625,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
-    "swaggerResponseBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "detail": {
-          "type": "string"
-        },
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
           }
         }
       }

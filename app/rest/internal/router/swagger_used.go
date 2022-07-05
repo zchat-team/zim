@@ -9,7 +9,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/swag"
 
-	"github.com/zchat-team/zchat-server/docs"
+	"github.com/zchat-team/zim/app/rest/docs"
 )
 
 func Swagger(r gin.IRouter) {
