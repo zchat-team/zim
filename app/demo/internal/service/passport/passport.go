@@ -6,8 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/zchat-team/zim/pkg/runtime"
+	"github.com/zmicro-team/zmicro/core/config"
 	"github.com/zmicro-team/zmicro/core/util/env"
-	"io/ioutil"
 	"strings"
 	"sync"
 	"time"
@@ -50,17 +50,9 @@ func GetService() *Service {
 		service = &Service{}
 		service.db = runtime.GetDB()
 
-		privKey, err := ioutil.ReadFile("conf/auth_key")
-		if err != nil {
-			log.Fatalf("Unable to read private key: %v", err)
-		}
-
-		pubKey, err := ioutil.ReadFile("conf/auth_key.pub")
-		if err != nil {
-			log.Fatalf("Unable to read public key: %v", err)
-		}
-
-		service.auth = auth.NewAuth(string(privKey), string(pubKey), runtime.GetRedisClient())
+		privKey := config.GetString("auth.privKey")
+		pubKey := config.GetString("auth.pubKey")
+		service.auth = auth.NewAuth(privKey, pubKey, runtime.GetRedisClient())
 	})
 	return service
 }
