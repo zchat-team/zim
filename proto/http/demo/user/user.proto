@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zchat-server/api/user";
+package github.com.zchat.team.zchat.server.api.user;
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service User {
+  rpc Search(SearchReq) returns (SearchRsp) {
+    option (google.api.http) = {
+      post: "/user/search",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "搜索用户";
+      tags: "用户";
+    };
+  }
+  rpc Get(GetReq) returns (GetRsp) {
+    option (google.api.http) = {
+      post: "/user/get",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "获取用户";
+      tags: "用户";
+    };
+  }
+  rpc MGet(MGetReq) returns (MGetRsp) {
+    option (google.api.http) = {
+      post: "/user/mget",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "获取多个用户";
+      tags: "用户";
+    };
+  }
+}
+
+message SearchReq {
+  string id = 1;
+}
+
+message UserInfo {
+  int64 id = 1;
+  string zid = 2;
+  string nickname = 3;
+  string avatar = 4;
+}
+message SearchRsp {
+  repeated UserInfo list = 1;
+}
+
+message GetReq {
+  int64 uid = 1;
+}
+
+message GetRsp {
+  int64 id = 1;
+  string zid = 2;
+  string nickname = 3;
+  string avatar = 4;
+}
+
+message MGetReq {
+  repeated int64 uids = 1;
+}
+
+message MGetRsp {
+  repeated UserInfo list = 1;
+}

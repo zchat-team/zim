@@ -192,3 +192,69 @@ func ErrLoginConflictw(opt ...Option) *errors.Error {
 	_apply(e, opt...)
 	return e
 }
+func IsUserNotExists(err error) bool {
+	e := errors.FromError(err)
+	return e.Detail == ErrorReason_user_not_exists.String() && e.Code == 1005
+}
+func ErrUserNotExists(message ...string) *errors.Error {
+	if len(message) > 0 {
+		return ErrUserNotExistsw(WithMessage(message[0]))
+	}
+	return ErrUserNotExistsw()
+}
+func ErrUserNotExistsf(format string, args ...any) *errors.Error {
+	return ErrUserNotExistsw(WithMessage(fmt.Sprintf(format, args...)))
+}
+func ErrUserNotExistsw(opt ...Option) *errors.Error {
+	e := &errors.Error{
+		Code:    1005,
+		Message: "用户不存在",
+		Detail:  ErrorReason_user_not_exists.String(),
+	}
+	_apply(e, opt...)
+	return e
+}
+func IsUserNoPasswd(err error) bool {
+	e := errors.FromError(err)
+	return e.Detail == ErrorReason_user_no_passwd.String() && e.Code == 1006
+}
+func ErrUserNoPasswd(message ...string) *errors.Error {
+	if len(message) > 0 {
+		return ErrUserNoPasswdw(WithMessage(message[0]))
+	}
+	return ErrUserNoPasswdw()
+}
+func ErrUserNoPasswdf(format string, args ...any) *errors.Error {
+	return ErrUserNoPasswdw(WithMessage(fmt.Sprintf(format, args...)))
+}
+func ErrUserNoPasswdw(opt ...Option) *errors.Error {
+	e := &errors.Error{
+		Code:    1006,
+		Message: "用户未设置密码, 不能用密码登录",
+		Detail:  ErrorReason_user_no_passwd.String(),
+	}
+	_apply(e, opt...)
+	return e
+}
+func IsPasswordIncorrect(err error) bool {
+	e := errors.FromError(err)
+	return e.Detail == ErrorReason_password_incorrect.String() && e.Code == 1007
+}
+func ErrPasswordIncorrect(message ...string) *errors.Error {
+	if len(message) > 0 {
+		return ErrPasswordIncorrectw(WithMessage(message[0]))
+	}
+	return ErrPasswordIncorrectw()
+}
+func ErrPasswordIncorrectf(format string, args ...any) *errors.Error {
+	return ErrPasswordIncorrectw(WithMessage(fmt.Sprintf(format, args...)))
+}
+func ErrPasswordIncorrectw(opt ...Option) *errors.Error {
+	e := &errors.Error{
+		Code:    1007,
+		Message: "密码错误",
+		Detail:  ErrorReason_password_incorrect.String(),
+	}
+	_apply(e, opt...)
+	return e
+}

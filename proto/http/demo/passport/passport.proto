@@ -1,0 +1,168 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zchat-server/api/passport";
+package github.com.zchat.team.zchat.server.api.passport;
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "google/api/field_behavior.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service Passport {
+  rpc Login(LoginReq) returns (LoginRsp) {
+    option (google.api.http) = {
+      post: "/passport/login",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "密码登录";
+      tags: "帐号认证模块";
+    };
+  }
+  rpc SmsLogin(SmsLoginReq) returns (SmsLoginRsp) {
+    option (google.api.http) = {
+      post: "/passport/smsLogin",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "短信验码登录";
+      tags: "帐号认证模块";
+    };
+  }
+  rpc Logout(LogoutReq) returns (LogoutRsp) {
+    option (google.api.http) = {
+      post: "/passport/logout",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "登出";
+      tags: "帐号认证模块";
+    };
+  }
+  rpc Sms(SmsReq) returns (SmsRsp) {
+    option (google.api.http) = {
+      post: "/passport/sms",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "获取验证码";
+      tags: "帐号认证模块";
+    };
+  }
+  rpc SetPwd(SetPwdReq) returns (SetPwdRsp) {
+    option (google.api.http) = {
+      post: "/passport/setPwd",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "设置密码";
+      tags: "帐号认证模块";
+    };
+  }
+  rpc ChangePwd(ChangePwdReq) returns (ChangePwdRsp) {
+    option (google.api.http) = {
+      post: "/passport/changePwd",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "修改密码";
+      tags: "帐号认证模块";
+    };
+  }
+  rpc RefreshToken(RefreshTokenReq) returns (RefreshTokenRsp) {
+    option (google.api.http) = {
+      post: "/passport/refreshToken",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "刷新令牌";
+      tags: "帐号认证模块";
+    };
+  }
+}
+
+message Token {
+  string access_token = 1 [(gogoproto.moretags) = 'form:"access_token"'];
+  string refresh_token = 2 [(gogoproto.moretags) = 'form:"refresh_token"'];
+  int64 created = 3 [(gogoproto.moretags) = 'form:"created"'];
+  int64 expires = 4 [(gogoproto.moretags) = 'form:"expires"'];
+}
+
+message LoginReq {
+  // 登录类型 1: 手机 2: 萝卜号 3: email
+  int32 type = 1 [(gogoproto.moretags) = 'form:"type" binding:"required,oneof=1 2 3"', (google.api.field_behavior) = REQUIRED];
+  string account = 2 [(gogoproto.moretags) = 'form:"account" binding:"required"', (google.api.field_behavior) = REQUIRED];
+  string password = 3 [(gogoproto.moretags) = 'form:"password" binding:"required"', (google.api.field_behavior) = REQUIRED];
+}
+
+message LoginRsp {
+  Token token = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+  int64 uid = 2;
+}
+
+message SmsLoginReq {
+  string mobile = 1 [(gogoproto.moretags) = 'form:"mobile" binding:"required,mobile"', (google.api.field_behavior) = REQUIRED];
+  string code = 2 [(gogoproto.moretags) = 'form:"code" binding:"required"', (google.api.field_behavior) = REQUIRED];
+}
+
+message SmsLoginRsp {
+  Token token = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+  int64 uid = 2;
+  bool is_signup = 3;
+}
+
+message SmsReq {
+  string mobile = 1 [(gogoproto.moretags) = 'form:"mobile" binding:"required,mobile"', (google.api.field_behavior) = REQUIRED];
+}
+
+message SmsRsp {
+  string code = 1;
+}
+
+message SetPwdReq {
+  string password = 1 [(gogoproto.moretags) = 'form:"password" binding:"required"', (google.api.field_behavior) = REQUIRED];
+}
+
+message SetPwdRsp {
+  Token token = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+}
+
+message ChangePwdReq {
+  string old_password = 1 [(gogoproto.moretags) = 'form:"old_password" binding:"required"', (google.api.field_behavior) = REQUIRED];
+  string new_password = 2 [(gogoproto.moretags) = 'form:"new_password" binding:"required"', (google.api.field_behavior) = REQUIRED];
+}
+
+message ChangePwdRsp {
+  Token token = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+}
+
+message RefreshTokenReq {
+  int64 uid = 1 [(gogoproto.moretags) = 'form:"uid" binding:"required"', (google.api.field_behavior) = REQUIRED];
+  string refresh_token = 2 [(gogoproto.moretags) = 'form:"refresh_token" binding:"required"', (google.api.field_behavior) = REQUIRED];
+}
+
+message RefreshTokenRsp {
+  Token token = 1 [(gogoproto.nullable) = false, (gogoproto.embed) = true];
+}
+
+message LogoutReq {
+
+}
+
+message LogoutRsp {
+
+}

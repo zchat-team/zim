@@ -14,7 +14,7 @@ import (
 )
 
 func RegisterAPI(r *gin.Engine) {
-	//Swagger(r)
+	Swagger(r)
 	g := r.Group("/api")
 
 	chat.RegisterImHTTPServer(g, sChat.GetService())

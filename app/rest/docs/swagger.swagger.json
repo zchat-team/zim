@@ -1,0 +1,1714 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "rest",
+    "version": "v0.1.0"
+  },
+  "tags": [
+    {
+      "name": "Im"
+    },
+    {
+      "name": "Conv"
+    },
+    {
+      "name": "Group"
+    },
+    {
+      "name": "Client"
+    }
+  ],
+  "host": "localhost:5080",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/zim/clients/{uin}/kick": {
+      "patch": {
+        "summary": "强制下线",
+        "operationId": "Client_Kick",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userKickRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uin",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "用户"
+        ]
+      }
+    },
+    "/zim/clients/{uin}/messages": {
+      "get": {
+        "summary": "查询用户发送的消息",
+        "operationId": "Client_GetMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userGetMessageRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uin",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "用户"
+        ]
+      }
+    },
+    "/zim/conversations": {
+      "get": {
+        "summary": "查询会话列表",
+        "operationId": "Conv_Query",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convQueryRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "聊天"
+        ]
+      },
+      "post": {
+        "summary": "创建会话",
+        "operationId": "Conv_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/restconvCreateRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/restconvCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      }
+    },
+    "/zim/conversations/{conv_id}": {
+      "delete": {
+        "summary": "删除会话",
+        "operationId": "Conv_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convDeleteRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      },
+      "put": {
+        "summary": "更新会话",
+        "operationId": "Conv_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convUpdateRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "other": {
+                  "type": "string",
+                  "title": "其他字段"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      }
+    },
+    "/zim/conversations/{conv_id}/members": {
+      "get": {
+        "summary": "查询成员",
+        "operationId": "Conv_QueryMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convQueryMemberRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      },
+      "delete": {
+        "summary": "移除成员",
+        "operationId": "Conv_DeleteMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convDeleteMemberRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "client_ids",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      },
+      "post": {
+        "summary": "增加成员",
+        "operationId": "Conv_AddMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convAddMemberRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "other": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      }
+    },
+    "/zim/conversations/{conv_id}/messages": {
+      "get": {
+        "summary": "查询历史消息",
+        "operationId": "Conv_QueryMsg",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convQueryMsgMsgRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      },
+      "post": {
+        "summary": "发送消息",
+        "operationId": "Conv_Send",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/restconvSendRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "other": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      }
+    },
+    "/zim/conversations/{conv_id}/messages/{msg_id}": {
+      "delete": {
+        "summary": "删除消息",
+        "operationId": "Conv_DeleteMsg",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convDeleteMsgRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "msg_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      },
+      "put": {
+        "summary": "修改消息",
+        "operationId": "Conv_UpdateMsg",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convUpdateMsgRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "msg_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "other": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      }
+    },
+    "/zim/conversations/{conv_id}/messages/{msg_id}/recall": {
+      "put": {
+        "summary": "修改消息",
+        "operationId": "Conv_Recall",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convRecallRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "msg_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sender": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      }
+    },
+    "/zim/conversations/{conv_id}/mutes": {
+      "get": {
+        "summary": "查询静音用户",
+        "operationId": "Conv_QueryMuteClient",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convQueryMuteClientRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      },
+      "delete": {
+        "summary": "移除静音用户",
+        "operationId": "Conv_DeleteMuteClient",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convDeleteMuteClientRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "client_ids",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      },
+      "post": {
+        "summary": "增加静音用户",
+        "operationId": "Conv_AddMuteClient",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/convAddMuteClientRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "conv_id",
+            "description": "会话ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "client_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "聊天"
+        ]
+      }
+    },
+    "/zim/groups": {
+      "post": {
+        "summary": "创建群",
+        "operationId": "Group_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/restgroupCreateRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/restgroupCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/zim/groups/{group_id}/members": {
+      "post": {
+        "summary": "添加成员",
+        "operationId": "Group_Add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupAddRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "group_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "required": [
+                    "members"
+                  ]
+                }
+              },
+              "required": [
+                "members"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/zim/send": {
+      "post": {
+        "summary": "发送消息",
+        "operationId": "Im_Send",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/restchatSendRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/restchatSendReq"
+            }
+          }
+        ],
+        "tags": [
+          "消息"
+        ]
+      }
+    },
+    "/zim/users/checkOnline": {
+      "post": {
+        "summary": "查询在线成员",
+        "operationId": "Client_CheckOnline",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userCheckOnlineRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userCheckOnlineReq"
+            }
+          }
+        ],
+        "tags": [
+          "用户"
+        ]
+      }
+    },
+    "/zim/users/{uin}/unreadCount": {
+      "get": {
+        "summary": "查询未读计数",
+        "operationId": "Client_UnreadCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userUnreadCountRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uin",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "conv_id",
+            "description": "会话ID，如果为空，则查询所有会话的未读计数.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "用户"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "convAddMemberRsp": {
+      "type": "object"
+    },
+    "convAddMuteClientRsp": {
+      "type": "object"
+    },
+    "convDeleteMemberRsp": {
+      "type": "object"
+    },
+    "convDeleteMsgRsp": {
+      "type": "object"
+    },
+    "convDeleteMuteClientRsp": {
+      "type": "object"
+    },
+    "convDeleteRsp": {
+      "type": "object"
+    },
+    "convQueryMemberRsp": {
+      "type": "object"
+    },
+    "convQueryMsgMsgRsp": {
+      "type": "object"
+    },
+    "convQueryMuteClientRsp": {
+      "type": "object"
+    },
+    "convQueryRsp": {
+      "type": "object"
+    },
+    "convRecallRsp": {
+      "type": "object"
+    },
+    "convUpdateMsgRsp": {
+      "type": "object"
+    },
+    "convUpdateRsp": {
+      "type": "object"
+    },
+    "groupAddRsp": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "restchatSendReq": {
+      "type": "object",
+      "properties": {
+        "conv_type": {
+          "type": "integer",
+          "format": "int32",
+          "required": [
+            "conv_type"
+          ]
+        },
+        "msg_type": {
+          "type": "integer",
+          "format": "int32",
+          "required": [
+            "msg_type"
+          ]
+        },
+        "sender": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "is_transparent": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "conv_type",
+        "msg_type"
+      ]
+    },
+    "restchatSendRsp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "send_time": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "restconvCreateReq": {
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "成员",
+          "required": [
+            "members"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "title": "会话名称"
+        },
+        "attrs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "属性"
+        },
+        "unique": {
+          "type": "boolean",
+          "title": "唯一性标识"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "title": "会话类型，私聊，群聊，聊天室，临时会话（如客服），系统会话（智能机器人、公从号、服务号）",
+          "required": [
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "members",
+        "type"
+      ]
+    },
+    "restconvCreateRsp": {
+      "type": "object",
+      "properties": {
+        "conv_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "会话ID"
+        }
+      }
+    },
+    "restconvSendRsp": {
+      "type": "object"
+    },
+    "restgroupCreateReq": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "title": "群主",
+          "required": [
+            "owner"
+          ]
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "成员",
+          "required": [
+            "members"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "title": "群名称"
+        },
+        "group_id": {
+          "type": "string",
+          "title": "群ID，如果不传，zim会生成一个群ID"
+        },
+        "notice": {
+          "type": "string"
+        },
+        "intro": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "owner",
+        "members"
+      ]
+    },
+    "restgroupCreateRsp": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "title": "群ID"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "swaggerResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "userCheckOnlineReq": {
+      "type": "object",
+      "properties": {
+        "uins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "要查询的用户列表",
+          "required": [
+            "uins"
+          ]
+        }
+      },
+      "required": [
+        "uins"
+      ]
+    },
+    "userCheckOnlineRsp": {
+      "type": "object",
+      "properties": {
+        "uins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "userGetMessageRsp": {
+      "type": "object"
+    },
+    "userKickRsp": {
+      "type": "object"
+    },
+    "userUnreadCountRsp": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "externalDocs": {
+    "description": "zim",
+    "url": "https://github.com/swagger-api/swagger-ui"
+  }
+}

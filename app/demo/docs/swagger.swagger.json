@@ -1,0 +1,2490 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "demo",
+    "version": "v0.1.0"
+  },
+  "tags": [
+    {
+      "name": "Contact"
+    },
+    {
+      "name": "Group"
+    },
+    {
+      "name": "Passport"
+    },
+    {
+      "name": "User"
+    }
+  ],
+  "host": "localhost:5188",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/contact/add": {
+      "post": {
+        "summary": "添加好友",
+        "operationId": "Contact_Add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apicontactAddRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apicontactAddReq"
+            }
+          }
+        ],
+        "tags": [
+          "联系人"
+        ]
+      }
+    },
+    "/contact/application/accept": {
+      "post": {
+        "summary": "同意请求",
+        "operationId": "Contact_Accept",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contactAcceptRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/contactAcceptReq"
+            }
+          }
+        ],
+        "tags": [
+          "联系人"
+        ]
+      }
+    },
+    "/contact/application/list": {
+      "post": {
+        "summary": "获取好友请求列表",
+        "operationId": "Contact_GetApplicationList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contactGetApplicationListRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/contactGetApplicationListReq"
+            }
+          }
+        ],
+        "tags": [
+          "联系人"
+        ]
+      }
+    },
+    "/contact/application/refuse": {
+      "post": {
+        "summary": "拒绝请求",
+        "operationId": "Contact_Refuse",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contactRefuseRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/contactRefuseReq"
+            }
+          }
+        ],
+        "tags": [
+          "联系人"
+        ]
+      }
+    },
+    "/contact/application/setRead": {
+      "post": {
+        "summary": "设置好友请求全部已读",
+        "operationId": "Contact_SetApplicationRead",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contactSetApplicationReadRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/contactSetApplicationReadReq"
+            }
+          }
+        ],
+        "tags": [
+          "联系人"
+        ]
+      }
+    },
+    "/contact/list": {
+      "post": {
+        "summary": "获取好友列表",
+        "operationId": "Contact_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/contactListRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/contactListReq"
+            }
+          }
+        ],
+        "tags": [
+          "联系人"
+        ]
+      }
+    },
+    "/group/add": {
+      "post": {
+        "summary": "添加群成员",
+        "operationId": "Group_Add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apigroupAddRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apigroupAddReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/addManager": {
+      "post": {
+        "summary": "添加管理员",
+        "operationId": "Group_AddManager",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupAddManagerRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupAddManagerReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/create": {
+      "post": {
+        "summary": "创建群组",
+        "operationId": "Group_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupCreateRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/dismiss": {
+      "post": {
+        "summary": "解散群组",
+        "operationId": "Group_Dismiss",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupDismissRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupDismissReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/info": {
+      "post": {
+        "summary": "群信息",
+        "operationId": "Group_Info",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupInfoRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupInfoReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/join": {
+      "post": {
+        "summary": "加入群组",
+        "operationId": "Group_Join",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupJoinRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupJoinReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/kick": {
+      "post": {
+        "summary": "退出群组",
+        "operationId": "Group_Kick",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupKickRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupKickReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/memberList": {
+      "post": {
+        "summary": "获取群成员列表",
+        "operationId": "Group_MemberList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupMemberListRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupMemberListReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/quit": {
+      "post": {
+        "summary": "退出群组",
+        "operationId": "Group_Quit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupQuitRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupQuitReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/removeManager": {
+      "post": {
+        "summary": "删除管理员",
+        "operationId": "Group_RemoveManager",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupRemoveManagerRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupRemoveManagerReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/rename": {
+      "post": {
+        "summary": "重命名群组",
+        "operationId": "Group_Rename",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupRenameRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupRenameReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/setAvatar": {
+      "post": {
+        "summary": "设置群组头像",
+        "operationId": "Group_SetAvatar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupSetAvatarRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupSetAvatarReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/setDisplayName": {
+      "post": {
+        "summary": "设置群名片",
+        "operationId": "Group_SetDisplayName",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupSetDisplayNameRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupSetDisplayNameReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/group/transfer": {
+      "post": {
+        "summary": "转让群组",
+        "operationId": "Group_Transfer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/groupTransferRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/groupTransferReq"
+            }
+          }
+        ],
+        "tags": [
+          "群组"
+        ]
+      }
+    },
+    "/passport/changePwd": {
+      "post": {
+        "summary": "修改密码",
+        "operationId": "Passport_ChangePwd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportChangePwdRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportChangePwdReq"
+            }
+          }
+        ],
+        "tags": [
+          "帐号认证模块"
+        ]
+      }
+    },
+    "/passport/login": {
+      "post": {
+        "summary": "密码登录",
+        "operationId": "Passport_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportLoginRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportLoginReq"
+            }
+          }
+        ],
+        "tags": [
+          "帐号认证模块"
+        ]
+      }
+    },
+    "/passport/logout": {
+      "post": {
+        "summary": "登出",
+        "operationId": "Passport_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportLogoutRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportLogoutReq"
+            }
+          }
+        ],
+        "tags": [
+          "帐号认证模块"
+        ]
+      }
+    },
+    "/passport/refreshToken": {
+      "post": {
+        "summary": "刷新令牌",
+        "operationId": "Passport_RefreshToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportRefreshTokenRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportRefreshTokenReq"
+            }
+          }
+        ],
+        "tags": [
+          "帐号认证模块"
+        ]
+      }
+    },
+    "/passport/setPwd": {
+      "post": {
+        "summary": "设置密码",
+        "operationId": "Passport_SetPwd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportSetPwdRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportSetPwdReq"
+            }
+          }
+        ],
+        "tags": [
+          "帐号认证模块"
+        ]
+      }
+    },
+    "/passport/sms": {
+      "post": {
+        "summary": "获取验证码",
+        "operationId": "Passport_Sms",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportSmsRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportSmsReq"
+            }
+          }
+        ],
+        "tags": [
+          "帐号认证模块"
+        ]
+      }
+    },
+    "/passport/smsLogin": {
+      "post": {
+        "summary": "短信验码登录",
+        "operationId": "Passport_SmsLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/passportSmsLoginRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/passportSmsLoginReq"
+            }
+          }
+        ],
+        "tags": [
+          "帐号认证模块"
+        ]
+      }
+    },
+    "/user/get": {
+      "post": {
+        "summary": "获取用户",
+        "operationId": "User_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userGetRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "用户"
+        ]
+      }
+    },
+    "/user/mget": {
+      "post": {
+        "summary": "获取多个用户",
+        "operationId": "User_MGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userMGetRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userMGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "用户"
+        ]
+      }
+    },
+    "/user/search": {
+      "post": {
+        "summary": "搜索用户",
+        "operationId": "User_Search",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/userSearchRsp"
+            }
+          },
+          "401": {
+            "description": "Returned when the user does not login.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "599": {
+            "description": "Returned when the business error happen.",
+            "schema": {
+              "$ref": "#/definitions/swaggerResponseBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userSearchReq"
+            }
+          }
+        ],
+        "tags": [
+          "用户"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apicontactAddReq": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "apicontactAddRsp": {
+      "type": "object"
+    },
+    "apigroupAddReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "apigroupAddRsp": {
+      "type": "object"
+    },
+    "contactAcceptReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "contactAcceptRsp": {
+      "type": "object"
+    },
+    "contactApplication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "title": "状态[1:审核中 2:通过 3:拒绝]"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "contactFriend": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "friend_uid": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "alias": {
+          "type": "string"
+        }
+      }
+    },
+    "contactGetApplicationListReq": {
+      "type": "object"
+    },
+    "contactGetApplicationListRsp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contactApplication"
+          }
+        }
+      }
+    },
+    "contactListReq": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "contactListRsp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contactFriend"
+          }
+        }
+      }
+    },
+    "contactRefuseReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "contactRefuseRsp": {
+      "type": "object"
+    },
+    "contactSetApplicationReadReq": {
+      "type": "object"
+    },
+    "contactSetApplicationReadRsp": {
+      "type": "object"
+    },
+    "groupAddManagerReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupAddManagerRsp": {
+      "type": "object"
+    },
+    "groupCreateReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "notice": {
+          "type": "string"
+        },
+        "intro": {
+          "type": "string"
+        }
+      }
+    },
+    "groupCreateRsp": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupDismissReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupDismissRsp": {
+      "type": "object"
+    },
+    "groupInfoReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupInfoRsp": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "notice": {
+          "type": "string"
+        },
+        "intro": {
+          "type": "string"
+        }
+      }
+    },
+    "groupJoinReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupJoinRsp": {
+      "type": "object"
+    },
+    "groupKickReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupKickRsp": {
+      "type": "object"
+    },
+    "groupMember": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      }
+    },
+    "groupMemberListReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "groupMemberListRsp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/groupMember"
+          }
+        }
+      }
+    },
+    "groupQuitReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupQuitRsp": {
+      "type": "object"
+    },
+    "groupRemoveManagerReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupRemoveManagerRsp": {
+      "type": "object"
+    },
+    "groupRenameReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupRenameRsp": {
+      "type": "object"
+    },
+    "groupSetAvatarReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupSetAvatarRsp": {
+      "type": "object"
+    },
+    "groupSetDisplayNameReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupSetDisplayNameRsp": {
+      "type": "object"
+    },
+    "groupTransferReq": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "groupTransferRsp": {
+      "type": "object"
+    },
+    "passportChangePwdReq": {
+      "type": "object",
+      "properties": {
+        "old_password": {
+          "type": "string",
+          "required": [
+            "old_password"
+          ]
+        },
+        "new_password": {
+          "type": "string",
+          "required": [
+            "new_password"
+          ]
+        }
+      },
+      "required": [
+        "old_password",
+        "new_password"
+      ]
+    },
+    "passportChangePwdRsp": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/passportToken"
+        }
+      }
+    },
+    "passportLoginReq": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "integer",
+          "format": "int32",
+          "title": "登录类型 1: 手机 2: 萝卜号 3: email",
+          "required": [
+            "type"
+          ]
+        },
+        "account": {
+          "type": "string",
+          "required": [
+            "account"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "required": [
+            "password"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "account",
+        "password"
+      ]
+    },
+    "passportLoginRsp": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/passportToken"
+        },
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "passportLogoutReq": {
+      "type": "object"
+    },
+    "passportLogoutRsp": {
+      "type": "object"
+    },
+    "passportRefreshTokenReq": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "int64",
+          "required": [
+            "uid"
+          ]
+        },
+        "refresh_token": {
+          "type": "string",
+          "required": [
+            "refresh_token"
+          ]
+        }
+      },
+      "required": [
+        "uid",
+        "refresh_token"
+      ]
+    },
+    "passportRefreshTokenRsp": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/passportToken"
+        }
+      }
+    },
+    "passportSetPwdReq": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "required": [
+            "password"
+          ]
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "passportSetPwdRsp": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/passportToken"
+        }
+      }
+    },
+    "passportSmsLoginReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string",
+          "required": [
+            "mobile"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "required": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "mobile",
+        "code"
+      ]
+    },
+    "passportSmsLoginRsp": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "$ref": "#/definitions/passportToken"
+        },
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_signup": {
+          "type": "boolean"
+        }
+      }
+    },
+    "passportSmsReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string",
+          "required": [
+            "mobile"
+          ]
+        }
+      },
+      "required": [
+        "mobile"
+      ]
+    },
+    "passportSmsRsp": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "passportToken": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "expires": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "swaggerResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "userGetReq": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "userGetRsp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "zid": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      }
+    },
+    "userMGetReq": {
+      "type": "object",
+      "properties": {
+        "uids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "userMGetRsp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userUserInfo"
+          }
+        }
+      }
+    },
+    "userSearchReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "userSearchRsp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userUserInfo"
+          }
+        }
+      }
+    },
+    "userUserInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "zid": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "externalDocs": {
+    "description": "demo",
+    "url": "https://github.com/swagger-api/swagger-ui"
+  }
+}

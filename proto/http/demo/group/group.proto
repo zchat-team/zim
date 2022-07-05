@@ -1,0 +1,294 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zchat-server/api/group";
+package github.com.zchat.team.zchat.server.api.group;
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service Group {
+  rpc Create(CreateReq) returns (CreateRsp) {
+    option (google.api.http) = {
+      post: "/group/create",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "创建群组";
+      tags: "群组";
+    };
+  }
+  rpc Add(AddReq) returns (AddRsp) {
+    option (google.api.http) = {
+      post: "/group/add",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "添加群成员";
+      tags: "群组";
+    };
+  }
+  rpc Join(JoinReq) returns (JoinRsp) {
+    option (google.api.http) = {
+      post: "/group/join",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "加入群组";
+      tags: "群组";
+    };
+  }
+  rpc Quit(QuitReq) returns (QuitRsp) {
+    option (google.api.http) = {
+      post: "/group/quit",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "退出群组";
+      tags: "群组";
+    };
+  }
+  rpc Kick(KickReq) returns (KickRsp) {
+    option (google.api.http) = {
+      post: "/group/kick",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "退出群组";
+      tags: "群组";
+    };
+  }
+  rpc Dismiss(DismissReq) returns (DismissRsp) {
+    option (google.api.http) = {
+      post: "/group/dismiss",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "解散群组";
+      tags: "群组";
+    };
+  }
+  rpc Transfer(TransferReq) returns (TransferRsp) {
+    option (google.api.http) = {
+      post: "/group/transfer",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "转让群组";
+      tags: "群组";
+    };
+  }
+  rpc AddManager(AddManagerReq) returns (AddManagerRsp) {
+    option (google.api.http) = {
+      post: "/group/addManager",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "添加管理员";
+      tags: "群组";
+    };
+  }
+  rpc RemoveManager(RemoveManagerReq) returns (RemoveManagerRsp) {
+    option (google.api.http) = {
+      post: "/group/removeManager",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "删除管理员";
+      tags: "群组";
+    };
+  }
+  rpc Rename(RenameReq) returns (RenameRsp) {
+    option (google.api.http) = {
+      post: "/group/rename",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "重命名群组";
+      tags: "群组";
+    };
+  }
+  rpc SetAvatar(SetAvatarReq) returns (SetAvatarRsp) {
+    option (google.api.http) = {
+      post: "/group/setAvatar",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "设置群组头像";
+      tags: "群组";
+    };
+  }
+  rpc SetDisplayName(SetDisplayNameReq) returns (SetDisplayNameRsp) {
+    option (google.api.http) = {
+      post: "/group/setDisplayName",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "设置群名片";
+      tags: "群组";
+    };
+  }
+  rpc MemberList(MemberListReq) returns (MemberListRsp) {
+    option (google.api.http) = {
+      post: "/group/memberList",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "获取群成员列表";
+      tags: "群组";
+    };
+  }
+  rpc Info(InfoReq) returns (InfoRsp) {
+    option (google.api.http) = {
+      post: "/group/info",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "群信息";
+      tags: "群组";
+    };
+  }
+}
+
+message CreateReq {
+  string name = 1;
+  repeated int64 members = 2;
+  string avatar = 3;
+  string notice = 4;
+  string intro = 5;
+}
+
+message CreateRsp {
+  int64 group_id = 1;
+}
+
+message AddReq {
+  int64 group_id = 1;
+  repeated int64 members = 2;
+}
+
+message AddRsp {
+
+}
+
+message JoinReq {
+  int64 group_id = 1;
+}
+
+message JoinRsp {
+
+}
+
+message QuitReq {
+  int64 group_id = 1;
+}
+
+message QuitRsp {
+
+}
+
+message KickReq {
+  int64 group_id = 1;
+}
+
+message KickRsp {
+
+}
+
+message DismissReq {
+  int64 group_id = 1;
+}
+
+message DismissRsp {
+
+}
+
+message TransferReq {
+  int64 group_id = 1;
+}
+
+message TransferRsp {
+
+}
+
+message AddManagerReq {
+  int64 group_id = 1;
+}
+
+message AddManagerRsp {
+
+}
+
+message RemoveManagerReq {
+  int64 group_id = 1;
+}
+
+message RemoveManagerRsp {
+
+}
+
+message RenameReq {
+  int64 group_id = 1;
+}
+
+message RenameRsp {
+
+}
+
+message SetAvatarReq {
+  int64 group_id = 1;
+}
+
+message SetAvatarRsp {
+
+}
+
+message SetDisplayNameReq {
+  int64 group_id = 1;
+}
+
+message SetDisplayNameRsp {
+
+}
+
+message MemberListReq {
+  int64 group_id = 1;
+  int64 offset = 2;
+  int32 limit = 3;
+}
+
+message Member {
+  int64 id  = 1;
+  string nickname = 2;
+  string avatar = 3;
+}
+
+message MemberListRsp {
+  repeated Member list = 1;
+}
+
+message InfoReq {
+  int64 group_id = 1;
+}
+
+message InfoRsp {
+  int64 group_id = 1;
+  string name = 2;
+  string avatar = 3;
+  string notice = 4;
+  string intro = 5;
+}

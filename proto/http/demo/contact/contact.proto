@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+option go_package = "github.com/zchat-team/zchat-server/api/contact";
+package github.com.zchat.team.zchat.server.api.contact;
+
+import "google/api/annotations.proto";
+import "gogoproto/gogo.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (gogoproto.goproto_unrecognized_all) = false;
+option (gogoproto.goproto_unkeyed_all) = false;
+option (gogoproto.goproto_sizecache_all) = false;
+option (gogoproto.goproto_getters_all) = false;
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+// Enable custom Size method (Required by Marshal and Unmarshal).
+option (gogoproto.sizer_all) = true;
+// Enable registration with golang/protobuf for the grpc-gateway.
+option (gogoproto.goproto_registration) = true;
+// Enable generation of XXX_MessageName methods for grpc-go/status.
+option (gogoproto.messagename_all) = true;
+
+service Contact {
+  rpc Add(AddReq) returns (AddRsp) {
+    option (google.api.http) = {
+      post: "/contact/add",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "添加好友";
+      tags: "联系人";
+    };
+  }
+  rpc SetApplicationRead(SetApplicationReadReq) returns (SetApplicationReadRsp) {
+    option (google.api.http) = {
+      post: "/contact/application/setRead",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "设置好友请求全部已读";
+      tags: "联系人";
+    };
+  }
+  rpc GetApplicationList(GetApplicationListReq) returns (GetApplicationListRsp) {
+    option (google.api.http) = {
+      post: "/contact/application/list",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "获取好友请求列表";
+      tags: "联系人";
+    };
+  }
+  rpc List(ListReq) returns (ListRsp) {
+    option (google.api.http) = {
+      post: "/contact/list",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "获取好友列表";
+      tags: "联系人";
+    };
+  }
+  rpc Accept(AcceptReq) returns (AcceptRsp) {
+    option (google.api.http) = {
+      post: "/contact/application/accept",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "同意请求";
+      tags: "联系人";
+    };
+  }
+  rpc Refuse(RefuseReq) returns (RefuseRsp) {
+    option (google.api.http) = {
+      post: "/contact/application/refuse",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "拒绝请求";
+      tags: "联系人";
+    };
+  }
+}
+
+message AddReq {
+  int64 uid = 1;
+}
+
+message AddRsp {
+}
+
+message SetApplicationReadReq {
+
+}
+
+message SetApplicationReadRsp {
+
+}
+
+message GetApplicationListReq {
+
+}
+
+message Application {
+  int64 id = 1;
+  int64 uid = 2;
+  string nickname = 3;
+  string avatar = 4;
+  // 状态[1:审核中 2:通过 3:拒绝]
+  int32 status = 5;
+  int64 created_at = 6;
+  int64 updated_at = 7;
+  int64 expires_at = 8;
+}
+
+message GetApplicationListRsp {
+  repeated Application list = 1;
+}
+
+message ListReq {
+  int64 offset = 1;
+  int32 limit = 2;
+}
+
+message Friend {
+  int64 id = 1;
+  string friend_uid = 2;
+  int64 created_at = 3;
+  string nickname = 4;
+  string avatar = 5;
+  string alias = 6;
+}
+
+message ListRsp {
+  repeated Friend list = 1;
+}
+
+message AcceptReq {
+  int64 id = 1;
+}
+
+message AcceptRsp {
+
+}
+
+message RefuseReq {
+  int64 id = 1;
+}
+
+message RefuseRsp {
+
+}
+
+
