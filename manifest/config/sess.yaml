@@ -1,0 +1,18 @@
+app:
+  name: "zim.sess"
+logger:
+  level: "debug"
+  filename: "logs/sess.log"
+  maxSize: 100
+  maxBackups: 10
+  maxAge: 7
+  compress: true
+registry:
+  basePath: "/zmicro"
+  updateInterval: 30
+  etcdAddr:
+    - "etcd:2379"
+redis:
+  addr: "redis:6379"
+  password: "123456"
+  db: 1

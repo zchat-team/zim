@@ -100,8 +100,8 @@ func (s *Service) Add(ctx context.Context, req *api.AddReq, rsp *api.AddRsp) (er
 
 		client := resty.New()
 
-		zimServer := config.GetString("zimServer")
-		sendUrl := zimServer + "api/zim/send"
+		restServer := config.GetString("rest")
+		sendUrl := restServer + "api/zim/send"
 		result, err := client.R().SetBody(&msg).Post(sendUrl)
 		if err != nil {
 			log.Error(err)
@@ -242,8 +242,8 @@ func (s *Service) Accept(ctx context.Context, req *api.AcceptReq, rsp *api.Accep
 		}
 
 		client := resty.New()
-		zimServer := config.GetString("zimServer")
-		sendUrl := zimServer + "api/zim/send"
+		restServer := config.GetString("rest")
+		sendUrl := restServer + "api/zim/send"
 		result, err := client.R().SetBody(&msg).Post(sendUrl)
 		if err != nil {
 			log.Error(err)
@@ -320,8 +320,8 @@ func (s *Service) Refuse(ctx context.Context, req *api.RefuseReq, rsp *api.Refus
 		}
 
 		client := resty.New()
-		zimServer := config.GetString("zimServer")
-		sendUrl := zimServer + "api/zim/send"
+		restServer := config.GetString("rest")
+		sendUrl := restServer + "api/zim/send"
 		result, err := client.R().SetBody(&msg).Post(sendUrl)
 		if err != nil {
 			log.Error(err)

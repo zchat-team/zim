@@ -1,0 +1,18 @@
+app:
+  name: "zim.conn"
+logger:
+  level: "debug"
+  filename: "logs/conn.log"
+  maxSize: 100
+  maxBackups: 10
+  maxAge: 7
+  compress: true
+server:
+  tcpAddr: ":2001"
+  wsAddr: ":2002"
+registry:
+  basePath: "/zmicro"
+  etcdAddr:
+    - "etcd:2379"
+nats:
+  addr: "nats://nats:4222"
