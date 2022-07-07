@@ -13,7 +13,7 @@ type UserLoginLog struct {
 	Type      int       `json:"type" gorm:"size:8;not null;default:0"`   // 类型[1:登录;2:登出]
 	Status    int       `json:"status" gorm:"size:8;not null;default:0"` // 状态[1:成功;2:失败]
 	LoginIp   string    `json:"login_ip" gorm:"size:64;not null"`        // 登录IP
-	CreatedAt time.Time `json:"created_at" gorm:"size:3"`
+	CreatedAt time.Time `json:"created_at" gorm:"comment:创建时间"`
 }
 
 func (_ *UserLoginLog) TableName() string {

@@ -10,8 +10,8 @@ type Application struct {
 	FriendUid int64     `json:"friend_uid" gorm:"size:64;not null;default:0;comment:好友ID"`
 	Status    int       `json:"status" gorm:"size:8;not null;default:0;comment:状态"` // 状态[1:审核中 2:通过 3:拒绝]
 	IsRead    string    `json:"is_read" gorm:"size:1;not null;default:'0';comment:是否已读"`
-	CreatedAt time.Time `json:"created_at" gorm:"size:3"`
-	UpdatedAt time.Time `json:"updated_at" gorm:"size:3"`
+	CreatedAt time.Time `json:"created_at" gorm:"comment:创建时间"`
+	UpdatedAt time.Time `json:"updated_at" gorm:"comment:更新时间"`
 	ExpiresAt int64     `json:"expires_at" gorm:"size:64;not null;default:0;comment:过期时间"`
 }
 
