@@ -27,11 +27,6 @@ func GetService() *Service {
 	return service
 }
 
-type Registry struct {
-	BasePath string
-	EtcdAddr []string
-}
-
 func (s *Service) Send(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
 	reqL := pb.SendReq{
 		ConvType:      req.ConvType,

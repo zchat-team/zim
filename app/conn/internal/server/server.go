@@ -39,11 +39,6 @@ type Server struct {
 	mapCmdFunc  map[protocol.CmdId]CmdFunc
 }
 
-type Registry struct {
-	BasePath string
-	EtcdAddr []string
-}
-
 func NewServer(opts ...Option) *Server {
 	s := new(Server)
 	s.opts = NewOptions(opts...)

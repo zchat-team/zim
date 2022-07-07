@@ -19,14 +19,14 @@ const (
 )
 
 const (
-	ConvTypeC2C           = 1 // 单聊
-	ConvTypeGroup         = 2 // 群聊
-	ConvTypeSystem        = 3 // 系统
-	ConvTypeCustomService = 4 // 客服
+	ConvTypeC2C   = 1 // 单聊
+	ConvTypeGroup = 2 // 群聊
+	//ConvTypeSystem        = 3 // 系统
+	//ConvTypeCustomService = 4 // 客服
 )
 
 const (
-	MsgKeepDays  = 30  // 离线消息保留天数
+	MsgKeepDays  = 7   // 离线消息保留天数
 	ConvKeepDays = 180 // 会话保留天数
 )
 

@@ -29,8 +29,8 @@ func NewServer() *Server {
 }
 
 func (s *Server) Start() error {
-	go s.consumeTodo()
 	go s.consumeNew()
+	go s.consumeTodo()
 
 	log.Info("Dispatch Server Started")
 
@@ -259,6 +259,9 @@ func (s *Server) onNew(m *common.Msg) (err error) {
 		err = s.onGroupMsg(m)
 	}
 
+	if err != nil {
+		return
+	}
 	// 持久化，可以考虑生成一条 MSGS.persist，由独立进程做持久化
 	go func() {
 		s.storeMysql(m)

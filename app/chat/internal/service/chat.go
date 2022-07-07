@@ -64,15 +64,10 @@ func (l *Chat) SendMsg(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp
 	rsp.Id = m.Id
 	rsp.SendTime = m.SendTime
 	rsp.ClientUuid = m.ClientUuid
-	//if req.ConvType == constant.ConvTypeC2C {
-	//	err = l.sendC2C(ctx, req, rsp)
-	//} else if req.ConvType == constant.ConvTypeGroup {
-	//	err = l.sendC2G(ctx, req, rsp)
-	//}
 	return
 }
 
-// SyncMsg 同步离线消息，从redis缓存中读取，只同步最近30天的消息
+// SyncMsg 同步离线消息，从redis缓存中读取，只同步最近7天的消息
 func (l *Chat) SyncMsg(ctx context.Context, req *chat.SyncMsgReq, rsp *chat.SyncMsgRsp) (err error) {
 	// 保证消息库 与 同步库 数据一致
 	if err = l.removeDirty(ctx, req); err != nil {
@@ -108,7 +103,6 @@ func (l *Chat) SyncMsg(ctx context.Context, req *chat.SyncMsgReq, rsp *chat.Sync
 		keys = append(keys, key)
 	}
 
-	//*rsp = api.SyncMsgRsp{}
 	if len(keys) == 0 {
 		return
 	}
@@ -208,160 +202,161 @@ func (l *Chat) MsgAck(ctx context.Context, req *chat.MsgAckReq, rsp *chat.MsgAck
 	return
 }
 
-func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
-	now := time.Now().UnixMilli()
-	id := idgen.Next()
-	p := common.Msg{
-		Id:            id,
-		ConvType:      req.ConvType,
-		Type:          req.MsgType,
-		Content:       req.Content,
-		Sender:        req.Sender,
-		Target:        req.Target,
-		SendTime:      now,
-		ClientUuid:    req.ClientUuid,
-		AtUserList:    req.AtUserList,
-		IsTransparent: req.IsTransparent,
-	}
+//
+//func (l *Chat) sendC2C(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
+//	now := time.Now().UnixMilli()
+//	id := idgen.Next()
+//	p := common.Msg{
+//		Id:            id,
+//		ConvType:      req.ConvType,
+//		Type:          req.MsgType,
+//		Content:       req.Content,
+//		Sender:        req.Sender,
+//		Target:        req.Target,
+//		SendTime:      now,
+//		ClientUuid:    req.ClientUuid,
+//		AtUserList:    req.AtUserList,
+//		IsTransparent: req.IsTransparent,
+//	}
+//
+//	if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeC2C, &p); err != nil {
+//		return
+//	}
+//
+//	if err = l.createConversation(ctx, req.Target, req.Sender, constant.ConvTypeC2C, &p); err != nil {
+//		return
+//	}
+//
+//	// PUBLISH 两条
+//	p.Owner = req.Sender
+//	b, err := proto.Marshal(&p)
+//	if err != nil {
+//		return
+//	}
+//	m := &nats.Msg{
+//		Subject: "MSGS.new",
+//		Reply:   "",
+//		Data:    b,
+//		Sub:     nil,
+//	}
+//	js := runtime.GetJS()
+//	js.PublishMsg(m)
+//	p.Owner = req.Target
+//	b, err = proto.Marshal(&p)
+//	if err != nil {
+//		return
+//	}
+//	m.Data = b
+//	js.PublishMsg(m)
+//
+//	// TODO: 移除code,message两个字段
+//	*rsp = chat.SendRsp{
+//		Code:       0,
+//		Message:    "",
+//		Id:         id,
+//		SendTime:   now,
+//		ClientUuid: req.ClientUuid,
+//	}
+//
+//	return
+//}
+//
+//func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
+//	now := time.Now().UnixMilli()
+//
+//	id := idgen.Next()
+//	p := common.Msg{
+//		Id:            id,
+//		ConvType:      req.ConvType,
+//		Type:          req.MsgType,
+//		Content:       req.Content,
+//		Sender:        req.Sender,
+//		Target:        req.Target,
+//		SendTime:      now,
+//		ClientUuid:    req.ClientUuid,
+//		AtUserList:    req.AtUserList,
+//		IsTransparent: req.IsTransparent,
+//	}
+//
+//	db := runtime.GetDB()
+//	var members []*model.GroupMember
+//	cond := model.GroupMember{GroupId: req.Target}
+//	if err = db.Where(&cond).Find(&members).Error; err != nil {
+//		return
+//	}
+//
+//	js := runtime.GetJS()
+//	for _, v := range members {
+//		p.Owner = v.Member
+//		b, err := proto.Marshal(&p)
+//		if err != nil {
+//			continue
+//		}
+//		m := &nats.Msg{
+//			Subject: "MSGS.new",
+//			Reply:   "",
+//			Data:    b,
+//			Sub:     nil,
+//		}
+//		l.createConversation(ctx, v.Member, req.Target, constant.ConvTypeGroup, &p)
+//
+//		js.PublishMsg(m)
+//	}
+//
+//	//if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeGroup, &p); err != nil {
+//	//	return
+//	//}
+//
+//	*rsp = chat.SendRsp{
+//		Code:       0,
+//		Message:    "",
+//		Id:         id,
+//		SendTime:   now,
+//		ClientUuid: req.ClientUuid,
+//	}
+//
+//	return
+//}
 
-	if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeC2C, &p); err != nil {
-		return
-	}
-
-	if err = l.createConversation(ctx, req.Target, req.Sender, constant.ConvTypeC2C, &p); err != nil {
-		return
-	}
-
-	// PUBLISH 两条
-	p.Owner = req.Sender
-	b, err := proto.Marshal(&p)
-	if err != nil {
-		return
-	}
-	m := &nats.Msg{
-		Subject: "MSGS.new",
-		Reply:   "",
-		Data:    b,
-		Sub:     nil,
-	}
-	js := runtime.GetJS()
-	js.PublishMsg(m)
-	p.Owner = req.Target
-	b, err = proto.Marshal(&p)
-	if err != nil {
-		return
-	}
-	m.Data = b
-	js.PublishMsg(m)
-
-	// TODO: 移除code,message两个字段
-	*rsp = chat.SendRsp{
-		Code:       0,
-		Message:    "",
-		Id:         id,
-		SendTime:   now,
-		ClientUuid: req.ClientUuid,
-	}
-
-	return
-}
-
-func (l *Chat) sendC2G(ctx context.Context, req *chat.SendReq, rsp *chat.SendRsp) (err error) {
-	now := time.Now().UnixMilli()
-
-	id := idgen.Next()
-	p := common.Msg{
-		Id:            id,
-		ConvType:      req.ConvType,
-		Type:          req.MsgType,
-		Content:       req.Content,
-		Sender:        req.Sender,
-		Target:        req.Target,
-		SendTime:      now,
-		ClientUuid:    req.ClientUuid,
-		AtUserList:    req.AtUserList,
-		IsTransparent: req.IsTransparent,
-	}
-
-	db := runtime.GetDB()
-	var members []*model.GroupMember
-	cond := model.GroupMember{GroupId: req.Target}
-	if err = db.Where(&cond).Find(&members).Error; err != nil {
-		return
-	}
-
-	js := runtime.GetJS()
-	for _, v := range members {
-		p.Owner = v.Member
-		b, err := proto.Marshal(&p)
-		if err != nil {
-			continue
-		}
-		m := &nats.Msg{
-			Subject: "MSGS.new",
-			Reply:   "",
-			Data:    b,
-			Sub:     nil,
-		}
-		l.createConversation(ctx, v.Member, req.Target, constant.ConvTypeGroup, &p)
-
-		js.PublishMsg(m)
-	}
-
-	//if err = l.createConversation(ctx, req.Sender, req.Target, constant.ConvTypeGroup, &p); err != nil {
-	//	return
-	//}
-
-	*rsp = chat.SendRsp{
-		Code:       0,
-		Message:    "",
-		Id:         id,
-		SendTime:   now,
-		ClientUuid: req.ClientUuid,
-	}
-
-	return
-}
-
-func (l *Chat) createConversation(ctx context.Context, owner, target string, convType int, m *common.Msg) (err error) {
-	rc := runtime.GetRedisClient()
-	rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
-		now := time.Now().UnixMilli()
-		member := redis.Z{
-			Score:  float64(now),
-			Member: target,
-		}
-
-		key := util.KeyConvSync(owner)
-		pipe.ZAdd(ctx, key, &member)
-		pipe.Expire(ctx, key, time.Duration(constant.ConvKeepDays*24)*time.Hour)
-
-		conv := &common.Conversation{
-			Type:   int32(convType),
-			Target: target,
-		}
-
-		key = util.KeyConv(owner, target)
-		v, err := pipe.Get(ctx, key).Result()
-		if err != nil {
-			if err != redis.Nil {
-				return err
-			}
-		} else {
-			json.Unmarshal([]byte(v), conv)
-		}
-		conv.LastMsg = m
-		if m.Target == owner {
-			conv.UnreadCount += 1
-		}
-		conv.UpdatedAt = now
-
-		b, _ := json.Marshal(conv)
-		pipe.SetEX(ctx, key, string(b), time.Duration(constant.ConvKeepDays*24)*time.Hour)
-		return nil
-	})
-	return
-}
+//func (l *Chat) createConversation(ctx context.Context, owner, target string, convType int, m *common.Msg) (err error) {
+//	rc := runtime.GetRedisClient()
+//	rc.TxPipelined(ctx, func(pipe redis.Pipeliner) error {
+//		now := time.Now().UnixMilli()
+//		member := redis.Z{
+//			Score:  float64(now),
+//			Member: target,
+//		}
+//
+//		key := util.KeyConvSync(owner)
+//		pipe.ZAdd(ctx, key, &member)
+//		pipe.Expire(ctx, key, time.Duration(constant.ConvKeepDays*24)*time.Hour)
+//
+//		conv := &common.Conversation{
+//			Type:   int32(convType),
+//			Target: target,
+//		}
+//
+//		key = util.KeyConv(owner, target)
+//		v, err := pipe.Get(ctx, key).Result()
+//		if err != nil {
+//			if err != redis.Nil {
+//				return err
+//			}
+//		} else {
+//			json.Unmarshal([]byte(v), conv)
+//		}
+//		conv.LastMsg = m
+//		if m.Target == owner {
+//			conv.UnreadCount += 1
+//		}
+//		conv.UpdatedAt = now
+//
+//		b, _ := json.Marshal(conv)
+//		pipe.SetEX(ctx, key, string(b), time.Duration(constant.ConvKeepDays*24)*time.Hour)
+//		return nil
+//	})
+//	return
+//}
 
 type MsgRecall struct {
 	Operator string `json:"operator"`
